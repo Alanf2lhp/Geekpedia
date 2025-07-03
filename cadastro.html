@@ -100,6 +100,22 @@
         color: #000;
       }
 
+      .checkbox-termos {
+        display: flex;
+        align-items: center;
+        font-size: 0.9em;
+        margin-top: 10px;
+      }
+
+      .checkbox-termos input {
+        margin-right: 8px;
+      }
+
+      .checkbox-termos a {
+        color: #00fff2;
+        text-decoration: underline;
+      }
+
       /* === POP-UP DE SUCESSO E ERRO === */
       .popup {
         position: fixed;
@@ -174,6 +190,14 @@
         <div id="barraSenha" class="strength-bar"></div>
       </div>
 
+      <!-- Termos de uso -->
+      <div class="checkbox-termos">
+        <input type="checkbox" id="aceitaTermos" />
+        <label for="aceitaTermos">
+          Li e aceito os <a href="termos.html" target="_blank">Termos de Uso</a>
+        </label>
+      </div>
+
       <button id="btnCadastrar">Cadastrar</button>
       <button class="login-btn" onclick="window.location.href='index.html'">
         Fazer Login
@@ -223,11 +247,19 @@
         const apelido = document.getElementById("apelido").value.trim()
         const email = document.getElementById("email").value.trim()
         const senha = document.getElementById("senha").value
+        const aceitaTermos = document.getElementById("aceitaTermos").checked
 
         document.getElementById("apelidoErro").textContent = ""
         document.getElementById("emailErro").textContent = ""
 
         const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
+
+        if (!aceitaTermos) {
+          mostrarPopup("popupErro")
+          document.getElementById("emailErro").textContent =
+            "Você precisa aceitar os Termos de Uso."
+          return
+        }
 
         if (!/^[A-Za-z]{1,15}$/.test(apelido)) {
           document.getElementById("apelidoErro").textContent =
