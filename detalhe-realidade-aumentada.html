@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Realidade Virtual e Aumentada - Geekpedia</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    #particles-js { position: fixed; width: 100%; height: 100%; background: #0d0d0d; top: 0; left: 0; z-index: -1; }
+    .content-detail { max-width: 900px; margin: 60px auto 40px; padding: 20px; background: rgba(0,0,0,0.7); border-radius: 10px; color: #c0f9f8; font-family: 'JetBrains Mono', monospace; line-height: 1.6; }
+    .content-detail h2 { color: #00fff2; margin-bottom: 20px; }
+    .content-detail p { margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+<div id="particles-js"></div>
+
+<header>
+  <h1><i class="fas fa-vr-cardboard"></i> Realidade Virtual & Aumentada</h1>
+  <p>Imersão digital e interação com o mundo real aumentada</p>
+</header>
+
+<nav>
+  <a href="index.html"><i class="fas fa-home"></i> Início</a>
+  <a href="tecnologia.html" class="active"><i class="fas fa-microchip"></i> Tecnologia</a>
+  <a href="games.html"><i class="fas fa-gamepad"></i> Games</a>
+  <a href="filmes.html"><i class="fas fa-film"></i> Filmes & Séries</a>
+  <a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a>
+</nav>
+
+<main class="content-detail">
+  <h2>O que é Realidade Virtual (VR)?</h2>
+  <p>VR cria um ambiente digital totalmente imersivo, isolando o usuário do mundo físico e transportando-o para um cenário virtual.</p>
+
+  <h2>O que é Realidade Aumentada (AR)?</h2>
+  <p>AR sobrepõe elementos digitais ao mundo real, melhorando a percepção e interação do usuário com seu ambiente.</p>
+
+  <h2>Aplicações</h2>
+  <p>Treinamentos, educação, jogos, turismo, medicina e arquitetura são áreas beneficiadas por VR e AR.</p>
+
+  <h2>Futuro da VR e AR</h2>
+  <p>Espera-se avanços em hardware, conteúdos mais ricos e integração com outras tecnologias como IA e IoT.</p>
+</main>
+
+<footer>
+  <p>🔬 Geekpedia © 2025 - Todos os direitos reservados.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+  particlesJS("particles-js", {
+    particles: {
+      number: { value: 90, density: { enable: true, value_area: 800 } },
+      color: { value: "#00fff2" },
+      shape: { type: "circle" },
+      opacity: { value: 0.4 },
+      size: { value: 2, random: true },
+      line_linked: { enable: true, distance: 150, color: "#00fff2", opacity: 0.2, width: 1 },
+      move: { enable: true, speed: 1.5 }
+    },
+    interactivity: { events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" } } },
+    retina_detect: true
+  });
+</script>
+
+</body>
+</html>
