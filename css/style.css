@@ -97,3 +97,11 @@ nav a:hover {
   padding: 20px;
   border-left: 4px solid #00fff2;
   border-radius: 8px;
+}
+.article-link {
+  text-decoration: none;
+  color: inherit;
+}
+.article-link .article:hover {
+  cursor: pointer;
+}
