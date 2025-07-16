@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Geekpedia - Tecnologia</title>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <!-- Fundo de partículas -->
+  <style>
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: #0d0d0d;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fundo animado -->
+  <div id="particles-js"></div>
+
+  <!-- Cabeçalho -->
+  <header>
+    <h1><i class="fas fa-microchip"></i> Geekpedia - Tecnologia</h1>
+    <p>Explore os avanços, curiosidades e revoluções do mundo tech.</p>
+  </header>
+
+  <!-- Navegação -->
+  <nav>
+    <a href="index.html"><i class="fas fa-home"></i> Início</a>
+    <a href="tecnologia.html" class="active"><i class="fas fa-microchip"></i> Tecnologia</a>
+    <a href="games.html"><i class="fas fa-gamepad"></i> Games</a>
+    <a href="filmes.html"><i class="fas fa-film"></i> Filmes & Séries</a>
+    <a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a>
+  </nav>
+
+  <!-- Conteúdo -->
+  <div class="content" id="tech-section">
+    <a href="detalhe-inteligencia-artificial.html" class="article-link">
+      <div class="article">
+        <h2>🤖 Inteligência Artificial e o Futuro</h2>
+        <p>Como a IA está mudando o mundo em áreas como saúde, educação e segurança.</p>
+      </div>
+    </a>
+
+    <a href="detalhe-hackers.html" class="article-link">
+      <div class="article">
+        <h2>💻 Hackers que Marcaram História</h2>
+        <p>De Mitnick a Snowden, veja como figuras polêmicas redefiniram a cibersegurança.</p>
+      </div>
+    </a>
+
+    <a href="detalhe-computadores-quanticos.html" class="article-link">
+      <div class="article">
+        <h2>⚛️ Computação Quântica</h2>
+        <p>Entenda o que são qubits, superposição e o potencial de mudar a computação.</p>
+      </div>
+    </a>
+
+    <a href="detalhe-evolucao-smartphones.html" class="article-link">
+      <div class="article">
+        <h2>📱 Evolução dos Smartphones</h2>
+        <p>De tijolos com antena aos dobráveis com IA — uma jornada tecnológica de décadas.</p>
+      </div>
+    </a>
+  </div>
+
+  <!-- Rodapé -->
+  <footer>
+    <p>🔬 Geekpedia Tecnologia © 2025 - Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 90, density: { enable: true, value_area: 800 } },
+        color: { value: "#00fff2" },
+        shape: { type: "circle" },
+        opacity: { value: 0.4 },
+        size: { value: 2, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#00fff2",
+          opacity: 0.2,
+          width: 1
+        },
+        move: { enable: true, speed: 1.5 }
+      },
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
+
+</body>
+</html>
