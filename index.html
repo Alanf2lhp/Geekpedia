@@ -3,16 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Geekpédia - Enciclopédia Geek & Tech</title>
-
-  <!-- Estilos principais -->
+  <title>Login - Geekpédia</title>
   <link rel="stylesheet" href="css/style.css" />
-
-  <!-- Fontes e Ícones -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-
-  <!-- Particles.js -->
   <style>
     #particles-js {
       position: fixed;
@@ -23,110 +17,108 @@
       left: 0;
       z-index: -1;
     }
+
+    .login-container {
+      max-width: 400px;
+      margin: 120px auto;
+      padding: 30px;
+      background: #1a1a1a;
+      border: 2px solid #00fff2;
+      border-radius: 10px;
+      text-align: center;
+      color: #e0e0e0;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .login-container h2 {
+      margin-bottom: 20px;
+      color: #00fff2;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background: #0f0f0f;
+      border: 1px solid #00fff2;
+      border-radius: 6px;
+      color: #00fff2;
+      font-size: 1rem;
+    }
+
+    .login-container button {
+      padding: 12px 20px;
+      background: #00fff2;
+      border: none;
+      color: #0d0d0d;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .login-container button:hover {
+      background: #00cccc;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
-
-  <!-- Fundo animado -->
   <div id="particles-js"></div>
 
-  <header>
-    <h1><i class="fas fa-flask"></i> Geekpédia</h1>
-    <p>A enciclopédia definitiva de cultura Geek e Tecnologia</p>
-  </header>
-
-  <nav>
-    <a href="#"><i class="fas fa-home"></i> Início</a>
-    <a href="tecnologia.html"><i class="fas fa-microchip"></i> Tecnologia</a>
-    <a href="games.html"><i class="fas fa-gamepad"></i> Games</a>
-    <a href="filmes.html "><i class="fas fa-film"></i> Filmes & Séries</a>
-    <a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a>
-  </nav>
-
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="🔍 Buscar artigo geek/tech..." onkeyup="searchArticles()">
+  <div class="login-container">
+    <h2><i class="fas fa-user-lock"></i> Login Geekpédia</h2>
+    <input type="text" id="username" placeholder="Usuário">
+    <input type="password" id="password" placeholder="Senha">
+    <button onclick="login()">Entrar</button>
+    <div id="error-message" class="error"></div>
   </div>
 
-  <div class="content" id="articleList">
-    <div class="article">
-      <h2>🎮 História dos Videogames</h2>
-      <p>Dos arcades dos anos 70 aos consoles modernos, os videogames evoluíram de forma impressionante...</p>
-    </div>
-    <div class="article">
-      <h2>🤖 O que é Inteligência Artificial?</h2>
-      <p>A Inteligência Artificial (IA) é o campo da computação que simula a inteligência humana...</p>
-    </div>
-    <div class="article">
-      <h2>🚀 Star Wars: Um Universo Expandido</h2>
-      <p>Mais do que filmes, Star Wars tornou-se uma franquia cultural com livros, séries, HQs e games...</p>
-    </div>
-    <div class="article">
-      <h2>💻 Hackers Famosos da História</h2>
-      <p>Kevin Mitnick, Adrian Lamo e outros nomes que ficaram conhecidos por explorar sistemas...</p>
-    </div>
-  </div>
-
-  <footer>
-    <p>👾 Geekpédia © 2025 - Todos os direitos reservados.</p>
-  </footer>
-
-  <!-- Particles.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-
-  <!-- Configuração das partículas -->
   <script>
     particlesJS("particles-js", {
-      "particles": {
-        "number": {
-          "value": 100,
-          "density": {
-            "enable": true,
-            "value_area": 800
-          }
+      particles: {
+        number: { value: 100, density: { enable: true, value_area: 800 } },
+        color: { value: "#00fff2" },
+        shape: { type: "circle" },
+        opacity: { value: 0.4, random: true },
+        size: { value: 2, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#00fff2",
+          opacity: 0.2,
+          width: 1
         },
-        "color": {
-          "value": "#00fff2"
-        },
-        "shape": {
-          "type": "circle"
-        },
-        "opacity": {
-          "value": 0.4,
-          "random": true
-        },
-        "size": {
-          "value": 2,
-          "random": true
-        },
-        "line_linked": {
-          "enable": true,
-          "distance": 150,
-          "color": "#00fff2",
-          "opacity": 0.2,
-          "width": 1
-        },
-        "move": {
-          "enable": true,
-          "speed": 1.5
+        move: { enable: true, speed: 1.5 }
+      },
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
         }
       },
-      "interactivity": {
-        "events": {
-          "onhover": {
-            "enable": true,
-            "mode": "repulse"
-          },
-          "onclick": {
-            "enable": true,
-            "mode": "push"
-          }
-        }
-      },
-      "retina_detect": true
+      retina_detect: true
     });
-  </script>
 
-  <!-- Seu script -->
-  <script src="js/script.js"></script>
+    function login() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      const errorDiv = document.getElementById('error-message');
+
+      // Simulação simples de login (substitua por validação real)
+      if (user === 'admin' && pass === '1234') {
+        window.location.href = 'home.html'; // Redireciona para a página principal
+      } else {
+        errorDiv.textContent = "Usuário ou senha inválidos!";
+      }
+    }
+  </script>
 </body>
 </html>
