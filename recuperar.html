@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recuperar Senha</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #00fff2;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .recovery-container {
+      background-color: #1a1a1a;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #00fff2;
+      text-align: center;
+      width: 300px;
+    }
+
+    .recovery-container h2 {
+      margin-bottom: 20px;
+    }
+
+    .recovery-container input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .recovery-container button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #00fff2;
+      color: #0d0d0d;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .recovery-container button:hover {
+      background-color: #00cccc;
+    }
+
+    .recovery-container .back {
+      background: transparent;
+      color: #00fff2;
+      border: 1px solid #00fff2;
+      margin-top: 15px;
+    }
+
+    .recovery-container .back:hover {
+      background-color: #00fff2;
+      color: #0d0d0d;
+    }
+  </style>
+</head>
+<body>
+  <div class="recovery-container">
+    <h2>Recuperar Senha</h2>
+    <p>Informe seu e-mail para enviar o link de recuperação.</p>
+    <input type="email" id="email" placeholder="Seu e-mail" />
+    <button onclick="enviarRecuperacao()">Enviar link de recuperação</button>
+    <button class="back" onclick="window.location.href='index.html'">Voltar ao Login</button>
+  </div>
+
+  <script>
+    function enviarRecuperacao() {
+      const email = document.getElementById('email').value;
+      if (email === '') {
+        alert('Por favor, preencha o e-mail.');
+      } else {
+        alert('Um link de recuperação foi enviado para o seu e-mail.');
+        // Aqui você poderia fazer uma chamada para backend
+      }
+    }
+  </script>
+</body>
+</html>

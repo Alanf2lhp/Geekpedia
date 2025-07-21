@@ -1,105 +1,104 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cadastro - Geekpédia</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <meta charset="UTF-8">
+  <title>Cadastro de Usuário</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: #0d0d0d;
-      top: 0;
-      left: 0;
-      z-index: -1;
+    body {
+      background-color: #1a1a1a;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
     }
 
     .cadastro-container {
-      max-width: 500px;
-      margin: 60px auto;
+      background-color: #2a2a2a;
       padding: 30px;
-      background: #1a1a1a;
-      border: 2px solid #00fff2;
       border-radius: 10px;
-      color: #e0e0e0;
-      font-family: 'JetBrains Mono', monospace;
+      box-shadow: 0 0 10px #00fff2;
+      color: #fff;
+      width: 350px;
     }
 
     .cadastro-container h2 {
       text-align: center;
-      color: #00fff2;
-      font-family: 'Orbitron', sans-serif;
       margin-bottom: 20px;
-    }
-
-    .cadastro-container label {
-      display: block;
-      margin: 10px 0 5px;
-    }
-
-    .cadastro-container input {
-      width: 100%;
-      padding: 10px;
-      background: #0f0f0f;
       color: #00fff2;
-      border: 1px solid #00fff2;
-      border-radius: 6px;
-      font-size: 1rem;
     }
 
-    .cadastro-container input:focus {
-      outline: none;
-      box-shadow: 0 0 10px #00fff2;
+    label {
+      display: block;
+      margin-bottom: 5px;
+      margin-top: 10px;
     }
 
-    .cadastro-container button {
-      margin-top: 20px;
-      padding: 12px;
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    input[type="password"] {
       width: 100%;
-      background: #00fff2;
-      color: #0d0d0d;
+      padding: 8px;
       border: none;
-      font-weight: bold;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .cadastro-container button:hover {
-      background: #00cccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      background-color: #444;
+      color: #fff;
     }
 
     .password-strength {
-      margin-top: 8px;
       height: 10px;
-      border-radius: 4px;
+      border-radius: 5px;
       background-color: #333;
+      margin-bottom: 10px;
       overflow: hidden;
     }
 
     .strength-bar {
       height: 100%;
       width: 0%;
-      transition: 0.3s;
+      transition: width 0.3s;
     }
-
-    .weak { background-color: red; width: 33%; }
-    .medium { background-color: orange; width: 66%; }
-    .strong { background-color: limegreen; width: 100%; }
 
     .error {
       color: red;
-      font-size: 0.9rem;
-      margin-top: 5px;
+      font-size: 0.9em;
+      margin-top: -5px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #00fff2;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #00ccc0;
+    }
+
+    .login-btn {
+      background: transparent;
+      color: #00fff2;
+      border: 1px solid #00fff2;
+    }
+
+    .login-btn:hover {
+      background: #00fff2;
+      color: #000;
     }
   </style>
 </head>
 <body>
-  <div id="particles-js"></div>
 
   <div class="cadastro-container">
     <h2><i class="fas fa-user-plus"></i> Criar Conta</h2>
@@ -122,66 +121,53 @@
     <div class="password-strength"><div id="barraSenha" class="strength-bar"></div></div>
 
     <button onclick="cadastrar()">Cadastrar</button>
+    <button class="login-btn" onclick="window.location.href='index.html'">Fazer Login</button>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 100, density: { enable: true, value_area: 800 } },
-        color: { value: "#00fff2" },
-        shape: { type: "circle" },
-        opacity: { value: 0.4, random: true },
-        size: { value: 2, random: true },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#00fff2",
-          opacity: 0.2,
-          width: 1
-        },
-        move: { enable: true, speed: 1.5 }
-      },
-      interactivity: {
-        events: {
-          onhover: { enable: true, mode: "repulse" },
-          onclick: { enable: true, mode: "push" }
-        }
-      },
-      retina_detect: true
-    });
-
     function verificarForcaSenha() {
-      const senha = document.getElementById('senha').value;
-      const barra = document.getElementById('barraSenha');
+      const senha = document.getElementById("senha").value;
+      const barra = document.getElementById("barraSenha");
 
       let forca = 0;
       if (senha.length >= 6) forca++;
       if (/[A-Z]/.test(senha)) forca++;
       if (/[0-9]/.test(senha)) forca++;
-      if (/[^A-Za-z0-9]/.test(senha)) forca++;
+      if (/[\W_]/.test(senha)) forca++;
 
-      barra.className = "strength-bar"; // Reset classes
-      if (forca <= 1) barra.classList.add("weak");
-      else if (forca == 2 || forca == 3) barra.classList.add("medium");
-      else barra.classList.add("strong");
+      switch (forca) {
+        case 0:
+        case 1:
+          barra.style.width = "33%";
+          barra.style.backgroundColor = "red";
+          break;
+        case 2:
+        case 3:
+          barra.style.width = "66%";
+          barra.style.backgroundColor = "orange";
+          break;
+        case 4:
+          barra.style.width = "100%";
+          barra.style.backgroundColor = "limegreen";
+          break;
+      }
     }
 
     function cadastrar() {
-      const apelido = document.getElementById('apelido').value;
-      const apelidoErro = document.getElementById('apelidoErro');
-      const regex = /^[a-zA-Z]{1,15}$/;
+      const apelido = document.getElementById("apelido").value;
+      const apelidoErro = document.getElementById("apelidoErro");
 
-      if (!regex.test(apelido)) {
-        apelidoErro.textContent = "O apelido deve conter apenas letras (A-Z, a-z), até 15 caracteres.";
+      if (!/^[A-Za-z]{1,15}$/.test(apelido)) {
+        apelidoErro.textContent = "O apelido deve conter apenas letras e até 15 caracteres.";
         return;
       } else {
         apelidoErro.textContent = "";
       }
 
-      alert("Usuário cadastrado com sucesso!");
-      // Aqui você pode enviar os dados via fetch/AJAX ou salvar no localStorage etc.
+      alert("Cadastro realizado com sucesso!");
+      // Aqui você pode enviar os dados para um backend
     }
   </script>
+
 </body>
 </html>

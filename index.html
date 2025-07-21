@@ -1,79 +1,88 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - Geekpédia</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geekpédia Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: #0d0d0d;
-      top: 0;
-      left: 0;
-      z-index: -1;
+    body {
+      background-color: #0d0d0d;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
     }
 
     .login-container {
-      max-width: 400px;
-      margin: 120px auto;
+      background-color: #1a1a1a;
       padding: 30px;
-      background: #1a1a1a;
-      border: 2px solid #00fff2;
-      border-radius: 10px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 255, 242, 0.2);
       text-align: center;
-      color: #e0e0e0;
-      font-family: 'JetBrains Mono', monospace;
+      width: 100%;
+      max-width: 400px;
     }
 
     .login-container h2 {
       margin-bottom: 20px;
       color: #00fff2;
-      font-family: 'Orbitron', sans-serif;
     }
 
     .login-container input {
       width: 100%;
       padding: 12px;
       margin: 10px 0;
-      background: #0f0f0f;
-      border: 1px solid #00fff2;
+      border: none;
       border-radius: 6px;
-      color: #00fff2;
-      font-size: 1rem;
+      background-color: #333;
+      color: #fff;
     }
 
     .login-container button {
-      padding: 12px 20px;
       width: 100%;
-      margin-top: 10px;
-      background: #00fff2;
+      padding: 12px;
+      margin-top: 15px;
+      background-color: #00fff2;
       border: none;
-      color: #0d0d0d;
-      font-weight: bold;
       border-radius: 6px;
       cursor: pointer;
+      color: #0d0d0d;
+      font-weight: bold;
       transition: 0.3s;
-      font-family: 'JetBrains Mono', monospace;
     }
 
     .login-container button:hover {
-      background: #00cccc;
+      background-color: #00cfc3;
     }
 
-    .login-container .secondary-btn {
-      background: transparent;
+    .login-container .secondary-button {
+      background-color: transparent;
       color: #00fff2;
       border: 1px solid #00fff2;
+      margin-top: 10px;
     }
 
-    .login-container .secondary-btn:hover {
-      background: #00fff2;
+    .login-container .secondary-button:hover {
+      background-color: #00fff2;
       color: #0d0d0d;
+    }
+
+    .forgot-password {
+      margin-top: 12px;
+    }
+
+    .forgot-password a {
+      color: #00fff2;
+      text-decoration: none;
+      font-size: 0.95em;
+    }
+
+    .forgot-password a:hover {
+      text-decoration: underline;
     }
 
     .error {
@@ -83,57 +92,31 @@
   </style>
 </head>
 <body>
-  <div id="particles-js"></div>
-
   <div class="login-container">
     <h2><i class="fas fa-user-lock"></i> Login Geekpédia</h2>
     <input type="text" id="username" placeholder="Usuário">
     <input type="password" id="password" placeholder="Senha">
-    
     <button onclick="login()">Entrar</button>
+
+    <div class="forgot-password">
+      <a href="recuperar.html">Esqueci minha senha</a>
+    </div>
+
     <div id="error-message" class="error"></div>
 
     <p style="margin-top: 20px;">Ainda não tem conta?</p>
-    <button class="secondary-btn" onclick="window.location.href='cadastro.html'">Criar Conta</button>
+    <button class="secondary-button" onclick="window.location.href='cadastro.html'">Criar Conta</button>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 100, density: { enable: true, value_area: 800 } },
-        color: { value: "#00fff2" },
-        shape: { type: "circle" },
-        opacity: { value: 0.4, random: true },
-        size: { value: 2, random: true },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#00fff2",
-          opacity: 0.2,
-          width: 1
-        },
-        move: { enable: true, speed: 1.5 }
-      },
-      interactivity: {
-        events: {
-          onhover: { enable: true, mode: "repulse" },
-          onclick: { enable: true, mode: "push" }
-        }
-      },
-      retina_detect: true
-    });
-
     function login() {
-      const user = document.getElementById('username').value;
-      const pass = document.getElementById('password').value;
-      const errorDiv = document.getElementById('error-message');
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
 
-      // Simulação simples de login (substitua por validação real)
-      if (user === 'admin' && pass === '1234') {
-        window.location.href = 'home.html'; // Redireciona para a página principal
+      if (username === "admin" && password === "1234") {
+        window.location.href = "home.html";
       } else {
-        errorDiv.textContent = "Usuário ou senha inválidos!";
+        document.getElementById("error-message").innerText = "Usuário ou senha incorretos!";
       }
     }
   </script>
