@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A Primeira Série de TV da História | Geekpédia</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: #0d0d0d;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="particles-js"></div>
+
+  <header>
+    <h1><i class="fas fa-tv"></i> A Primeira Série de TV da História</h1>
+    <p>Conheça “The Queen’s Messenger”, a pioneira que abriu caminho para a televisão moderna</p>
+  </header>
+
+  <nav>
+    <a href="home.html"><i class="fas fa-home"></i> Início</a>
+    <a href="filmes.html"><i class="fas fa-film"></i> Filmes & Séries</a>
+    <a href="games.html"><i class="fas fa-gamepad"></i> Games</a>
+    <a href="tecnologia.html"><i class="fas fa-microchip"></i> Tecnologia</a>
+    <a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a>
+  </nav>
+
+  <main class="content">
+    <article>
+      <h2>🎬 “The Queen’s Messenger” (1928)</h2>
+      <p>
+        Considerada a primeira série de televisão da história, “The Queen’s Messenger” foi transmitida em 1928, quando a TV ainda era uma tecnologia experimental.
+      </p>
+      <p>
+        O programa durava cerca de 15 minutos e era uma peça dramática curta que explorava temas de espionagem e intriga diplomática.
+      </p>
+      <p>
+        A transmissão pioneira marcou um grande avanço tecnológico, sendo realizada pela estação W2XBS em Nova York, que mais tarde se tornou a famosa WNBC.
+      </p>
+      <p>
+        Embora o alcance fosse limitado e o público pequeno, “The Queen’s Messenger” abriu caminho para o desenvolvimento das séries televisivas modernas, influenciando o formato, a narrativa e a produção que conhecemos hoje.
+      </p>
+      <p>
+        Sua importância reside não apenas no conteúdo, mas no fato de que demonstrou o potencial da televisão como meio de entretenimento e informação.
+      </p>
+    </article>
+  </main>
+
+  <footer>
+    <p>🎬 Geekpédia © 2025 - Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 90, density: { enable: true, value_area: 800 } },
+        color: { value: "#00fff2" },
+        shape: { type: "circle" },
+        opacity: { value: 0.4 },
+        size: { value: 2, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#00fff2",
+          opacity: 0.2,
+          width: 1
+        },
+        move: { enable: true, speed: 1.5 }
+      },
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
+
+</body>
+</html>
