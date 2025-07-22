@@ -1,1 +1,1 @@
-# Nerdpédia
+# Geekpédia
