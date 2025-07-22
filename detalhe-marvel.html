@@ -18,6 +18,59 @@
       left: 0;
       z-index: -1;
     }
+
+    header {
+      text-align: center;
+      color: #00fff2;
+      font-family: 'Orbitron', sans-serif;
+      padding: 40px 20px 10px;
+    }
+    header p {
+      font-family: 'JetBrains Mono', monospace;
+      color: #c0f9f8;
+      margin-top: 10px;
+    }
+
+    nav {
+      text-align: center;
+      margin: 10px 0 30px;
+      background: rgba(0,0,0,0.85);
+      padding: 10px 0;
+      border-radius: 8px;
+    }
+    nav a {
+      color: #00fff2;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #a0eaff;
+    }
+
+    main.content {
+      max-width: 900px;
+      margin: 0 auto 40px;
+      padding: 20px;
+      background: rgba(0,0,0,0.7);
+      border-radius: 10px;
+      color: #c0f9f8;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1.6;
+    }
+
+    main.content h2 {
+      color: #00fff2;
+      margin-bottom: 20px;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    main.content p {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
   </style>
 </head>
 <body>
@@ -31,10 +84,7 @@
 
   <nav>
     <a href="home.html"><i class="fas fa-home"></i> Início</a>
-    <a href="filmes.html" class="active"><i class="fas fa-film"></i> Filmes & Séries</a>
-    <a href="games.html"><i class="fas fa-gamepad"></i> Games</a>
-    <a href="tecnologia.html"><i class="fas fa-microchip"></i> Tecnologia</a>
-    <a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a>
+    <a href="filmes.html"><i class="fas fa-film"></i> Voltar à Filmes & Séries</a>
   </nav>
 
   <main class="content">
@@ -89,5 +139,6 @@
       retina_detect: true
     });
   </script>
+
 </body>
 </html>

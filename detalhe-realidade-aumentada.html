@@ -12,6 +12,40 @@
     .content-detail { max-width: 900px; margin: 60px auto 40px; padding: 20px; background: rgba(0,0,0,0.7); border-radius: 10px; color: #c0f9f8; font-family: 'JetBrains Mono', monospace; line-height: 1.6; }
     .content-detail h2 { color: #00fff2; margin-bottom: 20px; }
     .content-detail p { margin-bottom: 20px; }
+    nav.main-nav {
+      max-width: 900px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+    nav.main-nav a {
+      color: #00fff2;
+      font-weight: bold;
+      margin: 0 15px;
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1em;
+    }
+    nav.footer-nav {
+      max-width: 900px;
+      margin: 30px auto 20px;
+      text-align: center;
+    }
+    nav.footer-nav a {
+      color: #00fff2;
+      font-weight: bold;
+      margin: 0 15px;
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1em;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      color: #00fff2;
+      max-width: 900px;
+      margin: 0 auto 40px;
+    }
   </style>
 </head>
 <body>
@@ -23,12 +57,9 @@
   <p>Imersão digital e interação com o mundo real aumentada</p>
 </header>
 
-<nav>
+<nav class="main-nav">
   <a href="home.html"><i class="fas fa-home"></i> Início</a>
-  <a href="tecnologia.html" class="active"><i class="fas fa-microchip"></i> Tecnologia</a>
-  <a href="games.html"><i class="fas fa-gamepad"></i> Games</a>
-  <a href="filmes.html"><i class="fas fa-film"></i> Filmes & Séries</a>
-  <a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a>
+  <a href="tecnologia.html"><i class="fas fa-arrow-left"></i> Voltar à Tecnologia</a>
 </nav>
 
 <main class="content-detail">
@@ -44,6 +75,11 @@
   <h2>Futuro da VR e AR</h2>
   <p>Espera-se avanços em hardware, conteúdos mais ricos e integração com outras tecnologias como IA e IoT.</p>
 </main>
+
+<nav class="footer-nav">
+  <a href="home.html"><i class="fas fa-home"></i> Início</a>
+  <a href="tecnologia.html"><i class="fas fa-arrow-left"></i> Voltar à Tecnologia</a>
+</nav>
 
 <footer>
   <p>🔬 Geekpédia © 2025 - Todos os direitos reservados.</p>

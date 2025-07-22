@@ -8,10 +8,61 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    #particles-js { position: fixed; width: 100%; height: 100%; background: #0d0d0d; top: 0; left: 0; z-index: -1; }
-    .content-detail { max-width: 900px; margin: 60px auto 40px; padding: 20px; background: rgba(0,0,0,0.7); border-radius: 10px; color: #c0f9f8; font-family: 'JetBrains Mono', monospace; line-height: 1.6; }
-    .content-detail h2 { color: #00fff2; margin-bottom: 20px; }
-    .content-detail p { margin-bottom: 20px; }
+    #particles-js {
+      position: fixed; width: 100%; height: 100%; background: #0d0d0d;
+      top: 0; left: 0; z-index: -1;
+    }
+    header {
+      text-align: center;
+      padding: 2rem 1rem 0.5rem;
+    }
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      color: #00fff2;
+      font-size: 2rem;
+    }
+    header p {
+      color: #a0eaff;
+      font-size: 1rem;
+    }
+    nav {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    nav a {
+      display: inline-block;
+      margin: 0.5rem 1rem;
+      color: #00fff2;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #00e0d1;
+    }
+    .content-detail {
+      max-width: 900px;
+      margin: 60px auto 40px;
+      padding: 20px;
+      background: rgba(0,0,0,0.7);
+      border-radius: 10px;
+      color: #c0f9f8;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1.6;
+    }
+    .content-detail h2 {
+      color: #00fff2;
+      margin-bottom: 20px;
+    }
+    .content-detail p {
+      margin-bottom: 20px;
+    }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1rem;
+      color: #888;
+    }
   </style>
 </head>
 <body>
@@ -25,10 +76,7 @@
 
 <nav>
   <a href="home.html"><i class="fas fa-home"></i> Início</a>
-  <a href="tecnologia.html" class="active"><i class="fas fa-microchip"></i> Tecnologia</a>
-  <a href="games.html"><i class="fas fa-gamepad"></i> Games</a>
-  <a href="filmes.html"><i class="fas fa-film"></i> Filmes & Séries</a>
-  <a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a>
+  <a href="tecnologia.html"><i class="fas fa-arrow-left"></i> Voltar à Tecnologia</a>
 </nav>
 
 <main class="content-detail">
@@ -61,7 +109,12 @@
       line_linked: { enable: true, distance: 150, color: "#00fff2", opacity: 0.2, width: 1 },
       move: { enable: true, speed: 1.5 }
     },
-    interactivity: { events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" } } },
+    interactivity: {
+      events: {
+        onhover: { enable: true, mode: "repulse" },
+        onclick: { enable: true, mode: "push" }
+      }
+    },
     retina_detect: true
   });
 </script>

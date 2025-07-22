@@ -8,19 +8,19 @@
   <link rel="stylesheet" href="css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
   <style>
     body {
       margin: 0;
       font-family: 'JetBrains Mono', monospace;
       color: #d0f0f7;
-      background-color: #0d0d0d;
+      background: #0d0d0d;
     }
 
     #particles-js {
       position: fixed;
       width: 100%;
       height: 100%;
-      background: #0d0d0d;
       top: 0;
       left: 0;
       z-index: -1;
@@ -28,8 +28,7 @@
 
     header {
       text-align: center;
-      padding: 2rem 1rem 1rem;
-      background: transparent;
+      padding: 2rem 1rem 0.5rem;
     }
 
     header h1 {
@@ -39,68 +38,53 @@
     }
 
     header p {
-      font-size: 1rem;
       color: #a0eaff;
+      font-size: 1rem;
     }
 
     nav {
       text-align: center;
-      padding: 1rem;
+      margin-top: 1rem;
     }
 
     nav a {
       display: inline-block;
-      margin: 0.4rem 0.6rem;
-      padding: 0.4rem 0.8rem;
-      text-decoration: none;
+      margin: 0.5rem 1rem;
       color: #00fff2;
+      text-decoration: none;
       font-weight: bold;
-      border-radius: 6px;
-      transition: background 0.3s, color 0.3s;
     }
 
-    nav a:hover,
-    nav .active {
-      background-color: #00fff2;
-      color: #000;
+    nav a:hover {
+      color: #00e0d1;
     }
 
     main.content {
-      max-width: 850px;
+      max-width: 900px;
       margin: 2rem auto;
       padding: 2rem;
       background: rgba(0, 0, 0, 0.75);
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(0, 255, 242, 0.2);
+      border-radius: 10px;
+      line-height: 1.6;
     }
 
     h2 {
       font-family: 'Orbitron', sans-serif;
-      color: #00e6d8;
-      font-size: 1.6rem;
+      color: #00fff2;
+      font-size: 1.5rem;
       margin-bottom: 1rem;
-      border-left: 5px solid #00fff2;
-      padding-left: 10px;
     }
 
     p {
-      line-height: 1.7;
-      margin-bottom: 1.2rem;
-    }
-
-    .highlight {
-      background-color: rgba(0, 255, 242, 0.08);
-      border-left: 4px solid #00fff2;
-      padding: 1rem;
-      margin: 1.5rem 0;
-      border-radius: 8px;
+      margin-bottom: 1rem;
     }
 
     footer {
       text-align: center;
-      padding: 1rem;
-      color: #aaa;
       margin-top: 3rem;
+      padding: 1rem;
+      color: #888;
+      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -115,31 +99,20 @@
 
   <nav>
     <a href="home.html"><i class="fas fa-home"></i> Início</a>
-    <a href="filmes.html" class="active"><i class="fas fa-film"></i> Filmes & Séries</a>
-    <a href="games.html"><i class="fas fa-gamepad"></i> Games</a>
-    <a href="tecnologia.html"><i class="fas fa-microchip"></i> Tecnologia</a>
-    <a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a>
+    <a href="filmes.html"><i class="fas fa-arrow-left"></i> Voltar a Filmes & Séries</a>
   </nav>
 
   <main class="content">
     <article>
       <h2>📽️ “Logistics” — A obra de 857 horas</h2>
 
-      <p><strong>“Logistics”</strong> é reconhecido como <span style="color: #00fff2;"><strong>o filme mais longo da história do cinema</strong></span>, com impressionantes <strong>857 horas</strong> de duração — cerca de <strong>35 dias ininterruptos</strong>!</p>
+      <p><strong>“Logistics”</strong> é reconhecido como o filme mais longo da história do cinema, com impressionantes <strong>857 horas</strong> de duração — cerca de <strong>35 dias ininterruptos</strong>!</p>
 
-      <div class="highlight">
-        <p><i class="fas fa-user"></i> Criado por <strong>Erika Magnusson</strong> e <strong>Daniel Andersson</strong>, o filme é uma experiência artística extrema.</p>
-      </div>
+      <p>O filme foi criado pelos suecos <strong>Erika Magnusson</strong> e <strong>Daniel Andersson</strong> como uma obra experimental que registra, em tempo real, o trajeto de um pedômetro da fábrica na <strong>China</strong> até sua venda em <strong>Estocolmo</strong>, na <strong>Suécia</strong>.</p>
 
-      <p>A proposta da obra é registrar <em>em tempo real</em> o trajeto completo de um produto eletrônico, desde sua fabricação em uma fábrica na <strong>China</strong> até sua chegada em uma loja na <strong>Suécia</strong>.</p>
+      <p>Durante o filme, o espectador acompanha todas as etapas logísticas: produção, embalagem, transporte terrestre, navios cargueiros, distribuição e entrega.</p>
 
-      <p>Durante esse percurso, o espectador acompanha cada etapa da cadeia de suprimentos — incluindo transporte marítimo, armazenamento, distribuição e deslocamento urbano.</p>
-
-      <div class="highlight">
-        <p><i class="fas fa-truck-loading"></i> A ideia é provocar reflexão sobre <strong>consumo, logística e globalização</strong> — temas normalmente invisíveis no cotidiano.</p>
-      </div>
-
-      <p>Por conta de sua duração monumental, “Logistics” <strong>não é exibido em cinemas</strong>, sendo considerado uma instalação artística que <em>questiona o tempo, o ritmo e o conteúdo</em> da narrativa audiovisual tradicional.</p>
+      <p>Por conta da longa duração, “Logistics” é exibido como uma instalação artística, e não em salas de cinema tradicionais. A proposta é provocar uma reflexão sobre o consumo globalizado e a origem dos produtos que usamos no dia a dia.</p>
     </article>
   </main>
 

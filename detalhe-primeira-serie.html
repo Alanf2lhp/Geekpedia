@@ -9,6 +9,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
+    body {
+      margin: 0;
+      font-family: 'JetBrains Mono', monospace;
+      background: #0d0d0d;
+      color: #d0f0f7;
+    }
+
     #particles-js {
       position: fixed;
       width: 100%;
@@ -17,6 +24,67 @@
       top: 0;
       left: 0;
       z-index: -1;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      color: #00fff2;
+      font-size: 2rem;
+    }
+
+    header p {
+      color: #a0eaff;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    nav {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    nav a {
+      display: inline-block;
+      margin: 0.5rem 1rem;
+      color: #00fff2;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00e0d1;
+    }
+
+    main.content {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.75);
+      border-radius: 10px;
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: #00fff2;
+      font-size: 1.5rem;
+    }
+
+    p {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1rem;
+      color: #888;
     }
   </style>
 </head>
@@ -31,10 +99,7 @@
 
   <nav>
     <a href="home.html"><i class="fas fa-home"></i> Início</a>
-    <a href="filmes.html"><i class="fas fa-film"></i> Filmes & Séries</a>
-    <a href="games.html"><i class="fas fa-gamepad"></i> Games</a>
-    <a href="tecnologia.html"><i class="fas fa-microchip"></i> Tecnologia</a>
-    <a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a>
+    <a href="filmes.html"><i class="fas fa-arrow-left"></i> Voltar aos Filmes & Séries</a>
   </nav>
 
   <main class="content">

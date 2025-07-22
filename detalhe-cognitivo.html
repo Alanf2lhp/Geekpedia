@@ -4,85 +4,138 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Benefícios Cognitivos dos Jogos | Geekpédia</title>
+  
   <link rel="stylesheet" href="css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
   <style>
+    body {
+      margin: 0;
+      font-family: 'JetBrains Mono', monospace;
+      color: #d0f0f7;
+      background: #0d0d0d;
+    }
+
     #particles-js {
       position: fixed;
       width: 100%;
       height: 100%;
-      background: #0d0d0d;
       top: 0;
       left: 0;
       z-index: -1;
     }
-    .detail-container {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 8px;
-      color: #e0f7fa;
-      font-family: 'JetBrains Mono', monospace;
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem 0.5rem;
     }
-    h1, h2 {
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
       color: #00fff2;
+      font-size: 2rem;
     }
-    p {
-      line-height: 1.6;
-      margin-bottom: 20px;
+
+    header p {
+      color: #a0eaff;
+      font-size: 1rem;
     }
-    ul {
-      margin-left: 20px;
-      margin-bottom: 20px;
+
+    nav {
+      text-align: center;
+      margin-top: 1rem;
     }
-    ul li {
-      margin-bottom: 10px;
-    }
+
     nav a {
+      display: inline-block;
+      margin: 0.5rem 1rem;
       color: #00fff2;
       text-decoration: none;
       font-weight: bold;
+      transition: color 0.3s;
     }
+
     nav a:hover {
-      text-decoration: underline;
+      color: #00e0d1;
+    }
+
+    main.content {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.75);
+      border-radius: 10px;
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: #00fff2;
+      font-size: 1.4rem;
+      margin-top: 1.5rem;
+    }
+
+    p {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    ul li {
+      margin-bottom: 0.8rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1rem;
+      color: #888;
     }
   </style>
 </head>
 <body>
+
   <div id="particles-js"></div>
 
   <header>
     <h1><i class="fas fa-brain"></i> Benefícios Cognitivos dos Jogos</h1>
-    <nav>
-      <a href="games.html"><i class="fas fa-arrow-left"></i> Voltar aos Games</a>
-    </nav>
+    <p>Jogos também treinam o cérebro!</p>
   </header>
 
-  <section class="detail-container">
-    <h2>Como os jogos impactam positivamente o cérebro</h2>
-    <p>
-      Diferentes tipos de jogos podem estimular diversas funções cognitivas e habilidades mentais. Além de diversão, muitos jogos trazem benefícios que vão desde a melhoria da memória até o desenvolvimento de habilidades sociais.
-    </p>
+  <nav>
+    <a href="home.html"><i class="fas fa-home"></i> Início</a>
+    <a href="games.html"><i class="fas fa-arrow-left"></i> Voltar aos Games</a>
+  </nav>
 
-    <h2>Principais benefícios cognitivos:</h2>
-    <ul>
-      <li><strong>Melhora da memória:</strong> Jogos que envolvem lembrar padrões, rotas ou estratégias ajudam a exercitar a memória de curto e longo prazo.</li>
-      <li><strong>Desenvolvimento do raciocínio lógico:</strong> Jogos de estratégia, quebra-cabeças e enigmas desafiam o cérebro a pensar de forma crítica e a resolver problemas.</li>
-      <li><strong>Coordenação motora e atenção:</strong> Jogos de ação e ritmo exigem reflexos rápidos e alta concentração, melhorando a coordenação olho-mão.</li>
-      <li><strong>Tomada de decisão:</strong> Jogos que exigem escolhas rápidas e planejamento ajudam a aprimorar a habilidade de decisão sob pressão.</li>
-      <li><strong>Socialização e cooperação:</strong> Jogos multiplayer e cooperativos promovem interação social, comunicação e trabalho em equipe.</li>
-    </ul>
+  <main class="content">
+    <article>
+      <h2>🧠 Como os jogos impactam positivamente o cérebro</h2>
+      <p>
+        Diferentes tipos de jogos estimulam habilidades cognitivas e funções mentais. Além do entretenimento, muitos jogos proporcionam ganhos como memória reforçada, raciocínio lógico, atenção, e até socialização.
+      </p>
 
-    <h2>Pesquisas e estudos</h2>
-    <p>
-      Estudos recentes indicam que jogos eletrônicos podem ser usados como ferramentas terapêuticas para reabilitação cognitiva, treinamento cerebral e até para retardar o declínio mental em idosos.
-    </p>
-    <p>
-      É importante lembrar que o uso equilibrado e consciente dos jogos maximiza os benefícios, evitando efeitos negativos relacionados ao excesso.
-    </p>
-  </section>
+      <h2>⭐ Principais benefícios cognitivos:</h2>
+      <ul>
+        <li><strong>Melhora da memória:</strong> Jogos com padrões e estratégias ajudam na memória de curto e longo prazo.</li>
+        <li><strong>Raciocínio lógico:</strong> Quebra-cabeças e jogos de estratégia estimulam pensamento crítico e resolução de problemas.</li>
+        <li><strong>Coordenação e atenção:</strong> Jogos de ação exigem reflexos rápidos e foco, desenvolvendo a coordenação motora.</li>
+        <li><strong>Tomada de decisão:</strong> Jogos com escolhas imediatas treinam decisões rápidas sob pressão.</li>
+        <li><strong>Habilidades sociais:</strong> Jogos cooperativos promovem empatia, comunicação e trabalho em equipe.</li>
+      </ul>
+
+      <h2>📚 Pesquisas e estudos</h2>
+      <p>
+        Estudos mostram que jogos eletrônicos têm sido aplicados em terapias cognitivas, ajudando no desenvolvimento cerebral de crianças e no estímulo mental de idosos.
+      </p>
+      <p>
+        Com equilíbrio, os jogos podem ser ferramentas poderosas de aprendizado, diversão e desenvolvimento pessoal.
+      </p>
+    </article>
+  </main>
 
   <footer>
     <p>🎮 Geekpédia © 2025 - Todos os direitos reservados.</p>
@@ -92,13 +145,19 @@
   <script>
     particlesJS("particles-js", {
       particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
+        number: { value: 90, density: { enable: true, value_area: 800 } },
         color: { value: "#00fff2" },
         shape: { type: "circle" },
         opacity: { value: 0.4 },
         size: { value: 2, random: true },
-        line_linked: { enable: true, color: "#00fff2", opacity: 0.2 },
-        move: { enable: true, speed: 1 }
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#00fff2",
+          opacity: 0.2,
+          width: 1
+        },
+        move: { enable: true, speed: 1.5 }
       },
       interactivity: {
         events: {
@@ -109,6 +168,5 @@
       retina_detect: true
     });
   </script>
-
 </body>
 </html>
