@@ -1,13 +1,16 @@
 function searchArticles() {
-  const input = document.getElementById("searchInput").value.toLowerCase();
-  const articles = document.getElementsByClassName("article");
+  const input = document.getElementById('searchInput');
+  const filter = input.value.toLowerCase();
+  const articles = document.querySelectorAll('.article');
 
-  for (let i = 0; i < articles.length; i++) {
-    const title = articles[i].getElementsByTagName("h2")[0].innerText.toLowerCase();
-    if (title.includes(input)) {
-      articles[i].style.display = "block";
+  articles.forEach(article => {
+    const title = article.querySelector('h3').textContent.toLowerCase();
+    const description = article.querySelector('p').textContent.toLowerCase();
+
+    if (title.includes(filter) || description.includes(filter)) {
+      article.style.display = '';  // mostra o artigo
     } else {
-      articles[i].style.display = "none";
+      article.style.display = 'none';  // esconde o artigo
     }
-  }
+  });
 }
