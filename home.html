@@ -103,11 +103,12 @@
     <h1><i class="fas fa-flask"></i> Geekpédia</h1>
     <p>A enciclopédia definitiva de cultura Geek e Tecnologia</p>
   </header>
-  <div class="user-menu">
-    <span><i class="fas fa-user"></i> Olá, <strong>Alan</strong></span>
-    <a href="perfil.html"><i class="fas fa-cog"></i> Perfil</a>
-    <a href="index.html"><i class="fas fa-sign-out-alt"></i> Sair</a>
-  </div>
+ <div class="user-menu">
+  <span <span><i class="fas fa-user"></i> Olá, <strong>Alan</strong></span>
+
+  <a href="perfil.html"><i class="fas fa-cog"></i> Opções</a>
+  <a href="index.html" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Sair</a>
+</div>
 
   <nav>
     <a href="#"><i class="fas fa-home"></i> Início</a>
@@ -323,5 +324,24 @@
   <!-- Seu script -->
   <script src="js/script.js"></script>
 </body>
+<script>
+  // Simula que o usuário está logado (exemplo: localStorage)
+  // Exemplo de configuração: localStorage.setItem("username", "Alan");
+
+
+  function loadUsername() {
+    const username = localStorage.getItem("username");
+    if (username) {
+      const greeting = document.getElementById("user-greeting");
+      greeting.innerHTML = `<i class="fas fa-user"></i> Olá, <strong>${username}</strong>`;
+    }
+  }
+
+  function logoutUser() {
+    localStorage.removeItem("username"); // limpa o nome ao sair
+  }
+
+  loadUsername();
+</script>
 
 </html>
