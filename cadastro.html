@@ -99,6 +99,35 @@
         background: #00fff2;
         color: #000;
       }
+
+      /* === POP-UP DE SUCESSO === */
+      #popupSucesso {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #28a745;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 8px;
+        box-shadow: 0 0 15px #28a745aa;
+        font-weight: bold;
+        z-index: 9999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      #popupSucesso.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      #popupSucesso i {
+        font-size: 1.5rem;
+      }
     </style>
   </head>
   <body>
@@ -142,12 +171,17 @@
       </button>
     </div>
 
+    <!-- POP-UP DE SUCESSO -->
+    <div id="popupSucesso">
+      <i class="fas fa-check-circle"></i> Conta criada com sucesso!
+    </div>
+
     <script type="module">
       import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
       const supabase = createClient(
         'https://odxqvkwxhbfgcmngdhic.supabase.co',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9keHF2a3d4aGJmZ2NtbmdkaGljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjk1MTMsImV4cCI6MjA2ODg0NTUxM30.U47P-s4GNGgk5f_3cQsBxDVLOqp3-jXsOX14Ok8fZk8' // sua chave anon
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9keHF2a3d4aGJmZ2NtbmdkaGljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjk1MTMsImV4cCI6MjA2ODg0NTUxM30.U47P-s4GNGgk5f_3cQsBxDVLOqp3-jXsOX14Ok8fZk8'
       )
 
       function verificarForcaSenha() {
@@ -164,6 +198,18 @@
           "width:100%;background:limegreen"
       }
 
+      function mostrarPopupSucesso() {
+        const popup = document.getElementById("popupSucesso")
+        popup.classList.add("show")
+
+        // Esconde depois de 3 segundos
+        setTimeout(() => {
+          popup.classList.remove("show")
+          // Redirecionar após fechar pop-up
+          window.location.href = "index.html"
+        }, 3000)
+      }
+
       async function cadastrar() {
         const nome = document.getElementById("nome").value.trim()
         const data_nascimento = document.getElementById("data_nascimento").value
@@ -174,7 +220,8 @@
         document.getElementById("apelidoErro").textContent = ""
 
         if (!/^[A-Za-z]{1,15}$/.test(apelido)) {
-          document.getElementById("apelidoErro").textContent = "Apelido só com letras, até 15 caracteres."
+          document.getElementById("apelidoErro").textContent =
+            "Apelido só com letras, até 15 caracteres."
           return
         }
 
@@ -182,16 +229,14 @@
         const senhaHash = btoa(senha)
 
         const { data, error } = await supabase
-          .from('usuarios')
-          .insert([
-            { nome, data_nascimento, apelido, email, senha: senhaHash }
-          ])
+          .from("usuarios")
+          .insert([{ nome, data_nascimento, apelido, email, senha: senhaHash }])
 
         if (error) {
           alert("Erro ao cadastrar: " + error.message)
         } else {
-          alert("Conta criada com sucesso!")
-          window.location.href = "index.html"
+          // Substitui o alert por pop-up
+          mostrarPopupSucesso()
         }
       }
 
@@ -199,8 +244,8 @@
       window.verificarForcaSenha = verificarForcaSenha
       window.cadastrar = cadastrar
 
-      // Opcional: associar botão por JS ao invés de onclick inline
-      document.getElementById('btnCadastrar').addEventListener('click', cadastrar)
+      // Associar botão ao evento
+      document.getElementById("btnCadastrar").addEventListener("click", cadastrar)
     </script>
   </body>
 </html>
