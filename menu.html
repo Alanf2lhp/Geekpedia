@@ -1,0 +1,67 @@
+<!-- menu.html -->
+<nav class="main-menu">
+  <a href="index.html"><i class="fas fa-home"></i> Início</a>
+  <a href="tecnologia.html"><i class="fas fa-microchip"></i> Tecnologia</a>
+  <a href="games.html"><i class="fas fa-gamepad"></i> Games</a>
+  <a href="filmes.html"><i class="fas fa-film"></i> Filmes & Séries</a>
+  <a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a>
+
+  <div class="user-info">
+    <i class="fas fa-user"></i> <span id="userName">Visitante</span>
+    <button id="btnLogout" style="margin-left: 10px;">Sair</button>
+  </div>
+</nav>
+
+<style>
+  .main-menu {
+    background-color: #222;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: #00fff2;
+    font-family: 'Orbitron', sans-serif;
+  }
+  .main-menu a {
+    color: #00fff2;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .main-menu a:hover {
+    text-decoration: underline;
+  }
+  .user-info {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  #btnLogout {
+    background: #00fff2;
+    border: none;
+    border-radius: 4px;
+    color: #000;
+    cursor: pointer;
+    padding: 4px 8px;
+    font-weight: 600;
+  }
+  #btnLogout:hover {
+    background: #00ccc0;
+  }
+</style>
+
+<script>
+  // Carrega nome do usuário do localStorage
+  const userNameElem = document.getElementById('userName');
+  const btnLogout = document.getElementById('btnLogout');
+
+  // Busca nome salvo, ou mostra 'Visitante'
+  const nomeUsuario = localStorage.getItem('nomeUsuario') || 'Visitante';
+  userNameElem.textContent = nomeUsuario;
+
+  btnLogout.addEventListener('click', () => {
+    localStorage.removeItem('nomeUsuario');
+    // Redireciona para página de login ou home
+    window.location.href = 'index.html';
+  });
+</script>
