@@ -2,48 +2,8 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Redefinir Senha</title>
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-
-    const supabase = createClient(
-      'https://odxqvkwxhbfgcmngdhic.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9keHF2a3d4aGJmZ2NtbmdkaGljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjk1MTMsImV4cCI6MjA2ODg0NTUxM30.U47P-s4GNGgk5f_3cQsBxDVLOqp3-jXsOX14Ok8fZk8'
-    )
-
-    // Checa se o usuário está autenticado após o redirecionamento
-    const { data: { session } } = await supabase.auth.getSession()
-
-    if (!session) {
-      // Se não estiver autenticado, tenta completar a redefinição com o hash da URL
-      await supabase.auth.exchangeCodeForSession(window.location.href)
-    }
-
-    window.redefinirSenha = async function () {
-      const novaSenha = document.getElementById('novaSenha').value.trim()
-      const confirmarSenha = document.getElementById('confirmarSenha').value.trim()
-
-      if (novaSenha.length < 6) {
-        alert('A nova senha deve ter pelo menos 6 caracteres.')
-        return
-      }
-
-      if (novaSenha !== confirmarSenha) {
-        alert('As senhas não coincidem.')
-        return
-      }
-
-      const { error } = await supabase.auth.updateUser({ password: novaSenha })
-
-      if (error) {
-        alert('Erro ao redefinir a senha: ' + error.message)
-      } else {
-        alert('Senha redefinida com sucesso!')
-        window.location.href = 'index.html'
-      }
-    }
-  </script>
 
   <style>
     body {
@@ -63,17 +23,13 @@
       border-radius: 12px;
       box-shadow: 0 0 15px #00fff2;
       text-align: center;
-      width: 320px;
-    }
-
-    .reset-container h2 {
-      margin-bottom: 20px;
+      width: 300px;
     }
 
     .reset-container input {
       width: 100%;
       padding: 10px;
-      margin: 8px 0;
+      margin: 10px 0;
       border: none;
       border-radius: 5px;
     }
@@ -81,26 +37,119 @@
     .reset-container button {
       width: 100%;
       padding: 10px;
-      margin-top: 10px;
       border: none;
       border-radius: 5px;
       background-color: #00fff2;
       color: #0d0d0d;
       cursor: pointer;
       font-weight: bold;
+      margin-top: 10px;
     }
 
     .reset-container button:hover {
       background-color: #00cccc;
     }
+
+    #popup {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 25px;
+      border-radius: 8px;
+      font-weight: bold;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    #popup.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #popup.success {
+      background-color: #28a745;
+      color: white;
+      box-shadow: 0 0 15px #28a745aa;
+    }
+
+    #popup.error {
+      background-color: #dc3545;
+      color: white;
+      box-shadow: 0 0 15px #dc3545aa;
+    }
   </style>
 </head>
 <body>
+
   <div class="reset-container">
     <h2>Redefinir Senha</h2>
     <input type="password" id="novaSenha" placeholder="Nova senha" />
-    <input type="password" id="confirmarSenha" placeholder="Confirmar nova senha" />
-    <button onclick="redefinirSenha()">Redefinir</button>
+    <button onclick="redefinirSenha()">Salvar Nova Senha</button>
   </div>
+
+  <div id="popup"></div>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const supabase = createClient(
+      'https://odxqvkwxhbfgcmngdhic.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9keHF2a3d4aGJmZ2NtbmdkaGljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjk1MTMsImV4cCI6MjA2ODg0NTUxM30.U47P-s4GNGgk5f_3cQsBxDVLOqp3-jXsOX14Ok8fZk8'
+    );
+
+    function mostrarPopup(mensagem, tipo = 'success') {
+      const popup = document.getElementById('popup');
+      popup.textContent = mensagem;
+      popup.className = `show ${tipo}`;
+
+      setTimeout(() => {
+        popup.classList.remove('show');
+        if (tipo === 'success') window.location.href = 'index.html';
+      }, 3000);
+    }
+
+    window.redefinirSenha = async function () {
+      const novaSenha = document.getElementById('novaSenha').value.trim();
+
+      if (novaSenha.length < 6) {
+        mostrarPopup('A senha deve ter pelo menos 6 caracteres.', 'error');
+        return;
+      }
+
+      // 1. Atualiza no Auth
+      const { error: authError } = await supabase.auth.updateUser({ password: novaSenha });
+
+      if (authError) {
+        mostrarPopup('Erro ao redefinir senha no Auth: ' + authError.message, 'error');
+        return;
+      }
+
+      // 2. Obtém o e-mail do usuário logado
+      const { data: { user }, error: userError } = await supabase.auth.getUser();
+
+      if (userError || !user?.email) {
+        mostrarPopup('Não foi possível obter o e-mail do usuário.', 'error');
+        return;
+      }
+
+      const email = user.email;
+
+      // 3. Atualiza sua tabela personalizada
+      const senhaHash = btoa(novaSenha); // substitua por hash seguro no backend
+
+      const { error: dbError } = await supabase
+        .from('usuarios')
+        .update({ senha: senhaHash })
+        .eq('email', email);
+
+      if (dbError) {
+        mostrarPopup('Erro ao atualizar base de dados: ' + dbError.message, 'error');
+      } else {
+        mostrarPopup('Senha atualizada com sucesso!', 'success');
+      }
+    }
+  </script>
 </body>
 </html>
