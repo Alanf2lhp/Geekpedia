@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Recuperar Senha</title>
+  <title>Redefinir Senha</title>
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
@@ -12,22 +12,35 @@
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9keHF2a3d4aGJmZ2NtbmdkaGljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjk1MTMsImV4cCI6MjA2ODg0NTUxM30.U47P-s4GNGgk5f_3cQsBxDVLOqp3-jXsOX14Ok8fZk8'
     )
 
-    window.enviarRecuperacao = async function () {
-      const email = document.getElementById('email').value.trim()
+    // Checa se o usuário está autenticado após o redirecionamento
+    const { data: { session } } = await supabase.auth.getSession()
 
-      if (!email) {
-        alert('Por favor, preencha o e-mail.')
+    if (!session) {
+      // Se não estiver autenticado, tenta completar a redefinição com o hash da URL
+      await supabase.auth.exchangeCodeForSession(window.location.href)
+    }
+
+    window.redefinirSenha = async function () {
+      const novaSenha = document.getElementById('novaSenha').value.trim()
+      const confirmarSenha = document.getElementById('confirmarSenha').value.trim()
+
+      if (novaSenha.length < 6) {
+        alert('A nova senha deve ter pelo menos 6 caracteres.')
         return
       }
 
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'https://geekpedia-news.vercel.app/redefinir-senha.html' // ou seu domínio real
-      })
+      if (novaSenha !== confirmarSenha) {
+        alert('As senhas não coincidem.')
+        return
+      }
+
+      const { error } = await supabase.auth.updateUser({ password: novaSenha })
 
       if (error) {
-        alert('Erro: ' + error.message)
+        alert('Erro ao redefinir a senha: ' + error.message)
       } else {
-        alert('Um link de recuperação foi enviado para o seu e-mail.')
+        alert('Senha redefinida com sucesso!')
+        window.location.href = 'index.html'
       }
     }
   </script>
@@ -44,20 +57,20 @@
       margin: 0;
     }
 
-    .recovery-container {
+    .reset-container {
       background-color: #1a1a1a;
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 0 15px #00fff2;
       text-align: center;
-      width: 300px;
+      width: 320px;
     }
 
-    .recovery-container h2 {
+    .reset-container h2 {
       margin-bottom: 20px;
     }
 
-    .recovery-container input {
+    .reset-container input {
       width: 100%;
       padding: 10px;
       margin: 8px 0;
@@ -65,7 +78,7 @@
       border-radius: 5px;
     }
 
-    .recovery-container button {
+    .reset-container button {
       width: 100%;
       padding: 10px;
       margin-top: 10px;
@@ -77,30 +90,17 @@
       font-weight: bold;
     }
 
-    .recovery-container button:hover {
+    .reset-container button:hover {
       background-color: #00cccc;
-    }
-
-    .recovery-container .back {
-      background: transparent;
-      color: #00fff2;
-      border: 1px solid #00fff2;
-      margin-top: 15px;
-    }
-
-    .recovery-container .back:hover {
-      background-color: #00fff2;
-      color: #0d0d0d;
     }
   </style>
 </head>
 <body>
-  <div class="recovery-container">
-    <h2>Recuperar Senha</h2>
-    <p>Informe seu e-mail para enviar o link de recuperação.</p>
-    <input type="email" id="email" placeholder="Seu e-mail" />
-    <button onclick="enviarRecuperacao()">Enviar link de recuperação</button>
-    <button class="back" onclick="window.location.href='index.html'">Voltar ao Login</button>
+  <div class="reset-container">
+    <h2>Redefinir Senha</h2>
+    <input type="password" id="novaSenha" placeholder="Nova senha" />
+    <input type="password" id="confirmarSenha" placeholder="Confirmar nova senha" />
+    <button onclick="redefinirSenha()">Redefinir</button>
   </div>
 </body>
 </html>
