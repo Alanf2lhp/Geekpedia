@@ -1,173 +1,206 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Cadastro de Usuário</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    body {
-      background-color: #1a1a1a;
-      font-family: Arial, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    .cadastro-container {
-      background-color: #2a2a2a;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #00fff2;
-      color: #fff;
-      width: 350px;
-    }
-
-    .cadastro-container h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #00fff2;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-      margin-top: 10px;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="date"],
-    input[type="password"] {
-      width: 100%;
-      padding: 8px;
-      border: none;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      background-color: #444;
-      color: #fff;
-    }
-
-    .password-strength {
-      height: 10px;
-      border-radius: 5px;
-      background-color: #333;
-      margin-bottom: 10px;
-      overflow: hidden;
-    }
-
-    .strength-bar {
-      height: 100%;
-      width: 0%;
-      transition: width 0.3s;
-    }
-
-    .error {
-      color: red;
-      font-size: 0.9em;
-      margin-top: -5px;
-      margin-bottom: 10px;
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #00fff2;
-      color: #000;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background-color: #00ccc0;
-    }
-
-    .login-btn {
-      background: transparent;
-      color: #00fff2;
-      border: 1px solid #00fff2;
-    }
-
-    .login-btn:hover {
-      background: #00fff2;
-      color: #000;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="cadastro-container">
-    <h2><i class="fas fa-user-plus"></i> Criar Conta</h2>
-
-    <label for="nome">Nome Completo:</label>
-    <input type="text" id="nome" required>
-
-    <label for="data">Data de Nascimento:</label>
-    <input type="date" id="data" required>
-
-    <label for="email">E-mail:</label>
-    <input type="email" id="email" required>
-
-    <label for="apelido">Apelido (até 15 letras):</label>
-    <input type="text" id="apelido" maxlength="15" pattern="[A-Za-z]{1,15}" title="Somente letras, até 15 caracteres" required>
-    <div id="apelidoErro" class="error"></div>
-
-    <label for="senha">Senha:</label>
-    <input type="password" id="senha" required oninput="verificarForcaSenha()">
-    <div class="password-strength"><div id="barraSenha" class="strength-bar"></div></div>
-
-    <button onclick="cadastrar()">Cadastrar</button>
-    <button class="login-btn" onclick="window.location.href='index.html'">Fazer Login</button>
-  </div>
-
-  <script>
-    function verificarForcaSenha() {
-      const senha = document.getElementById("senha").value;
-      const barra = document.getElementById("barraSenha");
-
-      let forca = 0;
-      if (senha.length >= 6) forca++;
-      if (/[A-Z]/.test(senha)) forca++;
-      if (/[0-9]/.test(senha)) forca++;
-      if (/[\W_]/.test(senha)) forca++;
-
-      switch (forca) {
-        case 0:
-        case 1:
-          barra.style.width = "33%";
-          barra.style.backgroundColor = "red";
-          break;
-        case 2:
-        case 3:
-          barra.style.width = "66%";
-          barra.style.backgroundColor = "orange";
-          break;
-        case 4:
-          barra.style.width = "100%";
-          barra.style.backgroundColor = "limegreen";
-          break;
-      }
-    }
-
-    function cadastrar() {
-      const apelido = document.getElementById("apelido").value;
-      const apelidoErro = document.getElementById("apelidoErro");
-
-      if (!/^[A-Za-z]{1,15}$/.test(apelido)) {
-        apelidoErro.textContent = "O apelido deve conter apenas letras e até 15 caracteres.";
-        return;
-      } else {
-        apelidoErro.textContent = "";
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cadastro de Usuário</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        background-color: #1a1a1a;
+        font-family: Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
       }
 
-      alert("Cadastro realizado com sucesso!");
-      // Aqui você pode enviar os dados para um backend
-    }
-  </script>
+      .cadastro-container {
+        background-color: #2a2a2a;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #00fff2;
+        color: #fff;
+        width: 350px;
+      }
 
-</body>
+      .cadastro-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #00fff2;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        margin-top: 10px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="date"],
+      input[type="password"] {
+        width: 100%;
+        padding: 8px;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        background-color: #444;
+        color: #fff;
+      }
+
+      .password-strength {
+        height: 10px;
+        border-radius: 5px;
+        background-color: #333;
+        margin-bottom: 10px;
+        overflow: hidden;
+      }
+
+      .strength-bar {
+        height: 100%;
+        width: 0%;
+        transition: width 0.3s;
+      }
+
+      .error {
+        color: red;
+        font-size: 0.9em;
+        margin-top: -5px;
+        margin-bottom: 10px;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #00fff2;
+        color: #000;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      button:hover {
+        background-color: #00ccc0;
+      }
+
+      .login-btn {
+        background: transparent;
+        color: #00fff2;
+        border: 1px solid #00fff2;
+      }
+
+      .login-btn:hover {
+        background: #00fff2;
+        color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cadastro-container">
+      <h2><i class="fas fa-user-plus"></i> Criar Conta</h2>
+
+      <label for="nome">Nome Completo:</label>
+      <input type="text" id="nome" required />
+
+      <label for="data_nascimento">Data de Nascimento:</label>
+      <input type="date" id="data_nascimento" required />
+
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" required />
+
+      <label for="apelido">Apelido (até 15 letras):</label>
+      <input
+        type="text"
+        id="apelido"
+        maxlength="15"
+        pattern="[A-Za-z]{1,15}"
+        title="Somente letras, até 15 caracteres"
+        required
+      />
+      <div id="apelidoErro" class="error"></div>
+
+      <label for="senha">Senha:</label>
+      <input
+        type="password"
+        id="senha"
+        required
+        oninput="verificarForcaSenha()"
+      />
+      <div class="password-strength">
+        <div id="barraSenha" class="strength-bar"></div>
+      </div>
+
+      <button id="btnCadastrar">Cadastrar</button>
+      <button class="login-btn" onclick="window.location.href='index.html'">
+        Fazer Login
+      </button>
+    </div>
+
+    <script type="module">
+      import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+      const supabase = createClient(
+        'https://odxqvkwxhbfgcmngdhic.supabase.co',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9keHF2a3d4aGJmZ2NtbmdkaGljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjk1MTMsImV4cCI6MjA2ODg0NTUxM30.U47P-s4GNGgk5f_3cQsBxDVLOqp3-jXsOX14Ok8fZk8' // sua chave anon
+      )
+
+      function verificarForcaSenha() {
+        const senha = document.getElementById("senha").value
+        const barra = document.getElementById("barraSenha")
+        let forca = 0
+        if (senha.length >= 6) forca++
+        if (/[A-Z]/.test(senha)) forca++
+        if (/[0-9]/.test(senha)) forca++
+        if (/[\W_]/.test(senha)) forca++
+        barra.style.cssText =
+          forca <= 1 ? "width:33%;background:red" :
+          forca <= 3 ? "width:66%;background:orange" :
+          "width:100%;background:limegreen"
+      }
+
+      async function cadastrar() {
+        const nome = document.getElementById("nome").value.trim()
+        const data_nascimento = document.getElementById("data_nascimento").value
+        const apelido = document.getElementById("apelido").value.trim()
+        const email = document.getElementById("email").value.trim()
+        const senha = document.getElementById("senha").value
+
+        document.getElementById("apelidoErro").textContent = ""
+
+        if (!/^[A-Za-z]{1,15}$/.test(apelido)) {
+          document.getElementById("apelidoErro").textContent = "Apelido só com letras, até 15 caracteres."
+          return
+        }
+
+        // Exemplo simples de hash (não seguro para produção! Ideal usar hash no backend)
+        const senhaHash = btoa(senha)
+
+        const { data, error } = await supabase
+          .from('usuarios')
+          .insert([
+            { nome, data_nascimento, apelido, email, senha: senhaHash }
+          ])
+
+        if (error) {
+          alert("Erro ao cadastrar: " + error.message)
+        } else {
+          alert("Conta criada com sucesso!")
+          window.location.href = "index.html"
+        }
+      }
+
+      // Expõe as funções para o HTML (como você usa onclick inline)
+      window.verificarForcaSenha = verificarForcaSenha
+      window.cadastrar = cadastrar
+
+      // Opcional: associar botão por JS ao invés de onclick inline
+      document.getElementById('btnCadastrar').addEventListener('click', cadastrar)
+    </script>
+  </body>
 </html>
