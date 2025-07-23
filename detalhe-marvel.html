@@ -1,146 +1,176 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Marvel Studios: Fase por Fase | Geekpédia</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Marvel Studios: Fase por Fase | Geekpédia</title>
 
-  <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <style>
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: #0d0d0d;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: #0d0d0d;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
 
-    header {
-      text-align: center;
-      color: #00fff2;
-      font-family: 'Orbitron', sans-serif;
-      padding: 40px 20px 10px;
-    }
-    header p {
-      font-family: 'JetBrains Mono', monospace;
-      color: #c0f9f8;
-      margin-top: 10px;
-    }
+      header {
+        text-align: center;
+        color: #00fff2;
+        font-family: "Orbitron", sans-serif;
+        padding: 40px 20px 10px;
+      }
+      header p {
+        font-family: "JetBrains Mono", monospace;
+        color: #c0f9f8;
+        margin-top: 10px;
+      }
 
-    nav {
-      text-align: center;
-      margin: 10px 0 30px;
-      background: rgba(0,0,0,0.85);
-      padding: 10px 0;
-      border-radius: 8px;
-    }
-    nav a {
-      color: #00fff2;
-      text-decoration: none;
-      margin: 0 20px;
-      font-weight: 600;
-      font-family: 'JetBrains Mono', monospace;
-      transition: color 0.3s ease;
-    }
-    nav a:hover {
-      color: #a0eaff;
-    }
+      nav {
+        text-align: center;
+        margin: 10px 0 30px;
+        background: rgba(0, 0, 0, 0.85);
+        padding: 10px 0;
+        border-radius: 8px;
+      }
+      nav a {
+        color: #00fff2;
+        text-decoration: none;
+        margin: 0 20px;
+        font-weight: 600;
+        font-family: "JetBrains Mono", monospace;
+        transition: color 0.3s ease;
+      }
+      nav a:hover {
+        color: #a0eaff;
+      }
 
-    main.content {
-      max-width: 900px;
-      margin: 0 auto 40px;
-      padding: 20px;
-      background: rgba(0,0,0,0.7);
-      border-radius: 10px;
-      color: #c0f9f8;
-      font-family: 'JetBrains Mono', monospace;
-      line-height: 1.6;
-    }
+      main.content {
+        max-width: 900px;
+        margin: 0 auto 40px;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        color: #c0f9f8;
+        font-family: "JetBrains Mono", monospace;
+        line-height: 1.6;
+      }
 
-    main.content h2 {
-      color: #00fff2;
-      margin-bottom: 20px;
-      font-family: 'Orbitron', sans-serif;
-    }
+      main.content h2 {
+        color: #00fff2;
+        margin-bottom: 20px;
+        font-family: "Orbitron", sans-serif;
+      }
 
-    main.content p {
-      margin-bottom: 15px;
-      font-size: 1.1rem;
-    }
-  </style>
-</head>
-<body>
+      main.content p {
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+      }
+      footer {
+        text-align: center;
+        margin-top: 3rem;
+        padding: 1rem;
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
 
-  <div id="particles-js"></div>
+    <header>
+      <h1><i class="fas fa-film"></i> Marvel Studios</h1>
+      <p>Como o MCU construiu seu império cinematográfico</p>
+    </header>
 
-  <header>
-    <h1><i class="fas fa-film"></i> Marvel Studios</h1>
-    <p>Como o MCU construiu seu império cinematográfico</p>
-  </header>
+    <nav>
+      <a href="home.html"><i class="fas fa-home"></i> Início</a>
+      <a href="filmes.html"
+        ><i class="fas fa-film"></i> Voltar à Filmes & Séries</a
+      >
+    </nav>
 
-  <nav>
-    <a href="home.html"><i class="fas fa-home"></i> Início</a>
-    <a href="filmes.html"><i class="fas fa-film"></i> Voltar à Filmes & Séries</a>
-  </nav>
+    <main class="content">
+      <article>
+        <h2>🦸‍♂️ Marvel Studios: Fase por Fase</h2>
+        <img
+          src="./image/Marvel_Logo.svg.png"
+          alt="Logo Marvel"
+          style="
+            width: 100%;
+            max-width: 620px;
+            height: auto;
+            display: block;
+            margin: 0 auto 20px;
+          "
+        />
 
-  <main class="content">
-    <article>
-      <h2>🦸‍♂️ Marvel Studios: Fase por Fase</h2>
-      <img src="./image/Marvel_Logo.svg.png" alt="Logo Marvel" style="width: 100%; max-width: 620px; height: auto; display: block; margin: 0 auto 20px;">
+        <p>
+          Desde o lançamento de “Homem de Ferro” em 2008, o Universo
+          Cinematográfico Marvel (MCU) redefiniu a forma como as franquias são
+          construídas no cinema.
+        </p>
+        <p>
+          O MCU está dividido em fases que agrupam filmes interligados por
+          histórias e personagens, criando um universo coeso e expansivo.
+        </p>
+        <p>
+          - Fase 1: Introdução aos heróis clássicos como Homem de Ferro, Thor,
+          Capitão América e o confronto contra o vilão Loki.<br />
+          - Fase 2: Exploração de novos personagens e conflitos mais complexos,
+          incluindo “Guardians of the Galaxy”.<br />
+          - Fase 3: Culminação com “Avengers: Infinity War” e “Endgame”, eventos
+          que uniram quase todos os heróis.<br />
+          - Fase 4 e além: Expansão para séries na TV e introdução de novas
+          gerações e multiversos.
+        </p>
+        <p>
+          O sucesso do MCU influenciou toda a indústria, estabelecendo um padrão
+          para narrativas conectadas e grandes eventos cinematográficos.
+        </p>
+      </article>
+    </main>
 
-      <p>
-        Desde o lançamento de “Homem de Ferro” em 2008, o Universo Cinematográfico Marvel (MCU) redefiniu a forma como as franquias são construídas no cinema.
-      </p>
-      <p>
-        O MCU está dividido em fases que agrupam filmes interligados por histórias e personagens, criando um universo coeso e expansivo.
-      </p>
-      <p>
-        - Fase 1: Introdução aos heróis clássicos como Homem de Ferro, Thor, Capitão América e o confronto contra o vilão Loki.<br/>
-        - Fase 2: Exploração de novos personagens e conflitos mais complexos, incluindo “Guardians of the Galaxy”.<br/>
-        - Fase 3: Culminação com “Avengers: Infinity War” e “Endgame”, eventos que uniram quase todos os heróis.<br/>
-        - Fase 4 e além: Expansão para séries na TV e introdução de novas gerações e multiversos.
-      </p>
-      <p>
-        O sucesso do MCU influenciou toda a indústria, estabelecendo um padrão para narrativas conectadas e grandes eventos cinematográficos.
-      </p>
-    </article>
-  </main>
+    <footer>
+      <p>🎬 Geekpédia © 2025 - Todos os direitos reservados.</p>
+    </footer>
 
-  <footer>
-    <p>🎬 Geekpédia © 2025 - Todos os direitos reservados.</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 90, density: { enable: true, value_area: 800 } },
-        color: { value: "#00fff2" },
-        shape: { type: "circle" },
-        opacity: { value: 0.4 },
-        size: { value: 2, random: true },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#00fff2",
-          opacity: 0.2,
-          width: 1
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 90, density: { enable: true, value_area: 800 } },
+          color: { value: "#00fff2" },
+          shape: { type: "circle" },
+          opacity: { value: 0.4 },
+          size: { value: 2, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#00fff2",
+            opacity: 0.2,
+            width: 1,
+          },
+          move: { enable: true, speed: 1.5 },
         },
-        move: { enable: true, speed: 1.5 }
-      },
-      interactivity: {
-        events: {
-          onhover: { enable: true, mode: "repulse" },
-          onclick: { enable: true, mode: "push" }
-        }
-      },
-      retina_detect: true
-    });
-  </script>
-
-</body>
+        interactivity: {
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+          },
+        },
+        retina_detect: true,
+      });
+    </script>
+  </body>
 </html>

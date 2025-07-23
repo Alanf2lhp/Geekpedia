@@ -1,66 +1,114 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Trilha Sonora Premiada - Geekpédia</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <style>
-    #particles-js { position: fixed; width: 100%; height: 100%; background: #0d0d0d; top: 0; left: 0; z-index: -1; }
-    .detail-container { max-width: 800px; margin: auto; padding: 40px 20px; }
-  </style>
-</head>
-<body>
-  <div id="particles-js"></div>
-  <header>
-    <h1><i class="fas fa-music"></i> Trilha Sonora Premiada</h1>
-    <p>Games com trilhas que marcaram a indústria e ganharam prêmios importantes</p>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trilha Sonora Premiada - Geekpédia</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: #0d0d0d;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+      .detail-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 40px 20px;
+      }
+      footer {
+        text-align: center;
+        margin-top: 3rem;
+        padding: 1rem;
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+    <header>
+      <h1><i class="fas fa-music"></i> Trilha Sonora Premiada</h1>
+      <p>
+        Games com trilhas que marcaram a indústria e ganharam prêmios
+        importantes
+      </p>
+    </header>
 
-  <nav>
-    <a href="home.html"><i class="fas fa-home"></i> Início</a>
-    <a href="games.html"><i class="fas fa-gamepad"></i> Voltar aos Games</a>
-  </nav>
+    <nav>
+      <a href="home.html"><i class="fas fa-home"></i> Início</a>
+      <a href="games.html"><i class="fas fa-gamepad"></i> Voltar aos Games</a>
+    </nav>
 
-  <div class="detail-container">
-         <img src="./image/header.jpg" alt="Logo Marvel" style="width: 100%; max-width: 620px; height: auto; display: block; margin: 0 auto 20px;">
+    <div class="detail-container">
+      <img
+        src="./image/header.jpg"
+        alt="Logo Marvel"
+        style="
+          width: 100%;
+          max-width: 620px;
+          height: auto;
+          display: block;
+          margin: 0 auto 20px;
+        "
+      />
 
-    <h2>🎼 The Last of Us (2013)</h2>
-    <p>Composta por Gustavo Santaolalla, vencedor de 2 Oscars, a trilha de <strong>The Last of Us</strong> trouxe um clima emocional e minimalista ao apocalipse zumbi. Venceu diversos prêmios, como BAFTA e VGA.</p>
+      <h2>🎼 The Last of Us (2013)</h2>
+      <p>
+        Composta por Gustavo Santaolalla, vencedor de 2 Oscars, a trilha de
+        <strong>The Last of Us</strong> trouxe um clima emocional e minimalista
+        ao apocalipse zumbi. Venceu diversos prêmios, como BAFTA e VGA.
+      </p>
 
-    <h2>🎻 God of War (2018)</h2>
-    <p>O compositor Bear McCreary, famoso por séries como Battlestar Galactica, criou uma trilha épica e nórdica que venceu o The Game Awards de Melhor Trilha Sonora.</p>
+      <h2>🎻 God of War (2018)</h2>
+      <p>
+        O compositor Bear McCreary, famoso por séries como Battlestar Galactica,
+        criou uma trilha épica e nórdica que venceu o The Game Awards de Melhor
+        Trilha Sonora.
+      </p>
 
-    <h2>🎧 Final Fantasy Series</h2>
-    <p>Nobuo Uematsu é referência global. Sua música “One-Winged Angel” (FFVII) é uma das mais executadas em concertos sinfônicos de games.</p>
-  </div>
+      <h2>🎧 Final Fantasy Series</h2>
+      <p>
+        Nobuo Uematsu é referência global. Sua música “One-Winged Angel” (FFVII)
+        é uma das mais executadas em concertos sinfônicos de games.
+      </p>
+    </div>
 
-  <footer>
-    <p>🎵 Geekpédia © 2025 - Todos os direitos reservados.</p>
-  </footer>
+    <footer>
+      <p>🎵 Geekpédia © 2025 - Todos os direitos reservados.</p>
+    </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: "#00fff2" },
-        shape: { type: "circle" },
-        opacity: { value: 0.4 },
-        size: { value: 2, random: true },
-        line_linked: { enable: true, color: "#00fff2", opacity: 0.2 },
-        move: { enable: true, speed: 1 }
-      },
-      interactivity: {
-        events: {
-          onhover: { enable: true, mode: "repulse" },
-          onclick: { enable: true, mode: "push" }
-        }
-      },
-      retina_detect: true
-    });
-  </script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#00fff2" },
+          shape: { type: "circle" },
+          opacity: { value: 0.4 },
+          size: { value: 2, random: true },
+          line_linked: { enable: true, color: "#00fff2", opacity: 0.2 },
+          move: { enable: true, speed: 1 },
+        },
+        interactivity: {
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+          },
+        },
+        retina_detect: true,
+      });
+    </script>
+  </body>
 </html>

@@ -1,157 +1,186 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Drácula no Cinema | Geekpédia</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Drácula no Cinema | Geekpédia</title>
 
-  <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'JetBrains Mono', monospace;
-      background: #0d0d0d;
-      color: #d0f0f7;
-    }
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "JetBrains Mono", monospace;
+        background: #0d0d0d;
+        color: #d0f0f7;
+      }
 
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: #0d0d0d;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: #0d0d0d;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
 
-    header {
-      text-align: center;
-      padding: 2rem 1rem 1rem;
-    }
+      header {
+        text-align: center;
+        padding: 2rem 1rem 1rem;
+      }
 
-    header h1 {
-      font-family: 'Orbitron', sans-serif;
-      color: #00fff2;
-      font-size: 2rem;
-    }
+      header h1 {
+        font-family: "Orbitron", sans-serif;
+        color: #00fff2;
+        font-size: 2rem;
+      }
 
-    header p {
-      color: #a0eaff;
-      font-size: 1rem;
-      margin-top: 0.5rem;
-    }
+      header p {
+        color: #a0eaff;
+        font-size: 1rem;
+        margin-top: 0.5rem;
+      }
 
-    nav {
-      text-align: center;
-      margin-top: 1rem;
-    }
+      nav {
+        text-align: center;
+        margin-top: 1rem;
+      }
 
-    nav a {
-      display: inline-block;
-      margin: 0.5rem 1rem;
-      color: #00fff2;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
+      nav a {
+        display: inline-block;
+        margin: 0.5rem 1rem;
+        color: #00fff2;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s;
+      }
 
-    nav a:hover {
-      color: #00e0d1;
-    }
+      nav a:hover {
+        color: #00e0d1;
+      }
 
-    main.content {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background: rgba(0, 0, 0, 0.75);
-      border-radius: 10px;
-    }
+      main.content {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: rgba(0, 0, 0, 0.75);
+        border-radius: 10px;
+      }
 
-    h2 {
-      font-family: 'Orbitron', sans-serif;
-      color: #00fff2;
-      font-size: 1.5rem;
-    }
+      h2 {
+        font-family: "Orbitron", sans-serif;
+        color: #00fff2;
+        font-size: 1.5rem;
+      }
 
-    p {
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
+      p {
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
 
-    footer {
-      text-align: center;
-      margin-top: 3rem;
-      padding: 1rem;
-      color: #888;
-    }
-  </style>
-</head>
-<body>
+      footer {
+        text-align: center;
+        margin-top: 3rem;
+        padding: 1rem;
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
 
-  <div id="particles-js"></div>
+    <header>
+      <h1><i class="fas fa-film"></i> Drácula no Cinema</h1>
+      <p>O Vampiro mais retratado da história do cinema</p>
+    </header>
 
-  <header>
-    <h1><i class="fas fa-film"></i> Drácula no Cinema</h1>
-    <p>O Vampiro mais retratado da história do cinema</p>
-  </header>
+    <nav>
+      <a href="home.html"><i class="fas fa-home"></i> Início</a>
+      <a href="filmes.html"
+        ><i class="fas fa-arrow-left"></i> Voltar aos Filmes & Séries</a
+      >
+    </nav>
 
-  <nav>
-    <a href="home.html"><i class="fas fa-home"></i> Início</a>
-    <a href="filmes.html"><i class="fas fa-arrow-left"></i> Voltar aos Filmes & Séries</a>
-  </nav>
+    <main class="content">
+      <article>
+        <img
+          src="./image/dracula.webp"
+          alt="Logo Marvel"
+          style="
+            width: 100%;
+            max-width: 620px;
+            height: auto;
+            display: block;
+            margin: 0 auto 20px;
+          "
+        />
 
-  <main class="content">
-    <article>
-            <img src="./image/dracula.webp" alt="Logo Marvel" style="width: 100%; max-width: 620px; height: auto; display: block; margin: 0 auto 20px;">
+        <h2>🧛 O Conde Drácula no Cinema</h2>
+        <p>
+          Drácula, o famoso vampiro criado pelo escritor Bram Stoker em 1897, é
+          um dos personagens mais adaptados da história do cinema, com mais de
+          <strong>200 filmes</strong> produzidos até hoje.
+        </p>
+        <p>
+          O personagem transcendeu sua origem literária para se tornar um
+          verdadeiro <strong>ícone do horror</strong> e da cultura pop, sendo
+          interpretado por atores lendários como <strong>Bela Lugosi</strong>,
+          <strong>Christopher Lee</strong>, <strong>Gary Oldman</strong>, entre
+          outros.
+        </p>
+        <p>
+          As adaptações de Drácula vão desde os clássicos do cinema mudo, como
+          "Nosferatu" (1922), até versões modernas que exploram diferentes
+          gêneros, incluindo <strong>terror, romance, comédia</strong> e até
+          <strong>animação</strong>.
+        </p>
+        <p>
+          A história do vampiro que se alimenta de sangue humano continua
+          fascinando gerações, refletindo medos culturais, tabus e fantasias —
+          além de inspirar inúmeras
+          <strong>obras derivadas, séries e paródias</strong>.
+        </p>
+      </article>
+    </main>
 
-      <h2>🧛 O Conde Drácula no Cinema</h2>
-      <p>
-        Drácula, o famoso vampiro criado pelo escritor Bram Stoker em 1897, é um dos personagens mais adaptados da história do cinema, com mais de <strong>200 filmes</strong> produzidos até hoje.
-      </p>
-      <p>
-        O personagem transcendeu sua origem literária para se tornar um verdadeiro <strong>ícone do horror</strong> e da cultura pop, sendo interpretado por atores lendários como <strong>Bela Lugosi</strong>, <strong>Christopher Lee</strong>, <strong>Gary Oldman</strong>, entre outros.
-      </p>
-      <p>
-        As adaptações de Drácula vão desde os clássicos do cinema mudo, como "Nosferatu" (1922), até versões modernas que exploram diferentes gêneros, incluindo <strong>terror, romance, comédia</strong> e até <strong>animação</strong>.
-      </p>
-      <p>
-        A história do vampiro que se alimenta de sangue humano continua fascinando gerações, refletindo medos culturais, tabus e fantasias — além de inspirar inúmeras <strong>obras derivadas, séries e paródias</strong>.
-      </p>
-    </article>
-  </main>
+    <footer>
+      <p>🎬 Geekpédia © 2025 - Todos os direitos reservados.</p>
+    </footer>
 
-  <footer>
-    <p>🎬 Geekpédia © 2025 - Todos os direitos reservados.</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 90, density: { enable: true, value_area: 800 } },
-        color: { value: "#00fff2" },
-        shape: { type: "circle" },
-        opacity: { value: 0.4 },
-        size: { value: 2, random: true },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#00fff2",
-          opacity: 0.2,
-          width: 1
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 90, density: { enable: true, value_area: 800 } },
+          color: { value: "#00fff2" },
+          shape: { type: "circle" },
+          opacity: { value: 0.4 },
+          size: { value: 2, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#00fff2",
+            opacity: 0.2,
+            width: 1,
+          },
+          move: { enable: true, speed: 1.5 },
         },
-        move: { enable: true, speed: 1.5 }
-      },
-      interactivity: {
-        events: {
-          onhover: { enable: true, mode: "repulse" },
-          onclick: { enable: true, mode: "push" }
-        }
-      },
-      retina_detect: true
-    });
-  </script>
-</body>
+        interactivity: {
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+          },
+        },
+        retina_detect: true,
+      });
+    </script>
+  </body>
 </html>

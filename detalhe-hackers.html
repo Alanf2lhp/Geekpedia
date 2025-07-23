@@ -1,117 +1,165 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hackers Famosos - Geekpédia</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <style>
-    #particles-js { position: fixed; width: 100%; height: 100%; background: #0d0d0d; top: 0; left: 0; z-index: -1; }
-    header {
-      text-align: center;
-      padding: 2rem 1rem 0.5rem;
-    }
-    header h1 {
-      font-family: 'Orbitron', sans-serif;
-      color: #00fff2;
-      font-size: 2rem;
-    }
-    header p {
-      color: #a0eaff;
-      font-size: 1rem;
-    }
-    nav {
-      text-align: center;
-      margin-top: 1rem;
-    }
-    nav a {
-      display: inline-block;
-      margin: 0.5rem 1rem;
-      color: #00fff2;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #00e0d1;
-    }
-    .content-detail {
-      max-width: 900px;
-      margin: 60px auto 40px;
-      padding: 20px;
-      background: rgba(0,0,0,0.7);
-      border-radius: 10px;
-      color: #c0f9f8;
-      font-family: 'JetBrains Mono', monospace;
-      line-height: 1.6;
-    }
-    .content-detail h2 {
-      color: #00fff2;
-      margin-bottom: 20px;
-    }
-    .content-detail p {
-      margin-bottom: 20px;
-    }
-    footer {
-      text-align: center;
-      margin-top: 3rem;
-      padding: 1rem;
-      color: #888;
-    }
-  </style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hackers Famosos - Geekpédia</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: #0d0d0d;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+      header {
+        text-align: center;
+        padding: 2rem 1rem 0.5rem;
+      }
+      header h1 {
+        font-family: "Orbitron", sans-serif;
+        color: #00fff2;
+        font-size: 2rem;
+      }
+      header p {
+        color: #a0eaff;
+        font-size: 1rem;
+      }
+      nav {
+        text-align: center;
+        margin-top: 1rem;
+      }
+      nav a {
+        display: inline-block;
+        margin: 0.5rem 1rem;
+        color: #00fff2;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s;
+      }
+      nav a:hover {
+        color: #00e0d1;
+      }
+      .content-detail {
+        max-width: 900px;
+        margin: 60px auto 40px;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        color: #c0f9f8;
+        font-family: "JetBrains Mono", monospace;
+        line-height: 1.6;
+      }
+      .content-detail h2 {
+        color: #00fff2;
+        margin-bottom: 20px;
+      }
+      .content-detail p {
+        margin-bottom: 20px;
+      }
+      footer {
+        text-align: center;
+        margin-top: 3rem;
+        padding: 1rem;
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
 
-<div id="particles-js"></div>
+    <header>
+      <h1><i class="fas fa-user-secret"></i> Hackers que Marcaram História</h1>
+      <p>Figuras polêmicas que influenciaram a cibersegurança global</p>
+    </header>
 
-<header>
-  <h1><i class="fas fa-user-secret"></i> Hackers que Marcaram História</h1>
-  <p>Figuras polêmicas que influenciaram a cibersegurança global</p>
-</header>
+    <nav>
+      <a href="home.html"><i class="fas fa-home"></i> Início</a>
+      <a href="tecnologia.html"
+        ><i class="fas fa-arrow-left"></i> Voltar à Tecnologia</a
+      >
+    </nav>
 
-<nav>
-  <a href="home.html"><i class="fas fa-home"></i> Início</a>
-  <a href="tecnologia.html"><i class="fas fa-arrow-left"></i> Voltar à Tecnologia</a>
-</nav>
+    <main class="content-detail">
+      <img
+        src="./image/hackers.jpeg"
+        alt="Logo Marvel"
+        style="
+          width: 100%;
+          max-width: 620px;
+          height: auto;
+          display: block;
+          margin: 0 auto 20px;
+        "
+      />
 
-<main class="content-detail">
-        <img src="./image/hackers.jpeg" alt="Logo Marvel" style="width: 100%; max-width: 620px; height: auto; display: block; margin: 0 auto 20px;">
+      <h2>Kevin Mitnick</h2>
+      <p>
+        Um dos hackers mais famosos da história, Mitnick ficou conhecido por
+        invadir grandes empresas, antes de se tornar um consultor de segurança.
+      </p>
 
-  <h2>Kevin Mitnick</h2>
-  <p>Um dos hackers mais famosos da história, Mitnick ficou conhecido por invadir grandes empresas, antes de se tornar um consultor de segurança.</p>
+      <h2>Adrian Lamo</h2>
+      <p>
+        Conhecido como o "hacker sem teto", Lamo invadiu redes de grandes
+        corporações e posteriormente denunciou vulnerabilidades importantes.
+      </p>
 
-  <h2>Adrian Lamo</h2>
-  <p>Conhecido como o "hacker sem teto", Lamo invadiu redes de grandes corporações e posteriormente denunciou vulnerabilidades importantes.</p>
+      <h2>Edward Snowden</h2>
+      <p>
+        Ex-analista da NSA, Snowden revelou programas de vigilância em massa,
+        gerando um debate global sobre privacidade e segurança digital.
+      </p>
 
-  <h2>Edward Snowden</h2>
-  <p>Ex-analista da NSA, Snowden revelou programas de vigilância em massa, gerando um debate global sobre privacidade e segurança digital.</p>
+      <h2>Outros Nomes Importantes</h2>
+      <p>
+        Gary McKinnon, LulzSec, Anonymous e muitos outros influenciaram a
+        história da segurança digital, trazendo luz a vulnerabilidades e éticas
+        do hacking.
+      </p>
+    </main>
 
-  <h2>Outros Nomes Importantes</h2>
-  <p>Gary McKinnon, LulzSec, Anonymous e muitos outros influenciaram a história da segurança digital, trazendo luz a vulnerabilidades e éticas do hacking.</p>
-</main>
+    <footer>
+      <p>🔬 Geekpédia © 2025 - Todos os direitos reservados.</p>
+    </footer>
 
-<footer>
-  <p>🔬 Geekpédia © 2025 - Todos os direitos reservados.</p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-<script>
-  particlesJS("particles-js", {
-    particles: {
-      number: { value: 90, density: { enable: true, value_area: 800 } },
-      color: { value: "#00fff2" },
-      shape: { type: "circle" },
-      opacity: { value: 0.4 },
-      size: { value: 2, random: true },
-      line_linked: { enable: true, distance: 150, color: "#00fff2", opacity: 0.2, width: 1 },
-      move: { enable: true, speed: 1.5 }
-    },
-    interactivity: { events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" } } },
-    retina_detect: true
-  });
-</script>
-
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 90, density: { enable: true, value_area: 800 } },
+          color: { value: "#00fff2" },
+          shape: { type: "circle" },
+          opacity: { value: 0.4 },
+          size: { value: 2, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#00fff2",
+            opacity: 0.2,
+            width: 1,
+          },
+          move: { enable: true, speed: 1.5 },
+        },
+        interactivity: {
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+          },
+        },
+        retina_detect: true,
+      });
+    </script>
+  </body>
 </html>

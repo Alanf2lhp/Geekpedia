@@ -1,135 +1,154 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Séries Cults | Geekpédia</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Séries Cults | Geekpédia</title>
 
-  <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <style>
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: #0d0d0d;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-    header {
-      text-align: center;
-      color: #00fff2;
-      font-family: 'Orbitron', sans-serif;
-      padding: 40px 20px 10px;
-    }
-    header p {
-      font-family: 'JetBrains Mono', monospace;
-      color: #c0f9f8;
-      margin-top: 10px;
-    }
-    nav {
-      text-align: center;
-      margin: 10px 0 30px;
-      background: rgba(0,0,0,0.85);
-      padding: 10px 0;
-      border-radius: 8px;
-    }
-    nav a {
-      color: #00fff2;
-      text-decoration: none;
-      margin: 0 20px;
-      font-weight: 600;
-      font-family: 'JetBrains Mono', monospace;
-      transition: color 0.3s ease;
-    }
-    nav a:hover {
-      color: #a0eaff;
-    }
-    main.content {
-      max-width: 900px;
-      margin: 0 auto 40px;
-      padding: 20px;
-      background: rgba(0,0,0,0.7);
-      border-radius: 10px;
-      color: #c0f9f8;
-      font-family: 'JetBrains Mono', monospace;
-      line-height: 1.6;
-    }
-    main.content h2 {
-      color: #00fff2;
-      margin-bottom: 20px;
-      font-family: 'Orbitron', sans-serif;
-    }
-    main.content p {
-      margin-bottom: 15px;
-      font-size: 1.1rem;
-    }
-  </style>
-</head>
-<body>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: #0d0d0d;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+      header {
+        text-align: center;
+        color: #00fff2;
+        font-family: "Orbitron", sans-serif;
+        padding: 40px 20px 10px;
+      }
+      header p {
+        font-family: "JetBrains Mono", monospace;
+        color: #c0f9f8;
+        margin-top: 10px;
+      }
+      nav {
+        text-align: center;
+        margin: 10px 0 30px;
+        background: rgba(0, 0, 0, 0.85);
+        padding: 10px 0;
+        border-radius: 8px;
+      }
+      nav a {
+        color: #00fff2;
+        text-decoration: none;
+        margin: 0 20px;
+        font-weight: 600;
+        font-family: "JetBrains Mono", monospace;
+        transition: color 0.3s ease;
+      }
+      nav a:hover {
+        color: #a0eaff;
+      }
+      main.content {
+        max-width: 900px;
+        margin: 0 auto 40px;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        color: #c0f9f8;
+        font-family: "JetBrains Mono", monospace;
+        line-height: 1.6;
+      }
+      main.content h2 {
+        color: #00fff2;
+        margin-bottom: 20px;
+        font-family: "Orbitron", sans-serif;
+      }
+      main.content p {
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+      }
+      footer {
+        text-align: center;
+        margin-top: 3rem;
+        padding: 1rem;
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
 
-  <div id="particles-js"></div>
+    <header>
+      <h1><i class="fas fa-tv"></i> Séries Cults</h1>
+      <p>Produções que conquistaram fãs fiéis e duradouros</p>
+    </header>
 
-  <header>
-    <h1><i class="fas fa-tv"></i> Séries Cults</h1>
-    <p>Produções que conquistaram fãs fiéis e duradouros</p>
-  </header>
+    <nav>
+      <a href="home.html"><i class="fas fa-home"></i> Início</a>
+      <a href="filmes.html"
+        ><i class="fas fa-film"></i> Voltar à Filmes & Séries</a
+      >
+    </nav>
 
-  <nav>
-    <a href="home.html"><i class="fas fa-home"></i> Início</a>
-    <a href="filmes.html"><i class="fas fa-film"></i> Voltar à Filmes & Séries</a>
-  </nav>
+    <main class="content">
+      <article>
+        <h2>📺 Séries Cults</h2>
+        <p>
+          Séries cult são aquelas que, apesar de não terem necessariamente
+          grandes audiências durante sua exibição original, conquistam uma base
+          fiel e apaixonada de fãs.
+        </p>
+        <p>
+          Exemplos clássicos incluem “Twin Peaks”, “The X-Files”, “Freaks and
+          Geeks” e “Firefly”. Essas produções geralmente apresentam narrativas
+          originais, personagens únicos e abordagens inovadoras.
+        </p>
+        <p>
+          O culto em torno dessas séries é fomentado por discussões em fóruns,
+          eventos especiais e reprises que geram novas audiências.
+        </p>
+        <p>
+          Muitas vezes, séries cult acabam influenciando outras produções e
+          ganhando status de referência na cultura pop.
+        </p>
+      </article>
+    </main>
 
-  <main class="content">
-    <article>
-      <h2>📺 Séries Cults</h2>
-      <p>
-        Séries cult são aquelas que, apesar de não terem necessariamente grandes audiências durante sua exibição original, conquistam uma base fiel e apaixonada de fãs.
-      </p>
-      <p>
-        Exemplos clássicos incluem “Twin Peaks”, “The X-Files”, “Freaks and Geeks” e “Firefly”. Essas produções geralmente apresentam narrativas originais, personagens únicos e abordagens inovadoras.
-      </p>
-      <p>
-        O culto em torno dessas séries é fomentado por discussões em fóruns, eventos especiais e reprises que geram novas audiências.
-      </p>
-      <p>
-        Muitas vezes, séries cult acabam influenciando outras produções e ganhando status de referência na cultura pop.
-      </p>
-    </article>
-  </main>
+    <footer>
+      <p>🎬 Geekpédia © 2025 - Todos os direitos reservados.</p>
+    </footer>
 
-  <footer>
-    <p>🎬 Geekpédia © 2025 - Todos os direitos reservados.</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 90, density: { enable: true, value_area: 800 } },
-        color: { value: "#00fff2" },
-        shape: { type: "circle" },
-        opacity: { value: 0.4 },
-        size: { value: 2, random: true },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#00fff2",
-          opacity: 0.2,
-          width: 1
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 90, density: { enable: true, value_area: 800 } },
+          color: { value: "#00fff2" },
+          shape: { type: "circle" },
+          opacity: { value: 0.4 },
+          size: { value: 2, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#00fff2",
+            opacity: 0.2,
+            width: 1,
+          },
+          move: { enable: true, speed: 1.5 },
         },
-        move: { enable: true, speed: 1.5 }
-      },
-      interactivity: {
-        events: {
-          onhover: { enable: true, mode: "repulse" },
-          onclick: { enable: true, mode: "push" }
-        }
-      },
-      retina_detect: true
-    });
-  </script>
-</body>
+        interactivity: {
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+          },
+        },
+        retina_detect: true,
+      });
+    </script>
+  </body>
 </html>
