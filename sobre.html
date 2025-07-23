@@ -1,120 +1,155 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sobre - Geekpédia</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sobre - Geekpédia</title>
 
-  <!-- Estilos -->
-  <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
-  <!-- Fundo com partículas -->
-  <style>
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: #0d0d0d;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-    .sobre-container {
-      max-width: 800px;
-      margin: auto;
-      padding: 40px 20px;
-      background-color: rgba(0, 0, 0, 0.6);
-      border-radius: 10px;
-    }
-    .sobre-container h2 {
-      color: #00fff2;
-      margin-bottom: 20px;
-    }
-    .sobre-container p {
-      color: #e0e0e0;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-  </style>
-</head>
-<body>
+    <!-- Fundo com partículas -->
+    <style>
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: #0d0d0d;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+      .sobre-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 40px 20px;
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 10px;
+      }
+      .sobre-container h2 {
+        color: #00fff2;
+        margin-bottom: 20px;
+      }
+      .sobre-container p {
+        color: #e0e0e0;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
 
-  <div id="particles-js"></div>
+    <!-- Cabeçalho -->
+    <header>
+      <h1><i class="fas fa-info-circle"></i> Sobre o Geekpédia</h1>
+      <p>Conheça a história e os criadores da enciclopédia geek & tech</p>
+    </header>
 
-  <!-- Cabeçalho -->
-  <header>
-    <h1><i class="fas fa-info-circle"></i> Sobre o Geekpédia</h1>
-    <p>Conheça a história e os criadores da enciclopédia geek & tech</p>
-  </header>
+    <!-- Navegação -->
+    <div id="menuContainer"></div>
 
-  <!-- Navegação -->
-  <nav>
-    <a href="home.html"><i class="fas fa-home"></i> Início</a>
-    <a href="tecnologia.html"><i class="fas fa-microchip"></i> Tecnologia</a>
-    <a href="games.html"><i class="fas fa-gamepad"></i> Games</a>
-    <a href="filmes.html"><i class="fas fa-film"></i> Filmes & Séries</a>
-    <a href="sobre.html" class="active"><i class="fas fa-info-circle"></i> Sobre</a>
-  </nav>
+    <!-- Conteúdo -->
+    <div class="sobre-container">
+      <h2>✨ O que é o Geekpédia?</h2>
+      <p>
+        O <strong>Geekpédia</strong> é uma enciclopédia digital voltada à
+        cultura geek, tecnologia, jogos, filmes, séries e ciência. Criado por
+        entusiastas nerds, nosso objetivo é oferecer conteúdos informativos,
+        curiosos e atualizados sobre tudo que move o mundo geek.
+      </p>
 
-  <!-- Conteúdo -->
-  <div class="sobre-container">
-    <h2>✨ O que é o Geekpédia?</h2>
-    <p>
-      O <strong>Geekpédia</strong> é uma enciclopédia digital voltada à cultura geek, tecnologia, jogos, filmes, séries e ciência.
-      Criado por entusiastas nerds, nosso objetivo é oferecer conteúdos informativos, curiosos e atualizados sobre tudo que move o mundo geek.
-    </p>
+      <h2>🎯 Nossa Missão</h2>
+      <p>
+        Democratizar o conhecimento sobre tecnologia e cultura pop, despertando
+        a curiosidade de iniciantes e aprofundando o interesse de veteranos.
+      </p>
 
-    <h2>🎯 Nossa Missão</h2>
-    <p>
-      Democratizar o conhecimento sobre tecnologia e cultura pop, despertando a curiosidade de iniciantes e aprofundando o interesse de veteranos.
-    </p>
+      <h2>🧠 Quem Somos</h2>
+      <p>
+        Somos um pequeno time de desenvolvedores, gamers, cinéfilos e
+        apaixonados por ficção científica e inovação. Compartilhamos o que
+        amamos com a comunidade geek.
+      </p>
 
-    <h2>🧠 Quem Somos</h2>
-    <p>
-      Somos um pequeno time de desenvolvedores, gamers, cinéfilos e apaixonados por ficção científica e inovação. Compartilhamos o que amamos com a comunidade geek.
-    </p>
+      <h2>📬 Fale Conosco</h2>
+      <p>
+        Tem uma sugestão, crítica ou deseja colaborar? Entre em contato pelo
+        e-mail:
+        <a href="mailto:alangalantefilho@gmail.com" style="color: #00fff2"
+          >alangalantefilho@gmail.com</a
+        >
+      </p>
+    </div>
 
-    <h2>📬 Fale Conosco</h2>
-    <p>
-      Tem uma sugestão, crítica ou deseja colaborar? Entre em contato pelo e-mail: <a href="mailto:alangalantefilho@gmail.com" style="color:#00fff2;">alangalantefilho@gmail.com</a>
-    </p>
-  </div>
+    <!-- Rodapé -->
+    <footer>
+      <p>💡 Geekpédia © 2025 - Todos os direitos reservados.</p>
+    </footer>
 
-  <!-- Rodapé -->
-  <footer>
-    <p>💡 Geekpédia © 2025 - Todos os direitos reservados.</p>
-  </footer>
-
-  <!-- Particles.js -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: "#00fff2" },
-        shape: { type: "circle" },
-        opacity: { value: 0.4 },
-        size: { value: 2, random: true },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#00fff2",
-          opacity: 0.2,
-          width: 1
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#00fff2" },
+          shape: { type: "circle" },
+          opacity: { value: 0.4 },
+          size: { value: 2, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#00fff2",
+            opacity: 0.2,
+            width: 1,
+          },
+          move: { enable: true, speed: 1.3 },
         },
-        move: { enable: true, speed: 1.3 }
-      },
-      interactivity: {
-        events: {
-          onhover: { enable: true, mode: "repulse" },
-          onclick: { enable: true, mode: "push" }
-        }
-      },
-      retina_detect: true
-    });
-  </script>
+        interactivity: {
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+          },
+        },
+        retina_detect: true,
+      });
+    </script>
+    <script>
+      // Carrega o menu.html dinamicamente
+      fetch("menu.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("menuContainer").innerHTML = html;
 
-</body>
+          const apelido = localStorage.getItem("apelido");
+          const apelidoElem = document.getElementById("userName"); // <-- corrigido aqui
+          const btnLogout = document.getElementById("btnLogout");
+
+          if (apelido) {
+            apelidoElem.textContent = apelido;
+            btnLogout.style.display = "inline-block";
+          } else {
+            apelidoElem.textContent = "Visitante";
+            btnLogout.style.display = "none";
+          }
+
+          if (btnLogout) {
+            btnLogout.addEventListener("click", () => {
+              localStorage.removeItem("apelido");
+              localStorage.removeItem("usuario_id");
+              window.location.href = "index.html";
+            });
+          }
+        });
+    </script>
+  </body>
 </html>

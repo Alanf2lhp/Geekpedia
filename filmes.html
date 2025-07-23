@@ -1,155 +1,214 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Geekpédia - Filmes & Séries</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Geekpédia - Filmes & Séries</title>
 
-  <!-- Estilos -->
-  <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
-  <!-- Partículas -->
-  <style>
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: #0d0d0d;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-  </style>
-</head>
-<body>
+    <!-- Partículas -->
+    <style>
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: #0d0d0d;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Fundo com partículas -->
+    <div id="particles-js"></div>
 
-  <!-- Fundo com partículas -->
-  <div id="particles-js"></div>
+    <!-- Cabeçalho -->
+    <header>
+      <h1><i class="fas fa-film"></i> Geekpédia - Filmes & Séries</h1>
+      <p>
+        Fique por dentro dos universos cinematográficos e séries que todo geek
+        ama.
+      </p>
+    </header>
 
-  <!-- Cabeçalho -->
-  <header>
-    <h1><i class="fas fa-film"></i> Geekpédia - Filmes & Séries</h1>
-    <p>Fique por dentro dos universos cinematográficos e séries que todo geek ama.</p>
-  </header>
+    <!-- Menu -->
+    <div id="menuContainer"></div>
 
-  <!-- Menu -->
-  <nav>
-    <a href="home.html"><i class="fas fa-home"></i> Início</a>
-    <a href="tecnologia.html"><i class="fas fa-microchip"></i> Tecnologia</a>
-    <a href="games.html"><i class="fas fa-gamepad"></i> Games</a>
-    <a href="filmes.html" class="active"><i class="fas fa-film"></i> Filmes & Séries</a>
-    <a href="sobre.html"><i class="fas fa-info-circle"></i> Sobre</a>
-  </nav>
+    <!-- Conteúdo -->
+    <div class="content" id="filmes-series-section">
+      <a href="detalhe-starwars.html" class="article-link">
+        <div class="article">
+          <h2>🚀 Star Wars: A Saga Completa</h2>
+          <p>
+            Uma análise do universo expandido e da influência da franquia na
+            cultura pop.
+          </p>
+        </div>
+      </a>
 
-  <!-- Conteúdo -->
-  <div class="content" id="filmes-series-section">
-    <a href="detalhe-starwars.html" class="article-link">
-      <div class="article">
-        <h2>🚀 Star Wars: A Saga Completa</h2>
-        <p>Uma análise do universo expandido e da influência da franquia na cultura pop.</p>
-      </div>
-    </a>
+      <a href="detalhe-marvel.html" class="article-link">
+        <div class="article">
+          <h2>🦸‍♂️ Marvel Studios: Fase por Fase</h2>
+          <p>
+            Como o MCU construiu seu império cinematográfico desde 2008 até
+            hoje.
+          </p>
+        </div>
+      </a>
 
-    <a href="detalhe-marvel.html" class="article-link">
-      <div class="article">
-        <h2>🦸‍♂️ Marvel Studios: Fase por Fase</h2>
-        <p>Como o MCU construiu seu império cinematográfico desde 2008 até hoje.</p>
-      </div>
-    </a>
+      <a href="detalhe-seriescults.html" class="article-link">
+        <div class="article">
+          <h2>📺 Séries Cults que Todo Nerd Deveria Ver</h2>
+          <p>
+            De Stranger Things a Doctor Who — produções que moldaram a cultura
+            geek moderna.
+          </p>
+        </div>
+      </a>
 
-    <a href="detalhe-seriescults.html" class="article-link">
-      <div class="article">
-        <h2>📺 Séries Cults que Todo Nerd Deveria Ver</h2>
-        <p>De Stranger Things a Doctor Who — produções que moldaram a cultura geek moderna.</p>
-      </div>
-    </a>
+      <a href="detalhe-animes.html" class="article-link">
+        <div class="article">
+          <h2>🎌 Animes Icônicos e Suas Curiosidades</h2>
+          <p>
+            Explorando Naruto, Dragon Ball, Attack on Titan e outros fenômenos
+            da animação japonesa.
+          </p>
+        </div>
+      </a>
 
-    <a href="detalhe-animes.html" class="article-link">
-      <div class="article">
-        <h2>🎌 Animes Icônicos e Suas Curiosidades</h2>
-        <p>Explorando Naruto, Dragon Ball, Attack on Titan e outros fenômenos da animação japonesa.</p>
-      </div>
-    </a>
+      <!-- Curiosidades sobre Filmes & Séries com links -->
+      <a href="detalhe-logistics.html" class="article-link">
+        <div class="article">
+          <h2>📽️ O Filme Mais Longo da História</h2>
+          <p>
+            “Logistics” dura 857 horas e mostra o caminho de um produto desde a
+            loja até sua produção na China.
+          </p>
+        </div>
+      </a>
 
-    <!-- Curiosidades sobre Filmes & Séries com links -->
-    <a href="detalhe-logistics.html" class="article-link">
-      <div class="article">
-        <h2>📽️ O Filme Mais Longo da História</h2>
-        <p>“Logistics” dura 857 horas e mostra o caminho de um produto desde a loja até sua produção na China.</p>
-      </div>
-    </a>
+      <a href="detalhe-estreia-starwars.html" class="article-link">
+        <div class="article">
+          <h2>🍿 Estreia de Star Wars e o Fracasso Esperado</h2>
+          <p>
+            George Lucas não acreditava no sucesso do filme e viajou no dia da
+            estreia.
+          </p>
+        </div>
+      </a>
 
-    <a href="detalhe-estreia-starwars.html" class="article-link">
-      <div class="article">
-        <h2>🍿 Estreia de Star Wars e o Fracasso Esperado</h2>
-        <p>George Lucas não acreditava no sucesso do filme e viajou no dia da estreia.</p>
-      </div>
-    </a>
+      <a href="detalhe-dracula.html" class="article-link">
+        <div class="article">
+          <h2>🧛 Drácula no Cinema</h2>
+          <p>
+            O Conde Drácula já foi adaptado para mais de 200 filmes, sendo o
+            personagem mais retratado da história.
+          </p>
+        </div>
+      </a>
 
-    <a href="detalhe-dracula.html" class="article-link">
-      <div class="article">
-        <h2>🧛 Drácula no Cinema</h2>
-        <p>O Conde Drácula já foi adaptado para mais de 200 filmes, sendo o personagem mais retratado da história.</p>
-      </div>
-    </a>
+      <a href="detalhe-montauk.html" class="article-link">
+        <div class="article">
+          <h2>👀 Stranger Things quase se chamou “Montauk”</h2>
+          <p>
+            A série originalmente teria outro nome e se passaria em Nova York,
+            inspirada em teorias da conspiração.
+          </p>
+        </div>
+      </a>
 
-    <a href="detalhe-montauk.html" class="article-link">
-      <div class="article">
-        <h2>👀 Stranger Things quase se chamou “Montauk”</h2>
-        <p>A série originalmente teria outro nome e se passaria em Nova York, inspirada em teorias da conspiração.</p>
-      </div>
-    </a>
+      <a href="detalhe-oscar.html" class="article-link">
+        <div class="article">
+          <h2>🏆 Oscar e sua Origem Curiosa</h2>
+          <p>
+            O nome “Oscar” surgiu quando uma funcionária comentou que a
+            estatueta parecia seu tio Oscar.
+          </p>
+        </div>
+      </a>
 
-    <a href="detalhe-oscar.html" class="article-link">
-      <div class="article">
-        <h2>🏆 Oscar e sua Origem Curiosa</h2>
-        <p>O nome “Oscar” surgiu quando uma funcionária comentou que a estatueta parecia seu tio Oscar.</p>
-      </div>
-    </a>
+      <a href="detalhe-primeira-serie.html" class="article-link">
+        <div class="article">
+          <h2>🎬 Primeira Série de TV da História</h2>
+          <p>
+            “The Queen’s Messenger” foi transmitida em 1928, pioneira na TV
+            mesmo antes da sua popularização.
+          </p>
+        </div>
+      </a>
+    </div>
 
-    <a href="detalhe-primeira-serie.html" class="article-link">
-      <div class="article">
-        <h2>🎬 Primeira Série de TV da História</h2>
-        <p>“The Queen’s Messenger” foi transmitida em 1928, pioneira na TV mesmo antes da sua popularização.</p>
-      </div>
-    </a>
-  </div>
+    <!-- Rodapé -->
+    <footer>
+      <p>🎬 Geekpédia © 2025 - Todos os direitos reservados.</p>
+    </footer>
 
-  <!-- Rodapé -->
-  <footer>
-    <p>🎬 Geekpédia © 2025 - Todos os direitos reservados.</p>
-  </footer>
-
-  <!-- Partículas.js -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 90, density: { enable: true, value_area: 800 } },
-        color: { value: "#00fff2" },
-        shape: { type: "circle" },
-        opacity: { value: 0.4 },
-        size: { value: 2, random: true },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#00fff2",
-          opacity: 0.2,
-          width: 1
+    <!-- Partículas.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 90, density: { enable: true, value_area: 800 } },
+          color: { value: "#00fff2" },
+          shape: { type: "circle" },
+          opacity: { value: 0.4 },
+          size: { value: 2, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#00fff2",
+            opacity: 0.2,
+            width: 1,
+          },
+          move: { enable: true, speed: 1.5 },
         },
-        move: { enable: true, speed: 1.5 }
-      },
-      interactivity: {
-        events: {
-          onhover: { enable: true, mode: "repulse" },
-          onclick: { enable: true, mode: "push" }
-        }
-      },
-      retina_detect: true
-    });
-  </script>
+        interactivity: {
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+          },
+        },
+        retina_detect: true,
+      });
+    </script>
+    <script>
+      // Carrega o menu.html dinamicamente
+      fetch("menu.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("menuContainer").innerHTML = html;
 
-</body>
+          const apelido = localStorage.getItem("apelido");
+          const apelidoElem = document.getElementById("userName"); // <-- corrigido aqui
+          const btnLogout = document.getElementById("btnLogout");
+
+          if (apelido) {
+            apelidoElem.textContent = apelido;
+            btnLogout.style.display = "inline-block";
+          } else {
+            apelidoElem.textContent = "Visitante";
+            btnLogout.style.display = "none";
+          }
+
+          if (btnLogout) {
+            btnLogout.addEventListener("click", () => {
+              localStorage.removeItem("apelido");
+              localStorage.removeItem("usuario_id");
+              window.location.href = "index.html";
+            });
+          }
+        });
+    </script>
+  </body>
 </html>
