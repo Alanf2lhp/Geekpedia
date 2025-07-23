@@ -2,9 +2,8 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Redefinir Senha</title>
-
   <style>
     body {
       background-color: #0d0d0d;
@@ -22,24 +21,26 @@
       border-radius: 12px;
       box-shadow: 0 0 15px #00fff2;
       text-align: center;
-      width: 300px;
+      width: 320px;
     }
     .reset-container input {
       width: 100%;
       padding: 10px;
-      margin: 10px 0;
+      margin: 12px 0;
       border: none;
       border-radius: 5px;
+      font-size: 16px;
     }
     .reset-container button {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       border: none;
       border-radius: 5px;
       background-color: #00fff2;
       color: #0d0d0d;
       cursor: pointer;
       font-weight: bold;
+      font-size: 16px;
       margin-top: 10px;
     }
     .reset-container button:hover {
@@ -77,70 +78,78 @@
 
   <div class="reset-container">
     <h2>Redefinir Senha</h2>
-    <input type="password" id="novaSenha" placeholder="Nova senha" />
-    <button onclick="redefinirSenha()">Salvar Nova Senha</button>
+    <input type="password" id="novaSenha" placeholder="Digite a nova senha" />
+    <button id="btnRedefinir">Salvar Nova Senha</button>
   </div>
 
   <div id="popup"></div>
 
   <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
     const supabase = createClient(
       'https://odxqvkwxhbfgcmngdhic.supabase.co',
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9keHF2a3d4aGJmZ2NtbmdkaGljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjk1MTMsImV4cCI6MjA2ODg0NTUxM30.U47P-s4GNGgk5f_3cQsBxDVLOqp3-jXsOX14Ok8fZk8'
-    );
+    )
+
+    const popup = document.getElementById('popup')
+    const btn = document.getElementById('btnRedefinir')
+    const inputSenha = document.getElementById('novaSenha')
 
     function mostrarPopup(mensagem, tipo = 'success') {
-      const popup = document.getElementById('popup');
-      popup.textContent = mensagem;
-      popup.className = `show ${tipo}`;
+      popup.textContent = mensagem
+      popup.className = `show ${tipo}`
       setTimeout(() => {
-        popup.classList.remove('show');
-        if (tipo === 'success') window.location.href = 'index.html';
-      }, 3000);
+        popup.classList.remove('show')
+        if (tipo === 'success') {
+          // Redireciona após 3 segundos para página de login
+          window.location.href = 'index.html'
+        }
+      }, 3000)
     }
 
-    // Pega o access_token do hash na URL enviado pelo Supabase no link de reset
-    function pegarAccessToken() {
-      const hash = window.location.hash.substring(1); // remove #
-      const params = new URLSearchParams(hash);
-      return params.get('access_token');
+    // Função para pegar o access_token do hash da URL
+    function getAccessTokenFromHash() {
+      const hash = window.location.hash.substring(1) // Remove o #
+      const params = new URLSearchParams(hash)
+      return params.get('access_token')
     }
 
-    async function redefinirSenha() {
-      const novaSenha = document.getElementById('novaSenha').value.trim();
+    async function setSessionWithToken(token) {
+      const { error } = await supabase.auth.setSession(token)
+      if (error) {
+        mostrarPopup('Token inválido ou expirado.', 'error')
+        btn.disabled = true
+      }
+    }
+
+    // Quando clicar para redefinir senha:
+    btn.addEventListener('click', async () => {
+      const novaSenha = inputSenha.value.trim()
       if (novaSenha.length < 6) {
-        mostrarPopup('A senha deve ter pelo menos 6 caracteres.', 'error');
-        return;
+        mostrarPopup('A senha deve ter pelo menos 6 caracteres.', 'error')
+        return
       }
+      btn.disabled = true
+      const { error } = await supabase.auth.updateUser({ password: novaSenha })
+      if (error) {
+        mostrarPopup('Erro ao redefinir senha: ' + error.message, 'error')
+        btn.disabled = false
+      } else {
+        mostrarPopup('Senha redefinida com sucesso!', 'success')
+      }
+    })
 
-      const token = pegarAccessToken();
+    // Executa ao carregar a página
+    window.addEventListener('load', async () => {
+      const token = getAccessTokenFromHash()
       if (!token) {
-        mostrarPopup('Link inválido ou expirado.', 'error');
-        return;
+        mostrarPopup('Token não encontrado na URL.', 'error')
+        btn.disabled = true
+        return
       }
-
-      // Setar a sessão temporária com o token da URL
-      const { error: sessionError } = await supabase.auth.setSession({ access_token: token });
-
-      if (sessionError) {
-        mostrarPopup('Erro ao validar token: ' + sessionError.message, 'error');
-        return;
-      }
-
-      // Agora o usuário está autenticado temporariamente e podemos atualizar a senha
-      const { error: updateError } = await supabase.auth.updateUser({ password: novaSenha });
-
-      if (updateError) {
-        mostrarPopup('Erro ao redefinir senha: ' + updateError.message, 'error');
-        return;
-      }
-
-      mostrarPopup('Senha atualizada com sucesso!', 'success');
-    }
-
-    window.redefinirSenha = redefinirSenha;
+      await setSessionWithToken(token)
+    })
   </script>
 </body>
 </html>
