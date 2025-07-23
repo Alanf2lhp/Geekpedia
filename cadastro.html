@@ -100,16 +100,13 @@
         color: #000;
       }
 
-      /* === POP-UP DE SUCESSO === */
-      #popupSucesso {
+      /* === POP-UP DE SUCESSO E ERRO === */
+      .popup {
         position: fixed;
         top: 20px;
         right: 20px;
-        background-color: #28a745;
-        color: white;
         padding: 15px 25px;
         border-radius: 8px;
-        box-shadow: 0 0 15px #28a745aa;
         font-weight: bold;
         z-index: 9999;
         opacity: 0;
@@ -118,15 +115,26 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
       }
 
-      #popupSucesso.show {
+      .popup i {
+        font-size: 1.5rem;
+      }
+
+      .popup.show {
         opacity: 1;
         pointer-events: auto;
       }
 
-      #popupSucesso i {
-        font-size: 1.5rem;
+      #popupSucesso {
+        background-color: #28a745;
+        color: white;
+      }
+
+      #popupErro {
+        background-color: #dc3545;
+        color: white;
       }
     </style>
   </head>
@@ -142,6 +150,7 @@
 
       <label for="email">E-mail:</label>
       <input type="email" id="email" required />
+      <div id="emailErro" class="error"></div>
 
       <label for="apelido">Apelido (até 15 letras):</label>
       <input
@@ -171,9 +180,13 @@
       </button>
     </div>
 
-    <!-- POP-UP DE SUCESSO -->
-    <div id="popupSucesso">
+    <!-- POP-UPS -->
+    <div id="popupSucesso" class="popup">
       <i class="fas fa-check-circle"></i> Conta criada com sucesso!
+    </div>
+
+    <div id="popupErro" class="popup">
+      <i class="fas fa-exclamation-triangle"></i> Erro ao cadastrar!
     </div>
 
     <script type="module">
@@ -198,16 +211,10 @@
           "width:100%;background:limegreen"
       }
 
-      function mostrarPopupSucesso() {
-        const popup = document.getElementById("popupSucesso")
+      function mostrarPopup(id, tempo = 3000) {
+        const popup = document.getElementById(id)
         popup.classList.add("show")
-
-        // Esconde depois de 3 segundos
-        setTimeout(() => {
-          popup.classList.remove("show")
-          // Redirecionar após fechar pop-up
-          window.location.href = "index.html"
-        }, 3000)
+        setTimeout(() => popup.classList.remove("show"), tempo)
       }
 
       async function cadastrar() {
@@ -218,14 +225,24 @@
         const senha = document.getElementById("senha").value
 
         document.getElementById("apelidoErro").textContent = ""
+        document.getElementById("emailErro").textContent = ""
+
+        const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
 
         if (!/^[A-Za-z]{1,15}$/.test(apelido)) {
           document.getElementById("apelidoErro").textContent =
             "Apelido só com letras, até 15 caracteres."
+          mostrarPopup("popupErro")
           return
         }
 
-        // Exemplo simples de hash (não seguro para produção! Ideal usar hash no backend)
+        if (!emailRegex.test(email)) {
+          document.getElementById("emailErro").textContent =
+            "Digite um e-mail válido."
+          mostrarPopup("popupErro")
+          return
+        }
+
         const senhaHash = btoa(senha)
 
         const { data, error } = await supabase
@@ -233,18 +250,17 @@
           .insert([{ nome, data_nascimento, apelido, email, senha: senhaHash }])
 
         if (error) {
-          alert("Erro ao cadastrar: " + error.message)
+          document.getElementById("emailErro").textContent = error.message
+          mostrarPopup("popupErro")
         } else {
-          // Substitui o alert por pop-up
-          mostrarPopupSucesso()
+          mostrarPopup("popupSucesso")
+          setTimeout(() => window.location.href = "index.html", 3000)
         }
       }
 
-      // Expõe as funções para o HTML (como você usa onclick inline)
       window.verificarForcaSenha = verificarForcaSenha
       window.cadastrar = cadastrar
 
-      // Associar botão ao evento
       document.getElementById("btnCadastrar").addEventListener("click", cadastrar)
     </script>
   </body>
