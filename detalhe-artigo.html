@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Geekpédia - Detalhe do Artigo</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: #0d0d0d;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    body {
+      font-family: "JetBrains Mono", monospace;
+      color: #00fff2;
+      background: transparent;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    header {
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 2.2rem;
+      color: #00fff2;
+    }
+    a.back-link {
+      color: #4ddede;
+      text-decoration: none;
+      font-size: 1rem;
+      display: inline-block;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    .article-content {
+      background-color: rgba(0, 255, 242, 0.1);
+      padding: 15px;
+      border-radius: 8px;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+
+  <header>
+    <!-- Usamos href="#" para não navegar e o evento JS para voltar -->
+    <a href="#" class="back-link" id="btnVoltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+    <h1 id="titulo">Carregando...</h1>
+  </header>
+
+  <article id="conteudo" class="article-content">
+    <p>Por favor, aguarde enquanto carregamos o artigo.</p>
+  </article>
+
+  <footer>
+    <p>🎬 Geekpédia © 2025 - Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS.load('particles-js', 'particles.json', function() {
+      console.log('particles.js carregado');
+    });
+  </script>
+
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+    const supabaseUrl = "https://odxqvkwxhbfgcmngdhic.supabase.co";
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9keHF2a3d4aGJmZ2NtbmdkaGljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjk1MTMsImV4cCI6MjA2ODg0NTUxM30.U47P-s4GNGgk5f_3cQsBxDVLOqp3-jXsOX14Ok8fZk8";
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    // Função para pegar parâmetro da URL
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    async function carregarArtigoDetalhe() {
+      const id = getQueryParam("id");
+
+      if (!id) {
+        document.getElementById("titulo").innerText = "Artigo não encontrado";
+        document.getElementById("conteudo").innerHTML = "<p>Parâmetro inválido ou artigo não especificado.</p>";
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from("artigos")
+        .select("titulo, conteudo")
+        .eq("id", id)
+        .single();
+
+      if (error || !data) {
+        document.getElementById("titulo").innerText = "Erro ao carregar artigo";
+        document.getElementById("conteudo").innerHTML = `<p>Não foi possível encontrar o artigo solicitado.</p>`;
+        return;
+      }
+
+      document.getElementById("titulo").innerText = data.titulo;
+      // Permitir conteúdo com formatação HTML
+      document.getElementById("conteudo").innerHTML = data.conteudo || "<p>Conteúdo não disponível.</p>";
+    }
+
+    carregarArtigoDetalhe();
+
+    // Evento do botão voltar - volta para a página anterior do navegador
+    document.getElementById("btnVoltar").addEventListener("click", function(event) {
+      event.preventDefault();
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        // Caso não tenha histórico, volta para página inicial
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+</body>
+</html>
