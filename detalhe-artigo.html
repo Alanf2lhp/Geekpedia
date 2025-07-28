@@ -135,6 +135,55 @@
     #btnCancelarPopup:hover {
       background-color: #555;
     }
+
+    /* Comentários */
+    #comentarios-section {
+      margin-top: 40px;
+      border-top: 1px solid #00fff2;
+      padding-top: 20px;
+    }
+    #listaComentarios > div {
+      border-bottom: 1px solid #00fff2;
+      padding: 10px 0;
+    }
+    #listaComentarios strong {
+      font-weight: 700;
+    }
+    #listaComentarios span {
+      color: #4ddede;
+      font-size: 0.85rem;
+    }
+    #formComentario label {
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+    #formComentario textarea {
+      background-color: #111;
+      border: 1px solid #00fff2;
+      color: #00fff2;
+      border-radius: 5px;
+      padding: 8px;
+      font-family: "JetBrains Mono", monospace;
+      width: 100%;
+      max-width: 500px;
+    }
+    #formComentario button {
+      margin-top: 10px;
+      padding: 8px 15px;
+      background-color: #00fff2;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      font-family: "JetBrains Mono", monospace;
+    }
+    #usuarioLogadoApelido {
+      margin-bottom: 10px;
+      display: block;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -156,6 +205,24 @@
   <div id="areaExcluir" style="display: none;">
     <button class="btn-excluir" id="btnExcluir">🗑️ Excluir Artigo</button>
   </div>
+
+  <!-- Seção Comentários -->
+  <section id="comentarios-section">
+    <h2>Comentários</h2>
+
+    <div id="listaComentarios">
+      <p>Carregando comentários...</p>
+    </div>
+
+    <form id="formComentario" style="display:none;">
+      <span id="usuarioLogadoApelido">Carregando usuário...</span>
+
+      <label for="inputTexto">Comentário:</label>
+      <textarea id="inputTexto" name="texto" rows="4" required></textarea>
+
+      <button type="submit">Enviar Comentário</button>
+    </form>
+  </section>
 
   <footer>
     <p>🎬 Geekpédia © 2025 - Todos os direitos reservados.</p>
@@ -195,7 +262,7 @@
       return `${dia}/${mes}/${ano}`;
     }
 
-    // Funções para popup modal
+    // Popup modal
     function abrirPopup(mensagem, aoConfirmar, soMensagem = false) {
       const popup = document.getElementById("popup");
       const msg = document.getElementById("popupMsg");
@@ -228,6 +295,51 @@
       btnCancelar.addEventListener("click", fechar);
     }
 
+    async function carregarComentarios(artigoId) {
+      const { data, error } = await supabase
+        .from("comentarios")
+        .select("id, apelido, texto, criado_em")
+        .eq("artigo_id", artigoId)
+        .order("criado_em", { ascending: false });
+
+      const listaDiv = document.getElementById("listaComentarios");
+      if (error) {
+        listaDiv.innerHTML = "<p>Erro ao carregar comentários.</p>";
+        return;
+      }
+      if (!data || data.length === 0) {
+        listaDiv.innerHTML = "<p>Seja o primeiro a comentar!</p>";
+        return;
+      }
+
+      listaDiv.innerHTML = "";
+
+      data.forEach((comentario) => {
+        const div = document.createElement("div");
+
+        const apelido = document.createElement("strong");
+        apelido.textContent = comentario.apelido + " ";
+
+        const dataFormatada = new Date(comentario.criado_em).toLocaleString("pt-BR", {
+          dateStyle: "short",
+          timeStyle: "short",
+        });
+
+        const spanData = document.createElement("span");
+        spanData.textContent = ` - ${dataFormatada}`;
+
+        const texto = document.createElement("p");
+        texto.textContent = comentario.texto;
+        texto.style.margin = "5px 0 0 0";
+
+        div.appendChild(apelido);
+        div.appendChild(spanData);
+        div.appendChild(texto);
+
+        listaDiv.appendChild(div);
+      });
+    }
+
     async function carregarArtigoDetalhe() {
       const id = getQueryParam("id");
 
@@ -255,7 +367,7 @@
       document.getElementById("autor").innerHTML = `<i class="fas fa-user"></i> Autor: ${data.apelido || "Desconhecido"}`;
 
       // Exibir botão excluir se for o autor logado
-      const usuarioLogado = localStorage.getItem("apelido"); // Supondo que você salvou isso no login
+      const usuarioLogado = localStorage.getItem("apelido");
       if (usuarioLogado && usuarioLogado === data.apelido) {
         document.getElementById("areaExcluir").style.display = "block";
       }
@@ -272,7 +384,6 @@
             abrirPopup("Erro ao excluir artigo.", () => {}, true);
           } else {
             abrirPopup("Artigo excluído com sucesso.", () => {}, true);
-            // Fecha popup e redireciona após 2 segundos
             setTimeout(() => {
               document.getElementById("popup").style.display = "none";
               window.location.href = "home.html";
@@ -280,9 +391,58 @@
           }
         });
       });
+
+      // Carregar comentários ao carregar artigo
+      carregarComentarios(id);
+
+      // Mostrar formulário de comentário e apelido do usuário logado ou mensagem para logar
+      const apelidoUsuarioLogado = localStorage.getItem("apelido");
+      const formComentario = document.getElementById("formComentario");
+      const usuarioLogadoApelidoSpan = document.getElementById("usuarioLogadoApelido");
+
+      if (!apelidoUsuarioLogado) {
+        usuarioLogadoApelidoSpan.innerText = "Você precisa estar logado para comentar.";
+        formComentario.style.display = "none";
+      } else {
+        usuarioLogadoApelidoSpan.innerText = `Comentando como: ${apelidoUsuarioLogado}`;
+        formComentario.style.display = "block";
+      }
     }
 
     carregarArtigoDetalhe();
+
+    // Envio de comentário
+    document.getElementById("formComentario").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const apelido = localStorage.getItem("apelido");
+      const texto = document.getElementById("inputTexto").value.trim();
+      const artigoId = getQueryParam("id");
+
+      if (!apelido) {
+        alert("Você precisa estar logado para comentar.");
+        return;
+      }
+      if (!texto) {
+        alert("Por favor, escreva um comentário.");
+        return;
+      }
+
+      const { error } = await supabase.from("comentarios").insert({
+        artigo_id: artigoId,
+        apelido,
+        texto,
+      });
+
+      if (error) {
+        alert("Erro ao enviar comentário.");
+        return;
+      }
+
+      // Limpa campo e recarrega comentários
+      document.getElementById("inputTexto").value = "";
+      carregarComentarios(artigoId);
+    });
 
     document.getElementById("btnVoltar").addEventListener("click", function(event) {
       event.preventDefault();
