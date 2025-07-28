@@ -57,11 +57,6 @@
       flex-wrap: wrap;
       gap: 0.5rem;
     }
-    .article-meta span {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
     .article-content {
       background-color: rgba(0, 255, 242, 0.1);
       padding: 15px;
@@ -70,10 +65,75 @@
       font-size: 1rem;
       white-space: pre-wrap;
     }
+    .btn-excluir {
+      margin-top: 20px;
+      padding: 10px 15px;
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    .btn-excluir:hover {
+      background-color: #cc0000;
+    }
     footer {
       margin-top: 40px;
       text-align: center;
       color: #888;
+    }
+
+    /* Estilos do popup modal */
+    #popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.75);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      font-family: "JetBrains Mono", monospace;
+    }
+    #popup .popup-content {
+      background-color: #111;
+      border: 2px solid #00fff2;
+      padding: 25px 30px;
+      border-radius: 10px;
+      max-width: 400px;
+      text-align: center;
+      color: #00fff2;
+      box-shadow: 0 0 10px #00fff2;
+    }
+    #popup p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+    #popup button {
+      cursor: pointer;
+      font-weight: bold;
+      font-family: "JetBrains Mono", monospace;
+      padding: 10px 20px;
+      margin: 0 8px;
+      border-radius: 5px;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+    #btnConfirmarPopup {
+      background-color: #ff4d4d;
+      color: white;
+    }
+    #btnConfirmarPopup:hover {
+      background-color: #cc0000;
+    }
+    #btnCancelarPopup {
+      background-color: gray;
+      color: white;
+    }
+    #btnCancelarPopup:hover {
+      background-color: #555;
     }
   </style>
 </head>
@@ -93,16 +153,24 @@
     <p>Por favor, aguarde enquanto carregamos o artigo.</p>
   </article>
 
+  <div id="areaExcluir" style="display: none;">
+    <button class="btn-excluir" id="btnExcluir">🗑️ Excluir Artigo</button>
+  </div>
+
   <footer>
     <p>🎬 Geekpédia © 2025 - Todos os direitos reservados.</p>
   </footer>
 
+  <!-- Popup Modal -->
+  <div id="popup">
+    <div class="popup-content">
+      <p id="popupMsg">Mensagem do popup</p>
+      <button id="btnConfirmarPopup">Confirmar</button>
+      <button id="btnCancelarPopup">Cancelar</button>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script>
-    particlesJS.load('particles-js', 'particles.json', function() {
-      console.log('particles.js carregado');
-    });
-  </script>
 
   <script type="module">
     import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
@@ -127,6 +195,39 @@
       return `${dia}/${mes}/${ano}`;
     }
 
+    // Funções para popup modal
+    function abrirPopup(mensagem, aoConfirmar, soMensagem = false) {
+      const popup = document.getElementById("popup");
+      const msg = document.getElementById("popupMsg");
+      const btnConfirmar = document.getElementById("btnConfirmarPopup");
+      const btnCancelar = document.getElementById("btnCancelarPopup");
+
+      msg.innerText = mensagem;
+      popup.style.display = "flex";
+
+      if (soMensagem) {
+        btnConfirmar.style.display = "none";
+        btnCancelar.innerText = "Fechar";
+      } else {
+        btnConfirmar.style.display = "inline-block";
+        btnCancelar.innerText = "Cancelar";
+      }
+
+      function fechar() {
+        popup.style.display = "none";
+        btnConfirmar.removeEventListener("click", confirmarHandler);
+        btnCancelar.removeEventListener("click", fechar);
+      }
+
+      function confirmarHandler() {
+        fechar();
+        aoConfirmar();
+      }
+
+      btnConfirmar.addEventListener("click", confirmarHandler);
+      btnCancelar.addEventListener("click", fechar);
+    }
+
     async function carregarArtigoDetalhe() {
       const id = getQueryParam("id");
 
@@ -136,7 +237,6 @@
         return;
       }
 
-      // Seleciona os campos conforme seu dado, incluindo apelido e criado_em
       const { data, error } = await supabase
         .from("artigos")
         .select("titulo, conteudo, criado_em, apelido")
@@ -151,12 +251,35 @@
 
       document.getElementById("titulo").innerText = data.titulo;
       document.getElementById("conteudo").innerHTML = data.conteudo || "<p>Conteúdo não disponível.</p>";
+      document.getElementById("dataPub").innerHTML = `<i class="fas fa-calendar-alt"></i> Publicado em: ${formatarData(data.criado_em)}`;
+      document.getElementById("autor").innerHTML = `<i class="fas fa-user"></i> Autor: ${data.apelido || "Desconhecido"}`;
 
-      const dataFormatada = formatarData(data.criado_em);
-      const autor = data.apelido || "Desconhecido";
+      // Exibir botão excluir se for o autor logado
+      const usuarioLogado = localStorage.getItem("apelido"); // Supondo que você salvou isso no login
+      if (usuarioLogado && usuarioLogado === data.apelido) {
+        document.getElementById("areaExcluir").style.display = "block";
+      }
 
-      document.getElementById("dataPub").innerHTML = `<i class="fas fa-calendar-alt"></i> Publicado em: ${dataFormatada}`;
-      document.getElementById("autor").innerHTML = `<i class="fas fa-user"></i> Autor: ${autor}`;
+      // Função de exclusão com popup customizado
+      document.getElementById("btnExcluir").addEventListener("click", async () => {
+        abrirPopup("Tem certeza que deseja excluir este artigo?", async () => {
+          const { error: deleteError } = await supabase
+            .from("artigos")
+            .delete()
+            .eq("id", id);
+
+          if (deleteError) {
+            abrirPopup("Erro ao excluir artigo.", () => {}, true);
+          } else {
+            abrirPopup("Artigo excluído com sucesso.", () => {}, true);
+            // Fecha popup e redireciona após 2 segundos
+            setTimeout(() => {
+              document.getElementById("popup").style.display = "none";
+              window.location.href = "home.html";
+            }, 1000);
+          }
+        });
+      });
     }
 
     carregarArtigoDetalhe();
