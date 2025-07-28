@@ -53,106 +53,7 @@
 
     <!-- Conteúdo -->
     <div class="content" id="filmes-series-section">
-      <a href="detalhe-starwars.html" class="article-link">
-        <div class="article">
-          <h2>🚀 Star Wars: A Saga Completa</h2>
-          <p>
-            Uma análise do universo expandido e da influência da franquia na
-            cultura pop.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-marvel.html" class="article-link">
-        <div class="article">
-          <h2>🦸‍♂️ Marvel Studios: Fase por Fase</h2>
-          <p>
-            Como o MCU construiu seu império cinematográfico desde 2008 até
-            hoje.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-seriescults.html" class="article-link">
-        <div class="article">
-          <h2>📺 Séries Cults que Todo Nerd Deveria Ver</h2>
-          <p>
-            De Stranger Things a Doctor Who — produções que moldaram a cultura
-            geek moderna.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-animes.html" class="article-link">
-        <div class="article">
-          <h2>🎌 Animes Icônicos e Suas Curiosidades</h2>
-          <p>
-            Explorando Naruto, Dragon Ball, Attack on Titan e outros fenômenos
-            da animação japonesa.
-          </p>
-        </div>
-      </a>
-
-      <!-- Curiosidades sobre Filmes & Séries com links -->
-      <a href="detalhe-logistics.html" class="article-link">
-        <div class="article">
-          <h2>📽️ O Filme Mais Longo da História</h2>
-          <p>
-            “Logistics” dura 857 horas e mostra o caminho de um produto desde a
-            loja até sua produção na China.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-estreia-starwars.html" class="article-link">
-        <div class="article">
-          <h2>🍿 Estreia de Star Wars e o Fracasso Esperado</h2>
-          <p>
-            George Lucas não acreditava no sucesso do filme e viajou no dia da
-            estreia.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-dracula.html" class="article-link">
-        <div class="article">
-          <h2>🧛 Drácula no Cinema</h2>
-          <p>
-            O Conde Drácula já foi adaptado para mais de 200 filmes, sendo o
-            personagem mais retratado da história.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-montauk.html" class="article-link">
-        <div class="article">
-          <h2>👀 Stranger Things quase se chamou “Montauk”</h2>
-          <p>
-            A série originalmente teria outro nome e se passaria em Nova York,
-            inspirada em teorias da conspiração.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-oscar.html" class="article-link">
-        <div class="article">
-          <h2>🏆 Oscar e sua Origem Curiosa</h2>
-          <p>
-            O nome “Oscar” surgiu quando uma funcionária comentou que a
-            estatueta parecia seu tio Oscar.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-primeira-serie.html" class="article-link">
-        <div class="article">
-          <h2>🎬 Primeira Série de TV da História</h2>
-          <p>
-            “The Queen’s Messenger” foi transmitida em 1928, pioneira na TV
-            mesmo antes da sua popularização.
-          </p>
-        </div>
-      </a>
+      <!-- Os artigos do Supabase vão substituir o conteúdo estático aqui -->
     </div>
 
     <!-- Rodapé -->
@@ -188,15 +89,68 @@
         retina_detect: true,
       });
     </script>
-    <script>
-      // Carrega o menu.html dinamicamente
+
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+      const supabase = createClient(
+        "https://odxqvkwxhbfgcmngdhic.supabase.co",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9keHF2a3d4aGJmZ2NtbmdkaGljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjk1MTMsImV4cCI6MjA2ODg0NTUxM30.U47P-s4GNGgk5f_3cQsBxDVLOqp3-jXsOX14Ok8fZk8"
+      );
+
+      async function carregarArtigosFilmes() {
+        const container = document.getElementById("filmes-series-section");
+
+        const { data: artigos, error } = await supabase
+          .from("artigos")
+          .select("id, titulo, descricao")
+          .eq("categoria", "filmes")
+          .order("criado_em", { ascending: false });
+
+        if (error) {
+          container.innerHTML = `<p style="color: red;">Erro ao carregar artigos: ${error.message}</p>`;
+          return;
+        }
+
+        if (!artigos || artigos.length === 0) {
+          container.innerHTML = "<p>Nenhum artigo encontrado na categoria Filmes & Séries.</p>";
+          return;
+        }
+
+        container.innerHTML = "";
+
+        artigos.forEach((artigo) => {
+          const link = document.createElement("a");
+          link.href = `detalhe-artigo.html?id=${artigo.id}`;
+          link.className = "article-link";
+
+          const divArtigo = document.createElement("div");
+          divArtigo.className = "article";
+
+          const titulo = document.createElement("h2");
+          titulo.textContent = artigo.titulo;
+
+          const descricao = document.createElement("p");
+          descricao.textContent = artigo.descricao;
+
+          divArtigo.appendChild(titulo);
+          divArtigo.appendChild(descricao);
+          link.appendChild(divArtigo);
+
+          container.appendChild(link);
+        });
+      }
+
+      carregarArtigosFilmes();
+
+      // Código para carregar menu e tratar logout (se já tiver)
       fetch("menu.html")
         .then((res) => res.text())
         .then((html) => {
           document.getElementById("menuContainer").innerHTML = html;
 
           const apelido = localStorage.getItem("apelido");
-          const apelidoElem = document.getElementById("userName"); // <-- corrigido aqui
+          const apelidoElem = document.getElementById("userName");
           const btnLogout = document.getElementById("btnLogout");
 
           if (apelido) {

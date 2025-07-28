@@ -49,97 +49,7 @@
     <div id="menuContainer"></div>
 
     <div class="content" id="games-section">
-      <a href="detalhe-top10.html" class="article-link">
-        <div class="article">
-          <h2>🎮 Top 10 Jogos de Todos os Tempos</h2>
-          <p>
-            Uma lista nostálgica e atual com os jogos que marcaram gerações.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-evolucao.html" class="article-link">
-        <div class="article">
-          <h2>🕹️ Evolução dos Consoles</h2>
-          <p>
-            Dos 8 bits ao ray tracing: conheça a trajetória das plataformas de
-            games.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-lancamentos.html" class="article-link">
-        <div class="article">
-          <h2>🔥 Lançamentos Mais Aguardados de 2025</h2>
-          <p>
-            Uma prévia dos jogos que prometem dominar os controles e os corações
-            dos gamers.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-esports.html" class="article-link">
-        <div class="article">
-          <h2>👾 Cultura Gamer & Esports</h2>
-          <p>
-            Como o mundo dos games ultrapassou os pixels e se tornou uma
-            comunidade global.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-pioneiro.html" class="article-link">
-        <div class="article">
-          <h2>👨‍🔬 O Primeiro Jogo da História</h2>
-          <p>
-            “Pong” foi o primeiro sucesso, mas “Tennis for Two” (1958) foi o
-            pioneiro.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-cognitivo.html" class="article-link">
-        <div class="article">
-          <h2>🧠 Benefícios Cognitivos</h2>
-          <p>Jogos podem desenvolver memória, raciocínio e coordenação.</p>
-        </div>
-      </a>
-
-      <a href="detalhe-trilha.html" class="article-link">
-        <div class="article">
-          <h2>🎼 Trilha Sonora Premiada</h2>
-          <p>
-            “The Last of Us” possui trilha sonora de Gustavo Santaolalla,
-            vencedor de 2 Oscars.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-minecraft.html" class="article-link">
-        <div class="article">
-          <h2>🗺️ Mundo Imenso</h2>
-          <p>O mapa de “Minecraft” pode ser maior que o planeta Terra!</p>
-        </div>
-      </a>
-
-      <a href="detalhe-mobile.html" class="article-link">
-        <div class="article">
-          <h2>📱 Mobile em Alta</h2>
-          <p>
-            Jogos de celular representam mais de 50% da receita global do setor.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-star-citizen.html" class="article-link">
-        <div class="article">
-          <h2>💰 Game Mais Caro Já Feito</h2>
-          <p>
-            “Star Citizen” arrecadou mais de US$ 600 milhões — e ainda não foi
-            lançado.
-          </p>
-        </div>
-      </a>
+      <!-- Artigos serão carregados dinamicamente aqui -->
     </div>
 
     <footer>
@@ -174,6 +84,7 @@
         retina_detect: true,
       });
     </script>
+
     <script>
       // Carrega o menu.html dinamicamente
       fetch("menu.html")
@@ -182,7 +93,7 @@
           document.getElementById("menuContainer").innerHTML = html;
 
           const apelido = localStorage.getItem("apelido");
-          const apelidoElem = document.getElementById("userName"); // <-- corrigido aqui
+          const apelidoElem = document.getElementById("userName");
           const btnLogout = document.getElementById("btnLogout");
 
           if (apelido) {
@@ -201,6 +112,60 @@
             });
           }
         });
+    </script>
+
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+      const supabase = createClient(
+        "https://odxqvkwxhbfgcmngdhic.supabase.co",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9keHF2a3d4aGJmZ2NtbmdkaGljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjk1MTMsImV4cCI6MjA2ODg0NTUxM30.U47P-s4GNGgk5f_3cQsBxDVLOqp3-jXsOX14Ok8fZk8"
+      );
+
+      async function carregarArtigosGames() {
+        const container = document.getElementById("games-section");
+
+        const { data: artigos, error } = await supabase
+          .from("artigos")
+          .select("id, titulo, descricao")
+          .eq("categoria", "games")
+          .order("criado_em", { ascending: false });
+
+        if (error) {
+          container.innerHTML = `<p style="color: red;">Erro ao carregar artigos: ${error.message}</p>`;
+          return;
+        }
+
+        if (!artigos || artigos.length === 0) {
+          container.innerHTML = "<p>Nenhum artigo encontrado na categoria Games.</p>";
+          return;
+        }
+
+        container.innerHTML = "";
+
+        artigos.forEach((artigo) => {
+          const link = document.createElement("a");
+          link.href = `detalhe-artigo.html?id=${artigo.id}`;
+          link.className = "article-link";
+
+          const divArtigo = document.createElement("div");
+          divArtigo.className = "article";
+
+          const titulo = document.createElement("h2");
+          titulo.textContent = artigo.titulo;
+
+          const descricao = document.createElement("p");
+          descricao.textContent = artigo.descricao;
+
+          divArtigo.appendChild(titulo);
+          divArtigo.appendChild(descricao);
+          link.appendChild(divArtigo);
+
+          container.appendChild(link);
+        });
+      }
+
+      carregarArtigosGames();
     </script>
   </body>
 </html>

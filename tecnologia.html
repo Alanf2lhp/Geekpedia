@@ -50,105 +50,7 @@
 
     <!-- Conteúdo -->
     <div class="content" id="tech-section">
-      <a href="detalhe-inteligencia-artificial.html" class="article-link">
-        <div class="article">
-          <h2>🤖 Inteligência Artificial e o Futuro</h2>
-          <p>
-            Como a IA está mudando o mundo em áreas como saúde, educação e
-            segurança.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-hackers.html" class="article-link">
-        <div class="article">
-          <h2>💻 Hackers que Marcaram História</h2>
-          <p>
-            De Mitnick a Snowden, veja como figuras polêmicas redefiniram a
-            cibersegurança.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-computadores-quanticos.html" class="article-link">
-        <div class="article">
-          <h2>⚛️ Computação Quântica</h2>
-          <p>
-            Entenda o que são qubits, superposição e o potencial de mudar a
-            computação.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-evolucao-smartphones.html" class="article-link">
-        <div class="article">
-          <h2>📱 Evolução dos Smartphones</h2>
-          <p>
-            De tijolos com antena aos dobráveis com IA — uma jornada tecnológica
-            de décadas.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-internet-coisas.html" class="article-link">
-        <div class="article">
-          <h2>🌐 Internet das Coisas (IoT)</h2>
-          <p>
-            Dispositivos conectados que estão transformando casas e cidades em
-            ambientes inteligentes.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-blockchain.html" class="article-link">
-        <div class="article">
-          <h2>⛓ Blockchain e Criptomoedas</h2>
-          <p>
-            Como a tecnologia blockchain está mudando finanças, contratos e
-            segurança digital.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-realidade-aumentada.html" class="article-link">
-        <div class="article">
-          <h2>🕶 Realidade Aumentada e Virtual</h2>
-          <p>
-            Experiências imersivas que mesclam o real e o digital em jogos,
-            educação e indústria.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-5g.html" class="article-link">
-        <div class="article">
-          <h2>📶 Tecnologia 5G</h2>
-          <p>
-            A revolução da internet móvel com maior velocidade, baixa latência e
-            conexão massiva.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-robotica.html" class="article-link">
-        <div class="article">
-          <h2>🤖 Robótica e Automação</h2>
-          <p>
-            Robôs que realizam tarefas complexas e aumentam a produtividade em
-            diversos setores.
-          </p>
-        </div>
-      </a>
-
-      <a href="detalhe-ciberseguranca.html" class="article-link">
-        <div class="article">
-          <h2>🔐 Cibersegurança</h2>
-          <p>
-            Protegendo dados e sistemas contra ameaças digitais no mundo cada
-            vez mais conectado.
-          </p>
-        </div>
-      </a>
+      <!-- Artigos carregados dinamicamente vão aparecer aqui -->
     </div>
 
     <!-- Rodapé -->
@@ -184,15 +86,68 @@
         retina_detect: true,
       });
     </script>
-    <script>
-      // Carrega o menu.html dinamicamente
+
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+      const supabase = createClient(
+        "https://odxqvkwxhbfgcmngdhic.supabase.co",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9keHF2a3d4aGJmZ2NtbmdkaGljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjk1MTMsImV4cCI6MjA2ODg0NTUxM30.U47P-s4GNGgk5f_3cQsBxDVLOqp3-jXsOX14Ok8fZk8"
+      );
+
+      async function carregarArtigosTecnologia() {
+        const container = document.getElementById("tech-section");
+
+        const { data: artigos, error } = await supabase
+          .from("artigos")
+          .select("id, titulo, descricao")
+          .eq("categoria", "tecnologia")
+          .order("criado_em", { ascending: false });
+
+        if (error) {
+          container.innerHTML = `<p style="color: red;">Erro ao carregar artigos: ${error.message}</p>`;
+          return;
+        }
+
+        if (!artigos || artigos.length === 0) {
+          container.innerHTML = "<p>Nenhum artigo encontrado na categoria Tecnologia.</p>";
+          return;
+        }
+
+        container.innerHTML = "";
+
+        artigos.forEach((artigo) => {
+          const link = document.createElement("a");
+          link.href = `detalhe-artigo.html?id=${artigo.id}`;
+          link.className = "article-link";
+
+          const divArtigo = document.createElement("div");
+          divArtigo.className = "article";
+
+          const titulo = document.createElement("h2");
+          titulo.textContent = artigo.titulo;
+
+          const descricao = document.createElement("p");
+          descricao.textContent = artigo.descricao;
+
+          divArtigo.appendChild(titulo);
+          divArtigo.appendChild(descricao);
+          link.appendChild(divArtigo);
+
+          container.appendChild(link);
+        });
+      }
+
+      carregarArtigosTecnologia();
+
+      // Carregar menu e gerenciar logout
       fetch("menu.html")
         .then((res) => res.text())
         .then((html) => {
           document.getElementById("menuContainer").innerHTML = html;
 
           const apelido = localStorage.getItem("apelido");
-          const apelidoElem = document.getElementById("userName"); // <-- corrigido aqui
+          const apelidoElem = document.getElementById("userName");
           const btnLogout = document.getElementById("btnLogout");
 
           if (apelido) {
