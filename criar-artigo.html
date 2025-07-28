@@ -1,157 +1,188 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Criar Artigo - Geekpédia</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <style>
-      body {
-        font-family: "JetBrains Mono", monospace;
-        background: #0d0d0d;
-        color: #00fff2;
-        padding: 2rem;
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criar Artigo - Geekpédia</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Particles background */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0d0d0d;
+      z-index: -1;
+    }
+
+    body {
+      font-family: "JetBrains Mono", monospace;
+      background: transparent;
+      color: #00fff2;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-family: "Orbitron", sans-serif;
+    }
+
+    form {
+      max-width: 700px;
+      margin: 2rem auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background: rgba(0, 255, 242, 0.05);
+      padding: 2rem;
+      border: 1px solid #00fff2;
+      border-radius: 8px;
+    }
+
+    input,
+    textarea,
+    select,
+    button {
+      font-family: inherit;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    input,
+    textarea,
+    select {
+      background: #111;
+      color: #00fff2;
+      border: 1px solid #00fff2;
+    }
+
+    button {
+      background-color: #00fff2;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #00bfb2;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    a.voltar {
+      color: #00fff2;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Fundo com partículas -->
+  <div id="particles-js"></div>
+
+  <h1>📝 Criar Novo Artigo</h1>
+
+  <form id="formArtigo">
+    <input type="text" id="titulo" placeholder="Título do artigo" required />
+    <textarea id="descricao" placeholder="Descrição/resumo" rows="3" required></textarea>
+    <textarea id="conteudo" placeholder="Conteúdo completo" rows="8" required></textarea>
+
+    <select id="categoria" required>
+      <option value="">Selecione uma categoria</option>
+      <option value="games">🎮 Games</option>
+      <option value="filmes">🎥 Filmes & Séries</option>
+      <option value="tecnologia">💡 Tecnologia</option>
+    </select>
+
+    <button type="submit">Publicar Artigo</button>
+    <div class="message" id="mensagem"></div>
+  </form>
+
+  <a class="voltar" href="home.html">🔙 Voltar à Página Inicial</a>
+
+  <!-- Supabase JS CDN -->
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+    const supabase = createClient(
+      "https://odxqvkwxhbfgcmngdhic.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9keHF2a3d4aGJmZ2NtbmdkaGljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjk1MTMsImV4cCI6MjA2ODg0NTUxM30.U47P-s4GNGgk5f_3cQsBxDVLOqp3-jXsOX14Ok8fZk8"
+    );
+
+    const form = document.getElementById("formArtigo");
+    const mensagem = document.getElementById("mensagem");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const titulo = document.getElementById("titulo").value.trim();
+      const descricao = document.getElementById("descricao").value.trim();
+      const conteudo = document.getElementById("conteudo").value.trim();
+      const categoria = document.getElementById("categoria").value;
+      const apelido = localStorage.getItem("apelido");
+
+      if (!apelido) {
+        mensagem.textContent = "Erro: usuário não identificado. Faça login novamente.";
+        mensagem.style.color = "red";
+        return;
       }
 
-      h1 {
-        text-align: center;
-        font-family: "Orbitron", sans-serif;
+      const { data, error } = await supabase
+        .from("artigos")
+        .insert([{ titulo, descricao, conteudo, categoria, apelido }]);
+
+      if (error) {
+        mensagem.textContent = "Erro ao publicar o artigo: " + error.message;
+        mensagem.style.color = "red";
+      } else {
+        mensagem.textContent = "✅ Artigo publicado com sucesso!";
+        mensagem.style.color = "#00ff88";
+        form.reset();
+        setTimeout(() => {
+          window.location.href = "home.html";
+        }, 1000);
       }
+    });
+  </script>
 
-      form {
-        max-width: 700px;
-        margin: 2rem auto;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        background: rgba(0, 255, 242, 0.05);
-        padding: 2rem;
-        border: 1px solid #00fff2;
-        border-radius: 8px;
-      }
-
-      input,
-      textarea,
-      select,
-      button {
-        font-family: inherit;
-        padding: 0.8rem;
-        border: none;
-        border-radius: 5px;
-        font-size: 1rem;
-      }
-
-      input,
-      textarea,
-      select {
-        background: #111;
-        color: #00fff2;
-        border: 1px solid #00fff2;
-      }
-
-      button {
-        background-color: #00fff2;
-        color: #000;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-
-      button:hover {
-        background-color: #00bfb2;
-      }
-
-      .message {
-        text-align: center;
-        margin-top: 1rem;
-        font-weight: bold;
-      }
-
-      a.voltar {
-        color: #00fff2;
-        text-decoration: none;
-        display: block;
-        text-align: center;
-        margin-top: 2rem;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>📝 Criar Novo Artigo</h1>
-
-    <form id="formArtigo">
-      <input type="text" id="titulo" placeholder="Título do artigo" required />
-      <textarea
-        id="descricao"
-        placeholder="Descrição/resumo"
-        rows="3"
-        required
-      ></textarea>
-      <textarea
-        id="conteudo"
-        placeholder="Conteúdo completo"
-        rows="8"
-        required
-      ></textarea>
-
-      <select id="categoria" required>
-        <option value="">Selecione uma categoria</option>
-        <option value="games">🎮 Games</option>
-        <option value="filmes">🎥 Filmes & Séries</option>
-        <option value="tecnologia">💡 Tecnologia</option>
-      </select>
-
-      <button type="submit">Publicar Artigo</button>
-      <div class="message" id="mensagem"></div>
-    </form>
-
-    <a class="voltar" href="home.html">🔙 Voltar à Página Inicial</a>
-
-    <!-- Supabase JS CDN -->
-    <script type="module">
-      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
-
-      const supabase = createClient(
-        "https://odxqvkwxhbfgcmngdhic.supabase.co",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9keHF2a3d4aGJmZ2NtbmdkaGljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjk1MTMsImV4cCI6MjA2ODg0NTUxM30.U47P-s4GNGgk5f_3cQsBxDVLOqp3-jXsOX14Ok8fZk8"
-      );
-
-      const form = document.getElementById("formArtigo");
-      const mensagem = document.getElementById("mensagem");
-
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const titulo = document.getElementById("titulo").value.trim();
-        const descricao = document.getElementById("descricao").value.trim();
-        const conteudo = document.getElementById("conteudo").value.trim();
-        const categoria = document.getElementById("categoria").value;
-        const apelido = localStorage.getItem("apelido");
-
-        if (!apelido) {
-          mensagem.textContent =
-            "Erro: usuário não identificado. Faça login novamente.";
-          mensagem.style.color = "red";
-          return;
-        }
-
-        const { data, error } = await supabase
-          .from("artigos")
-          .insert([{ titulo, descricao, conteudo, categoria, apelido }]);
-
-        if (error) {
-          mensagem.textContent = "Erro ao publicar o artigo: " + error.message;
-          mensagem.style.color = "red";
-        } else {
-          mensagem.textContent = "✅ Artigo publicado com sucesso!";
-          mensagem.style.color = "#00ff88";
-          form.reset();
-
-          setTimeout(() => {
-            window.location.href = "home.html";
-          }, 1000);
-        }
-      });
-    </script>
-  </body>
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 90, density: { enable: true, value_area: 800 } },
+        color: { value: "#00fff2" },
+        shape: { type: "circle" },
+        opacity: { value: 0.4 },
+        size: { value: 2, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#00fff2",
+          opacity: 0.2,
+          width: 1,
+        },
+        move: { enable: true, speed: 1.5 },
+      },
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" },
+        },
+      },
+      retina_detect: true,
+    });
+  </script>
+</body>
 </html>

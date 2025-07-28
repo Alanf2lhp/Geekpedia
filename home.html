@@ -134,6 +134,32 @@
         console.log("particles.js carregado");
       });
     </script>
+    <script>
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 90, density: { enable: true, value_area: 800 } },
+          color: { value: "#00fff2" },
+          shape: { type: "circle" },
+          opacity: { value: 0.4 },
+          size: { value: 2, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#00fff2",
+            opacity: 0.2,
+            width: 1,
+          },
+          move: { enable: true, speed: 1.5 },
+        },
+        interactivity: {
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+          },
+        },
+        retina_detect: true,
+      });
+    </script>
 
     <!-- Script do menu dinâmico -->
     <script>
@@ -225,7 +251,8 @@
         secao.id = `secao-${categoria.toLowerCase().replace(/\s+/g, "-")}`;
         const titulo = document.createElement("h2");
         titulo.className = "category-title";
-        titulo.textContent = emojiCategoria(categoria) + " " + capitalizar(categoria);
+        titulo.textContent =
+          emojiCategoria(categoria) + " " + capitalizar(categoria);
         secao.appendChild(titulo);
         container.appendChild(secao);
         secoesCriadas[categoria] = secao;
@@ -257,13 +284,15 @@
 
         if (error) {
           console.error("Erro ao buscar artigos:", error);
-          document.getElementById("articleList").innerHTML =
-            `<p style="color:red;">Erro ao carregar artigos: ${error.message}</p>`;
+          document.getElementById(
+            "articleList"
+          ).innerHTML = `<p style="color:red;">Erro ao carregar artigos: ${error.message}</p>`;
           return;
         }
 
         if (!artigos || artigos.length === 0) {
-          document.getElementById("articleList").innerHTML = "<p>Nenhum artigo encontrado.</p>";
+          document.getElementById("articleList").innerHTML =
+            "<p>Nenhum artigo encontrado.</p>";
           return;
         }
 
@@ -274,7 +303,9 @@
           const a = document.createElement("a");
           a.className = "article";
           // Link para detalhe.html com parâmetros id e cat
-          a.href = `detalhe-artigo.html?id=${encodeURIComponent(art.id)}&cat=${encodeURIComponent(art.categoria)}`;
+          a.href = `detalhe-artigo.html?id=${encodeURIComponent(
+            art.id
+          )}&cat=${encodeURIComponent(art.categoria)}`;
           a.innerHTML = `<h3>${art.titulo}</h3><p>${art.descricao}</p>`;
           secao.appendChild(a);
         });
@@ -287,19 +318,24 @@
           if (!secao) secao = criarSecao(art.categoria);
           const a = document.createElement("a");
           a.className = "article";
-          a.href = `detalhe-artigo.html?id=${encodeURIComponent(art.id || "")}&cat=${encodeURIComponent(art.categoria || "")}`;
+          a.href = `detalhe-artigo.html?id=${encodeURIComponent(
+            art.id || ""
+          )}&cat=${encodeURIComponent(art.categoria || "")}`;
           a.innerHTML = `<h3>${art.titulo}</h3><p>${art.descricao}</p>`;
           secao.appendChild(a);
         });
       }
 
       window.searchArticles = function searchArticles() {
-        const filtro = document.getElementById("searchInput").value.toLowerCase();
+        const filtro = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
         const artigos = document.querySelectorAll(".article");
         artigos.forEach((art) => {
           const titulo = art.querySelector("h3").textContent.toLowerCase();
           const descricao = art.querySelector("p").textContent.toLowerCase();
-          art.style.display = titulo.includes(filtro) || descricao.includes(filtro) ? "" : "none";
+          art.style.display =
+            titulo.includes(filtro) || descricao.includes(filtro) ? "" : "none";
         });
       };
 
