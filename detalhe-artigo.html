@@ -34,6 +34,7 @@
       font-family: "Orbitron", sans-serif;
       font-size: 2.2rem;
       color: #00fff2;
+      margin-bottom: 0.5rem;
     }
     a.back-link {
       color: #4ddede;
@@ -46,12 +47,33 @@
     a.back-link:hover {
       text-decoration: underline;
     }
+    .article-meta {
+      font-size: 0.9rem;
+      color: #4ddede;
+      margin-bottom: 1rem;
+      font-style: italic;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .article-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
     .article-content {
       background-color: rgba(0, 255, 242, 0.1);
       padding: 15px;
       border-radius: 8px;
       line-height: 1.6;
       font-size: 1rem;
+      white-space: pre-wrap;
+    }
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      color: #888;
     }
   </style>
 </head>
@@ -59,9 +81,12 @@
   <div id="particles-js"></div>
 
   <header>
-    <!-- Usamos href="#" para não navegar e o evento JS para voltar -->
     <a href="#" class="back-link" id="btnVoltar"><i class="fas fa-arrow-left"></i> Voltar</a>
     <h1 id="titulo">Carregando...</h1>
+    <div class="article-meta" id="meta">
+      <span id="dataPub"><i class="fas fa-calendar-alt"></i> --/--/----</span>
+      <span id="autor"><i class="fas fa-user"></i> Autor: --</span>
+    </div>
   </header>
 
   <article id="conteudo" class="article-content">
@@ -87,10 +112,19 @@
 
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Função para pegar parâmetro da URL
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param);
+    }
+
+    function formatarData(isoDate) {
+      if (!isoDate) return "--/--/----";
+      const data = new Date(isoDate);
+      if (isNaN(data)) return "--/--/----";
+      const dia = String(data.getDate()).padStart(2, '0');
+      const mes = String(data.getMonth() + 1).padStart(2, '0');
+      const ano = data.getFullYear();
+      return `${dia}/${mes}/${ano}`;
     }
 
     async function carregarArtigoDetalhe() {
@@ -102,9 +136,10 @@
         return;
       }
 
+      // Seleciona os campos conforme seu dado, incluindo apelido e criado_em
       const { data, error } = await supabase
         .from("artigos")
-        .select("titulo, conteudo")
+        .select("titulo, conteudo, criado_em, apelido")
         .eq("id", id)
         .single();
 
@@ -115,19 +150,22 @@
       }
 
       document.getElementById("titulo").innerText = data.titulo;
-      // Permitir conteúdo com formatação HTML
       document.getElementById("conteudo").innerHTML = data.conteudo || "<p>Conteúdo não disponível.</p>";
+
+      const dataFormatada = formatarData(data.criado_em);
+      const autor = data.apelido || "Desconhecido";
+
+      document.getElementById("dataPub").innerHTML = `<i class="fas fa-calendar-alt"></i> Publicado em: ${dataFormatada}`;
+      document.getElementById("autor").innerHTML = `<i class="fas fa-user"></i> Autor: ${autor}`;
     }
 
     carregarArtigoDetalhe();
 
-    // Evento do botão voltar - volta para a página anterior do navegador
     document.getElementById("btnVoltar").addEventListener("click", function(event) {
       event.preventDefault();
       if (window.history.length > 1) {
         window.history.back();
       } else {
-        // Caso não tenha histórico, volta para página inicial
         window.location.href = "index.html";
       }
     });
