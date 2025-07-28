@@ -2,23 +2,17 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Geekpédia - Enciclopédia Geek & Tech</title>
 
     <!-- Estilos principais -->
     <link rel="stylesheet" href="css/style.css" />
 
     <!-- Fontes e Ícones -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=JetBrains+Mono&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <!-- Particles.js -->
+    <!-- Particles.js e estilos internos -->
     <style>
       #particles-js {
         position: fixed;
@@ -96,23 +90,45 @@
       .user-menu i {
         margin-right: 0.3rem;
       }
+
       footer {
         text-align: center;
         margin-top: 3rem;
         padding: 1rem;
         color: #888;
       }
+
+      .search-bar {
+        margin: 1rem 0;
+        text-align: center;
+      }
+
+      #searchInput {
+        width: 90%;
+        max-width: 400px;
+        padding: 0.6rem 1rem;
+        border: 1px solid #00fff2;
+        border-radius: 6px;
+        background: transparent;
+        color: #00fff2;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 1rem;
+      }
+
+      #searchInput::placeholder {
+        color: #4ddede;
+      }
     </style>
   </head>
 
   <body>
-    <!-- Fundo animado -->
     <div id="particles-js"></div>
 
     <header>
       <h1><i class="fas fa-flask"></i> Geekpédia</h1>
       <p>A enciclopédia definitiva de cultura Geek e Tecnologia</p>
     </header>
+
     <div id="menuContainer"></div>
 
     <div class="search-bar">
@@ -126,209 +142,139 @@
 
     <div class="content" id="articleList">
       <!-- GAMES -->
-      <section class="category-section">
+      <section class="category-section" id="secao-games">
         <h2 class="category-title">🎮 Games</h2>
-        <a href="detalhe-evolucao.html" class="article">
-          <h3>📈 Evolução dos Videogames</h3>
-          <p>
-            Um panorama completo sobre a evolução dos videogames desde os
-            primeiros consoles até hoje.
-          </p>
-        </a>
-        <a href="detalhe-lancamentos.html" class="article">
-          <h3>🆕 Lançamentos Mais Aguardados</h3>
-          <p>
-            Conheça os jogos que prometem revolucionar o mercado nos próximos
-            meses.
-          </p>
-        </a>
-        <a href="detalhe-esports.html" class="article">
-          <h3>🏆 Mundo dos eSports</h3>
-          <p>
-            Explore o cenário competitivo dos esportes eletrônicos e seus
-            principais campeonatos.
-          </p>
-        </a>
-        <a href="detalhe-pioneiro.html" class="article">
-          <h3>🎮 Pioneiros dos Videogames</h3>
-          <p>
-            Saiba quem foram os pioneiros que moldaram a indústria dos
-            videogames.
-          </p>
-        </a>
-        <a href="detalhe-cognitivo.html" class="article">
-          <h3>🧠 Jogos Cognitivos</h3>
-          <p>
-            Descubra como os jogos podem estimular o cérebro e melhorar
-            habilidades cognitivas.
-          </p>
-        </a>
-        <a href="detalhe-mobile.html" class="article">
-          <h3>📱 Games Mobile em Alta</h3>
-          <p>
-            Os jogos para dispositivos móveis que conquistaram milhões de
-            jogadores.
-          </p>
-        </a>
-        <a href="detalhe-trilha.html" class="article">
-          <h3>🎵 Trilha Sonora Premiada</h3>
-          <p>
-            As trilhas sonoras que se tornaram ícones dentro dos videogames.
-          </p>
-        </a>
-        <a href="detalhe-minecraft.html" class="article">
-          <h3>🌍 Games de Mundo Imenso</h3>
-          <p>
-            Conheça os jogos que oferecem vastos mundos para exploração e
-            aventura.
-          </p>
-        </a>
-        <a href="detalhe-star-citizen.html" class="article">
-          <h3>💰 O Game Mais Caro Já Produzido</h3>
-          <p>
-            Um olhar sobre o jogo que quebrou recordes de orçamento e
-            desenvolvimento.
-          </p>
-        </a>
-        <a href="detalhe-top10.html" class="article">
-          <h3>🔟 Top 10 Jogos Mais Vendidos</h3>
-          <p>
-            Confira os games que lideram as vendas em toda a história da
-            indústria.
-          </p>
-        </a>
+        <!-- Artigos fixos -->
+        <a href="detalhe-evolucao.html" class="article"
+          ><h3>📈 Evolução dos Videogames</h3>
+          <p>Um panorama completo sobre a evolução dos videogames desde os primeiros consoles até hoje.</p></a
+        >
+        <a href="detalhe-lancamentos.html" class="article"
+          ><h3>🆕 Lançamentos Mais Aguardados</h3>
+          <p>Conheça os jogos que prometem revolucionar o mercado nos próximos meses.</p></a
+        >
+        <a href="detalhe-esports.html" class="article"
+          ><h3>🏆 Mundo dos eSports</h3>
+          <p>Explore o cenário competitivo dos esportes eletrônicos e seus principais campeonatos.</p></a
+        >
+        <a href="detalhe-pioneiro.html" class="article"
+          ><h3>🎮 Pioneiros dos Videogames</h3>
+          <p>Saiba quem foram os pioneiros que moldaram a indústria dos videogames.</p></a
+        >
+        <a href="detalhe-cognitivo.html" class="article"
+          ><h3>🧠 Jogos Cognitivos</h3>
+          <p>Descubra como os jogos podem estimular o cérebro e melhorar habilidades cognitivas.</p></a
+        >
+        <a href="detalhe-mobile.html" class="article"
+          ><h3>📱 Games Mobile em Alta</h3>
+          <p>Os jogos para dispositivos móveis que conquistaram milhões de jogadores.</p></a
+        >
+        <a href="detalhe-trilha.html" class="article"
+          ><h3>🎵 Trilha Sonora Premiada</h3>
+          <p>As trilhas sonoras que se tornaram ícones dentro dos videogames.</p></a
+        >
+        <a href="detalhe-minecraft.html" class="article"
+          ><h3>🌍 Games de Mundo Imenso</h3>
+          <p>Conheça os jogos que oferecem vastos mundos para exploração e aventura.</p></a
+        >
+        <a href="detalhe-star-citizen.html" class="article"
+          ><h3>💰 O Game Mais Caro Já Produzido</h3>
+          <p>Um olhar sobre o jogo que quebrou recordes de orçamento e desenvolvimento.</p></a
+        >
+        <a href="detalhe-top10.html" class="article"
+          ><h3>🔟 Top 10 Jogos Mais Vendidos</h3>
+          <p>Confira os games que lideram as vendas em toda a história da indústria.</p></a
+        >
       </section>
 
       <!-- FILMES & SÉRIES -->
-      <section class="category-section">
+      <section class="category-section" id="secao-filmes">
         <h2 class="category-title">🎥 Filmes & Séries</h2>
-        <a href="detalhe-logistics.html" class="article">
-          <h3>📦 Logistics – Curiosidades e História</h3>
-          <p>Uma análise sobre o filme documental que surpreendeu o público.</p>
-        </a>
-        <a href="detalhe-dracula.html" class="article">
-          <h3>🧛‍♂️ Drácula: Origem e Influência</h3>
-          <p>
-            O impacto do clássico vampiro na cultura pop e nas produções
-            modernas.
-          </p>
-        </a>
-        <a href="detalhe-estreia-starwars.html" class="article">
-          <h3>⭐ Estreia de Star Wars</h3>
-          <p>A estreia do fenômeno que mudou o cinema para sempre.</p>
-        </a>
-        <a href="detalhe-marvel.html" class="article">
-          <h3>🦸‍♂️ Universo Marvel no Cinema</h3>
-          <p>
-            Como a Marvel construiu um império cinematográfico e cativou fãs ao
-            redor do mundo.
-          </p>
-        </a>
-        <a href="detalhe-seriescults.html" class="article">
-          <h3>🎭 Séries Cults Inesquecíveis</h3>
-          <p>
-            Uma seleção das séries que conquistaram status cult com fãs
-            dedicados.
-          </p>
-        </a>
-        <a href="detalhe-montauk.html" class="article">
-          <h3>👽 Projeto Montauk</h3>
-          <p>
-            Teorias e mistérios sobre a base secreta que inspirou várias
-            histórias de ficção.
-          </p>
-        </a>
-        <a href="detalhe-oscar.html" class="article">
-          <h3>🏆 História do Oscar</h3>
-          <p>
-            Curiosidades e fatos marcantes sobre o prêmio mais importante do
-            cinema.
-          </p>
-        </a>
-        <a href="detalhe-animes.html" class="article">
-          <h3>🎌 Animes que Marcaram Época</h3>
-          <p>
-            Os animes mais influentes e queridos pelo público ao longo dos anos.
-          </p>
-        </a>
-        <a href="detalhe-primeira-serie.html" class="article">
-          <h3>📺 A Primeira Série de TV da História</h3>
-          <p>
-            Conheça “The Queen’s Messenger”, a pioneira que abriu caminho para a
-            televisão moderna.
-          </p>
-        </a>
-        <a href="detalhe-starwars.html" class="article">
-          <h3>🌌 Universo Expandido de Star Wars</h3>
-          <p>
-            Exploração dos livros, séries e demais mídias que ampliam a saga
-            principal.
-          </p>
-        </a>
+        <a href="detalhe-logistics.html" class="article"
+          ><h3>📦 Logistics – Curiosidades e História</h3>
+          <p>Uma análise sobre o filme documental que surpreendeu o público.</p></a
+        >
+        <a href="detalhe-dracula.html" class="article"
+          ><h3>🧛‍♂️ Drácula: Origem e Influência</h3>
+          <p>O impacto do clássico vampiro na cultura pop e nas produções modernas.</p></a
+        >
+        <a href="detalhe-estreia-starwars.html" class="article"
+          ><h3>⭐ Estreia de Star Wars</h3>
+          <p>A estreia do fenômeno que mudou o cinema para sempre.</p></a
+        >
+        <a href="detalhe-marvel.html" class="article"
+          ><h3>🦸‍♂️ Universo Marvel no Cinema</h3>
+          <p>Como a Marvel construiu um império cinematográfico e cativou fãs ao redor do mundo.</p></a
+        >
+        <a href="detalhe-seriescults.html" class="article"
+          ><h3>🎭 Séries Cults Inesquecíveis</h3>
+          <p>Uma seleção das séries que conquistaram status cult com fãs dedicados.</p></a
+        >
+        <a href="detalhe-montauk.html" class="article"
+          ><h3>👽 Projeto Montauk</h3>
+          <p>Teorias e mistérios sobre a base secreta que inspirou várias histórias de ficção.</p></a
+        >
+        <a href="detalhe-oscar.html" class="article"
+          ><h3>🏆 História do Oscar</h3>
+          <p>Curiosidades e fatos marcantes sobre o prêmio mais importante do cinema.</p></a
+        >
+        <a href="detalhe-animes.html" class="article"
+          ><h3>🎌 Animes que Marcaram Época</h3>
+          <p>Os animes mais influentes e queridos pelo público ao longo dos anos.</p></a
+        >
+        <a href="detalhe-primeira-serie.html" class="article"
+          ><h3>📺 A Primeira Série de TV da História</h3>
+          <p>Conheça “The Queen’s Messenger”, a pioneira que abriu caminho para a televisão moderna.</p></a
+        >
+        <a href="detalhe-starwars.html" class="article"
+          ><h3>🌌 Universo Expandido de Star Wars</h3>
+          <p>Exploração dos livros, séries e demais mídias que ampliam a saga principal.</p></a
+        >
       </section>
 
       <!-- TECNOLOGIA -->
-      <section class="category-section">
+      <section class="category-section" id="secao-tecnologia">
         <h2 class="category-title">💡 Tecnologia</h2>
-        <a href="detalhe-realidade-aumentada.html" class="article">
-          <h3>🕶️ Realidade Aumentada (AR)</h3>
-          <p>
-            Como a AR está transformando a forma como interagimos com o mundo
-            digital.
-          </p>
-        </a>
-        <a href="detalhe-blockchain.html" class="article">
-          <h3>⛓️ Blockchain e Criptomoedas</h3>
-          <p>
-            Entenda a tecnologia por trás das moedas digitais e suas aplicações.
-          </p>
-        </a>
-        <a href="detalhe-inteligencia-artificial.html" class="article">
-          <h3>🤖 Inteligência Artificial</h3>
-          <p>O que é IA, suas aplicações e impactos na sociedade moderna.</p>
-        </a>
-        <a href="detalhe-hackers.html" class="article">
-          <h3>💻 Hackers Famosos</h3>
-          <p>
-            Histórias dos hackers que marcaram a história da segurança digital.
-          </p>
-        </a>
-        <a href="detalhe-computadores-quanticos.html" class="article">
-          <h3>🧮 Computação Quântica</h3>
-          <p>
-            O futuro da computação com computadores baseados em princípios
-            quânticos.
-          </p>
-        </a>
-        <a href="detalhe-internet-coisas.html" class="article">
-          <h3>🌐 Internet das Coisas (IoT)</h3>
-          <p>Como objetos conectados estão revolucionando nosso dia a dia.</p>
-        </a>
-        <a href="detalhe-5g.html" class="article">
-          <h3>📶 Tecnologia 5G</h3>
-          <p>A próxima geração da internet móvel e suas possibilidades.</p>
-        </a>
-        <a href="detalhe-robotica.html" class="article">
-          <h3>🤖 Robótica</h3>
-          <p>
-            O avanço dos robôs e suas aplicações na indústria e na vida
-            cotidiana.
-          </p>
-        </a>
-        <a href="detalhe-ciberseguranca.html" class="article">
-          <h3>🔐 Cibersegurança</h3>
-          <p>
-            Práticas e tecnologias para proteger dados e sistemas contra
-            ataques.
-          </p>
-        </a>
-        <a href="detalhe-evolucao-smartphones.html" class="article">
-          <h3>📱 Evolução dos Smartphones</h3>
-          <p>
-            Da era dos celulares básicos aos potentes dispositivos atuais: veja
-            como os smartphones evoluíram.
-          </p>
-        </a>
+        <a href="detalhe-realidade-aumentada.html" class="article"
+          ><h3>🕶️ Realidade Aumentada (AR)</h3>
+          <p>Como a AR está transformando a forma como interagimos com o mundo digital.</p></a
+        >
+        <a href="detalhe-blockchain.html" class="article"
+          ><h3>⛓️ Blockchain e Criptomoedas</h3>
+          <p>Entenda a tecnologia por trás das moedas digitais e suas aplicações.</p></a
+        >
+        <a href="detalhe-inteligencia-artificial.html" class="article"
+          ><h3>🤖 Inteligência Artificial</h3>
+          <p>O que é IA, suas aplicações e impactos na sociedade moderna.</p></a
+        >
+        <a href="detalhe-hackers.html" class="article"
+          ><h3>💻 Hackers Famosos</h3>
+          <p>Histórias dos hackers que marcaram a história da segurança digital.</p></a
+        >
+        <a href="detalhe-computadores-quanticos.html" class="article"
+          ><h3>🧮 Computação Quântica</h3>
+          <p>O futuro da computação com computadores baseados em princípios quânticos.</p></a
+        >
+        <a href="detalhe-internet-coisas.html" class="article"
+          ><h3>🌐 Internet das Coisas (IoT)</h3>
+          <p>Como objetos conectados estão revolucionando nosso dia a dia.</p></a
+        >
+        <a href="detalhe-5g.html" class="article"
+          ><h3>📶 Tecnologia 5G</h3>
+          <p>A próxima geração da internet móvel e suas possibilidades.</p></a
+        >
+        <a href="detalhe-robotica.html" class="article"
+          ><h3>🤖 Robótica</h3>
+          <p>O avanço dos robôs e suas aplicações na indústria e na vida cotidiana.</p></a
+        >
+        <a href="detalhe-ciberseguranca.html" class="article"
+          ><h3>🔐 Cibersegurança</h3>
+          <p>Práticas e tecnologias para proteger dados e sistemas contra ataques.</p></a
+        >
+        <a href="detalhe-evolucao-smartphones.html" class="article"
+          ><h3>📱 Evolução dos Smartphones</h3>
+          <p>Da era dos celulares básicos aos potentes dispositivos atuais: veja como os smartphones evoluíram.</p></a
+        >
       </section>
     </div>
 
@@ -336,80 +282,101 @@
       <p>👾 Geekpédia © 2025 - Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Particles.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <!-- Scripts -->
 
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
-      particlesJS("particles-js", {
-        particles: {
-          number: {
-            value: 100,
-            density: {
-              enable: true,
-              value_area: 800,
-            },
-          },
-          color: {
-            value: "#00fff2",
-          },
-          shape: {
-            type: "circle",
-          },
-          opacity: {
-            value: 0.4,
-            random: true,
-          },
-          size: {
-            value: 2,
-            random: true,
-          },
-          line_linked: {
-            enable: true,
-            distance: 150,
-            color: "#00fff2",
-            opacity: 0.2,
-            width: 1,
-          },
-          move: {
-            enable: true,
-            speed: 1.5,
-          },
-        },
-        interactivity: {
-          events: {
-            onhover: {
-              enable: true,
-              mode: "repulse",
-            },
-            onclick: {
-              enable: true,
-              mode: "push",
-            },
-          },
-        },
-        retina_detect: true,
+      /* Configuração básica para particles.js */
+      particlesJS.load('particles-js', 'particles.json', function () {
+        console.log('particles.js carregado');
       });
     </script>
 
-    <!-- Seu script -->
+    <!-- Script de artigos dinâmicos e localStorage -->
     <script src="js/script.js"></script>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.min.js"></script>
     <script>
-      // Carrega o menu.html dinamicamente
+      // Substitua pelos dados reais da sua instância Supabase
+      const supabaseUrl = "https://seu-projeto.supabase.co";
+      const supabaseKey = "sua-chave-anonima-ou-service-role";
+      const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+      async function carregarArtigos() {
+        const { data: artigos, error } = await supabase.from("artigos").select("*");
+        if (error) {
+          console.error("Erro ao buscar artigos:", error);
+          return;
+        }
+        artigos.forEach((art) => {
+          const secao = document.getElementById(`secao-${art.categoria}`);
+          if (secao) {
+            const a = document.createElement("a");
+            a.className = "article";
+            a.href = art.link || "#";
+            a.innerHTML = `
+              <h3>${art.titulo}</h3>
+              <p>${art.descricao}</p>
+            `;
+            secao.appendChild(a);
+          }
+        });
+      }
+
+      function adicionarArtigosUsuario() {
+        const artigos = JSON.parse(localStorage.getItem("artigos")) || [];
+        artigos.forEach((art) => {
+          const secao = document.getElementById(`secao-${art.categoria}`);
+          if (secao) {
+            const link = document.createElement("a");
+            link.className = "article";
+            link.href = art.link || "#";
+            link.innerHTML = `<h3>${art.titulo}</h3><p>${art.descricao}</p>`;
+            secao.appendChild(link);
+          }
+        });
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        carregarArtigos();
+        adicionarArtigosUsuario();
+      });
+
+      // Função de busca (filter) dos artigos visíveis
+      function searchArticles() {
+        const filtro = document.getElementById("searchInput").value.toLowerCase();
+        const artigos = document.querySelectorAll(".article");
+        artigos.forEach((art) => {
+          const titulo = art.querySelector("h3").textContent.toLowerCase();
+          const descricao = art.querySelector("p").textContent.toLowerCase();
+          if (titulo.includes(filtro) || descricao.includes(filtro)) {
+            art.style.display = "";
+          } else {
+            art.style.display = "none";
+          }
+        });
+      }
+    </script>
+
+    <!-- Menu dinâmico -->
+    <script>
       fetch("menu.html")
         .then((res) => res.text())
         .then((html) => {
           document.getElementById("menuContainer").innerHTML = html;
 
           const apelido = localStorage.getItem("apelido");
-          const apelidoElem = document.getElementById("userName"); // <-- corrigido aqui
+          const apelidoElem = document.getElementById("userName");
           const btnLogout = document.getElementById("btnLogout");
 
           if (apelido) {
             apelidoElem.textContent = apelido;
-            btnLogout.style.display = "inline-block";
+            if (btnLogout) btnLogout.style.display = "inline-block";
           } else {
             apelidoElem.textContent = "Visitante";
-            btnLogout.style.display = "none";
+            if (btnLogout) btnLogout.style.display = "none";
           }
 
           if (btnLogout) {
@@ -419,7 +386,51 @@
               window.location.href = "index.html";
             });
           }
+
+          // Exibir banner de cookies se necessário
+          if (apelido && !localStorage.getItem("cookiesAceitos")) {
+            const cookieBanner = document.getElementById("cookie-banner");
+            if (cookieBanner) cookieBanner.style.display = "block";
+          }
         });
+    </script>
+
+    <!-- Banner de Cookies -->
+    <div
+      id="cookie-banner"
+      style="
+        display: none;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #222;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        z-index: 1000;
+      "
+    >
+      Este site utiliza cookies para melhorar a experiência do usuário.
+      <button
+        onclick="aceitarCookies()"
+        style="
+          margin-left: 10px;
+          padding: 8px 15px;
+          background-color: #4caf50;
+          border: none;
+          color: white;
+          border-radius: 4px;
+        "
+      >
+        Aceitar
+      </button>
+    </div>
+
+    <script>
+      function aceitarCookies() {
+        localStorage.setItem("cookiesAceitos", "true");
+        document.getElementById("cookie-banner").style.display = "none";
+      }
     </script>
   </body>
 </html>
