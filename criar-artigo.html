@@ -146,6 +146,10 @@
           mensagem.textContent = "✅ Artigo publicado com sucesso!";
           mensagem.style.color = "#00ff88";
           form.reset();
+
+          setTimeout(() => {
+            window.location.href = "home.html";
+          }, 1500);
         }
       });
     </script>
