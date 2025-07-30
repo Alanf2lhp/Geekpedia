@@ -3,10 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Cadastro de Usuário</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
       body {
         background-color: #1a1a1a;
@@ -116,7 +113,6 @@
         text-decoration: underline;
       }
 
-      /* === POP-UP DE SUCESSO E ERRO === */
       .popup {
         position: fixed;
         top: 20px;
@@ -197,6 +193,7 @@
           Li e aceito os <a href="termos.html" target="_blank">Termos de Uso</a>
         </label>
       </div>
+      <div id="termosErro" class="error"></div>
 
       <button id="btnCadastrar">Cadastrar</button>
       <button class="login-btn" onclick="window.location.href='index.html'">
@@ -204,7 +201,6 @@
       </button>
     </div>
 
-    <!-- POP-UPS -->
     <div id="popupSucesso" class="popup">
       <i class="fas fa-check-circle"></i> Conta criada com sucesso!
     </div>
@@ -249,28 +245,27 @@
         const senha = document.getElementById("senha").value
         const aceitaTermos = document.getElementById("aceitaTermos").checked
 
+        // Limpa mensagens anteriores
         document.getElementById("apelidoErro").textContent = ""
         document.getElementById("emailErro").textContent = ""
+        document.getElementById("termosErro").textContent = ""
 
         const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
 
         if (!aceitaTermos) {
+          document.getElementById("termosErro").textContent = "Você precisa aceitar os Termos de Uso."
           mostrarPopup("popupErro")
-          document.getElementById("emailErro").textContent =
-            "Você precisa aceitar os Termos de Uso."
           return
         }
 
         if (!/^[A-Za-z]{1,15}$/.test(apelido)) {
-          document.getElementById("apelidoErro").textContent =
-            "Apelido só com letras, até 15 caracteres."
+          document.getElementById("apelidoErro").textContent = "Apelido só com letras, até 15 caracteres."
           mostrarPopup("popupErro")
           return
         }
 
         if (!emailRegex.test(email)) {
-          document.getElementById("emailErro").textContent =
-            "Digite um e-mail válido."
+          document.getElementById("emailErro").textContent = "Digite um e-mail válido."
           mostrarPopup("popupErro")
           return
         }
@@ -292,7 +287,6 @@
 
       window.verificarForcaSenha = verificarForcaSenha
       window.cadastrar = cadastrar
-
       document.getElementById("btnCadastrar").addEventListener("click", cadastrar)
     </script>
   </body>
