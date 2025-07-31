@@ -194,16 +194,13 @@
         font-weight: bold;
       }
 
-      /* Container flex para conteúdo + imagem */
+      /* Container vertical: imagem acima do conteúdo */
       .flex-container {
         display: flex;
+        flex-direction: column;
         gap: 20px;
-        align-items: flex-start;
-        flex-wrap: wrap;
       }
       .image-container {
-        flex: 0 0 300px;
-        max-width: 300px;
         width: 100%;
         text-align: center;
       }
@@ -213,14 +210,9 @@
         border-radius: 8px;
       }
 
-      /* Responsividade */
+      /* Responsividade mantém o fluxo vertical */
       @media (max-width: 600px) {
-        .flex-container {
-          flex-direction: column;
-          gap: 15px;
-        }
-        .article-content,
-        .image-container {
+        .article-content {
           width: 100% !important;
           flex: none !important;
           min-width: auto !important;
@@ -246,33 +238,34 @@
     </header>
 
     <div class="flex-container">
-      <article id="conteudo" class="article-content">
-        <p>Por favor, aguarde enquanto carregamos o artigo.</p>
-      </article>
-
       <div class="image-container">
         <img
           id="imagem-artigo"
           src="URL_DA_IMAGEM_AQUI"
           alt="Imagem do artigo"
         />
-        <p
-          id="resolucao-imagem"
-          style="margin-top: 600px; color: #ccc; font-size: rem;"
-        ></p>
+        <p id="resolucao-imagem" style="margin-top:8px; color: #ccc; font-size:0.9rem;"></p>
       </div>
+
+      <article id="conteudo" class="article-content">
+        <p>Por favor, aguarde enquanto carregamos o artigo.</p>
+      </article>
     </div>
 
     <script>
       function exibirResolucao() {
-        // desativado: não faz nada
-      }
-      const img = document.getElementById("imagem-artigo");
-      const info = document.getElementById("resolucao-imagem");
-      if (img && info) {
+        const img = document.getElementById("imagem-artigo");
+        const info = document.getElementById("resolucao-imagem");
+        if (!img || !info) return;
         const largura = img.naturalWidth;
         const altura = img.naturalHeight;
         info.textContent = `Resolução: ${largura} x ${altura}px`;
+      }
+      // se imagem já carregada
+      const imgEl = document.getElementById("imagem-artigo");
+      imgEl.addEventListener("load", exibirResolucao);
+      if (imgEl.complete && imgEl.naturalWidth) {
+        exibirResolucao();
       }
     </script>
 
@@ -416,7 +409,6 @@
           div.appendChild(spanData);
           div.appendChild(texto);
 
-          // Se o usuário logado for o autor do comentário, mostra o botão de excluir
           if (usuarioLogado && usuarioLogado === comentario.apelido) {
             const btnExcluirComentario = document.createElement("button");
             btnExcluirComentario.textContent = "🗑️ Excluir";
@@ -486,7 +478,6 @@
           data.apelido || "Desconhecido"
         }`;
 
-        // === INSERIR AQUI ===
         const imgEl = document.getElementById("imagem-artigo");
         if (data.url_imagem) {
           imgEl.src = data.url_imagem;
@@ -498,15 +489,12 @@
           imgEl.style.display = "none";
           document.getElementById("resolucao-imagem").textContent = "";
         }
-        // =====================
 
-        // Exibir botão excluir se for o autor logado
         const usuarioLogado = localStorage.getItem("apelido");
         if (usuarioLogado && usuarioLogado === data.apelido) {
           document.getElementById("areaExcluir").style.display = "block";
         }
 
-        // Função de exclusão com popup customizado
         document
           .getElementById("btnExcluir")
           .addEventListener("click", async () => {
@@ -531,10 +519,8 @@
             );
           });
 
-        // Carregar comentários ao carregar artigo
         carregarComentarios(id);
 
-        // Mostrar formulário de comentário e apelido do usuário logado ou mensagem para logar
         const apelidoUsuarioLogado = localStorage.getItem("apelido");
         const formComentario = document.getElementById("formComentario");
         const usuarioLogadoApelidoSpan = document.getElementById(
@@ -553,7 +539,6 @@
 
       carregarArtigoDetalhe();
 
-      // Envio de comentário
       document
         .getElementById("formComentario")
         .addEventListener("submit", async (e) => {
@@ -583,12 +568,10 @@
             return;
           }
 
-          // Limpa campo e recarrega comentários
           document.getElementById("inputTexto").value = "";
           carregarComentarios(artigoId);
         });
 
-      // Botão voltar
       document
         .getElementById("btnVoltar")
         .addEventListener("click", function (event) {
@@ -629,4 +612,3 @@
     </script>
   </body>
 </html>
-
