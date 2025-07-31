@@ -98,6 +98,9 @@
     <textarea id="descricao" placeholder="Descrição/resumo" rows="3" required></textarea>
     <textarea id="conteudo" placeholder="Conteúdo completo" rows="8" required></textarea>
 
+    <label for="imagem">Selecione uma imagem:</label>
+    <input type="file" id="imagem" accept="image/*" />
+
     <select id="categoria" required>
       <option value="">Selecione uma categoria</option>
       <option value="games">🎮 Games</option>
@@ -138,9 +141,37 @@
         return;
       }
 
+      // Pega arquivo da imagem
+      const inputImagem = document.getElementById("imagem");
+      const arquivoImagem = inputImagem.files[0];
+
+      let urlImagem = null;
+
+      if (arquivoImagem) {
+        const nomeArquivo = `${Date.now()}_${arquivoImagem.name}`;
+        // Upload da imagem no bucket 'imagens-artigos'
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from('imagens-artigos')
+          .upload(nomeArquivo, arquivoImagem);
+
+        if (uploadError) {
+          mensagem.textContent = "Erro ao fazer upload da imagem: " + uploadError.message;
+          mensagem.style.color = "red";
+          return;
+        }
+
+        // Pega URL pública da imagem
+        const { data: publicUrlData } = supabase.storage
+          .from('imagens-artigos')
+          .getPublicUrl(nomeArquivo);
+
+        urlImagem = publicUrlData.publicUrl;
+      }
+
+      // Insere artigo no banco com a URL da imagem
       const { data, error } = await supabase
         .from("artigos")
-        .insert([{ titulo, descricao, conteudo, categoria, apelido }]);
+        .insert([{ titulo, descricao, conteudo, categoria, apelido, url_imagem: urlImagem }]);
 
       if (error) {
         mensagem.textContent = "Erro ao publicar o artigo: " + error.message;

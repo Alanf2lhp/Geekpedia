@@ -14,7 +14,6 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-
     <style>
       #particles-js {
         position: fixed;
@@ -70,6 +69,8 @@
         line-height: 1.6;
         font-size: 1rem;
         white-space: pre-wrap;
+        flex: 1 1 400px;
+        min-width: 300px;
       }
       .btn-excluir {
         margin-top: 20px;
@@ -192,6 +193,42 @@
         display: block;
         font-weight: bold;
       }
+
+      /* Container flex para conteúdo + imagem */
+      .flex-container {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .image-container {
+        flex: 0 0 300px;
+        max-width: 300px;
+        width: 100%;
+        text-align: center;
+      }
+      #imagem-artigo {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      /* Responsividade */
+      @media (max-width: 600px) {
+        .flex-container {
+          flex-direction: column;
+          gap: 15px;
+        }
+        .article-content,
+        .image-container {
+          width: 100% !important;
+          flex: none !important;
+          min-width: auto !important;
+        }
+        #imagem-artigo {
+          max-width: 100% !important;
+        }
+      }
     </style>
   </head>
   <body>
@@ -208,9 +245,37 @@
       </div>
     </header>
 
-    <article id="conteudo" class="article-content">
-      <p>Por favor, aguarde enquanto carregamos o artigo.</p>
-    </article>
+    <div class="flex-container">
+      <article id="conteudo" class="article-content">
+        <p>Por favor, aguarde enquanto carregamos o artigo.</p>
+      </article>
+
+      <div class="image-container">
+        <img
+          id="imagem-artigo"
+          src="URL_DA_IMAGEM_AQUI"
+          alt="Imagem do artigo"
+          onload="exibirResolucao()"
+        />
+        <p
+          id="resolucao-imagem"
+          style="margin-top: 8px; color: #ccc; font-size: 0.9rem;"
+        ></p>
+      </div>
+    </div>
+
+    <script>
+      function exibirResolucao() {
+        // desativado: não faz nada
+      }
+      const img = document.getElementById("imagem-artigo");
+      const info = document.getElementById("resolucao-imagem");
+      if (img && info) {
+        const largura = img.naturalWidth;
+        const altura = img.naturalHeight;
+        info.textContent = `Resolução: ${largura} x ${altura}px`;
+      }
+    </script>
 
     <div id="areaExcluir" style="display: none">
       <button class="btn-excluir" id="btnExcluir">🗑️ Excluir Artigo</button>
@@ -396,7 +461,7 @@
 
         const { data, error } = await supabase
           .from("artigos")
-          .select("titulo, conteudo, criado_em, apelido")
+          .select("titulo, conteudo, criado_em, apelido, url_imagem")
           .eq("id", id)
           .single();
 
@@ -408,7 +473,6 @@
           ).innerHTML = `<p>Não foi possível encontrar o artigo solicitado.</p>`;
           return;
         }
-
         document.getElementById("titulo").innerText = data.titulo;
         document.getElementById("conteudo").innerHTML =
           data.conteudo || "<p>Conteúdo não disponível.</p>";
@@ -422,6 +486,20 @@
         ).innerHTML = `<i class="fas fa-user"></i> Autor: ${
           data.apelido || "Desconhecido"
         }`;
+
+        // === INSERIR AQUI ===
+        const imgEl = document.getElementById("imagem-artigo");
+        if (data.url_imagem) {
+          imgEl.src = data.url_imagem;
+          imgEl.style.display = "block";
+          imgEl.onload = () => {
+            exibirResolucao();
+          };
+        } else {
+          imgEl.style.display = "none";
+          document.getElementById("resolucao-imagem").textContent = "";
+        }
+        // =====================
 
         // Exibir botão excluir se for o autor logado
         const usuarioLogado = localStorage.getItem("apelido");
@@ -454,7 +532,7 @@
             );
           });
 
-        // Carregar comentários ao carregar artigo
+               // Carregar comentários ao carregar artigo
         carregarComentarios(id);
 
         // Mostrar formulário de comentário e apelido do usuário logado ou mensagem para logar
@@ -511,6 +589,7 @@
           carregarComentarios(artigoId);
         });
 
+      // Botão voltar
       document
         .getElementById("btnVoltar")
         .addEventListener("click", function (event) {
@@ -522,6 +601,7 @@
           }
         });
     </script>
+
     <script>
       particlesJS("particles-js", {
         particles: {
@@ -550,3 +630,4 @@
     </script>
   </body>
 </html>
+
