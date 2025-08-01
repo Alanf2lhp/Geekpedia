@@ -72,10 +72,22 @@
       background-color: #00bfb2;
     }
 
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
     .message {
       text-align: center;
       margin-top: 1rem;
       font-weight: bold;
+    }
+
+    .subtexto-imagem {
+      font-size: 0.85rem;
+      margin-top: -0.5rem;
+      margin-bottom: 0.5rem;
+      color: #aaa;
     }
 
     a.voltar {
@@ -93,13 +105,14 @@
 
   <h1>📝 Criar Novo Artigo</h1>
 
-  <form id="formArtigo">
+  <form id="formArtigo" novalidate>
     <input type="text" id="titulo" placeholder="Título do artigo" required />
     <textarea id="descricao" placeholder="Descrição/resumo" rows="3" required></textarea>
     <textarea id="conteudo" placeholder="Conteúdo completo" rows="8" required></textarea>
 
     <label for="imagem">Selecione uma imagem:</label>
     <input type="file" id="imagem" accept="image/*" />
+    <div class="subtexto-imagem">Só são permitidas imagens na orientação <strong>horizontal</strong> (largura maior que altura).</div>
 
     <select id="categoria" required>
       <option value="">Selecione uma categoria</option>
@@ -108,7 +121,7 @@
       <option value="tecnologia">💡 Tecnologia</option>
     </select>
 
-    <button type="submit">Publicar Artigo</button>
+    <button type="submit" id="botaoPublicar">Publicar Artigo</button>
     <div class="message" id="mensagem"></div>
   </form>
 
@@ -125,9 +138,56 @@
 
     const form = document.getElementById("formArtigo");
     const mensagem = document.getElementById("mensagem");
+    const inputImagem = document.getElementById("imagem");
+    const botaoPublicar = document.getElementById("botaoPublicar");
+
+    /**
+     * Verifica se a imagem é horizontal: largura > altura.
+     * @param {File} file 
+     * @returns {Promise<boolean>}
+     */
+    function imagemEhHorizontal(file) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => {
+          const ehHorizontal = img.naturalWidth > img.naturalHeight;
+          URL.revokeObjectURL(url);
+          resolve(ehHorizontal);
+        };
+        img.onerror = () => {
+          URL.revokeObjectURL(url);
+          reject(new Error("Não foi possível carregar a imagem para verificação."));
+        };
+        img.src = url;
+      });
+    }
+
+    // Feedback imediato ao selecionar imagem
+    inputImagem.addEventListener("change", async () => {
+      mensagem.textContent = "";
+      const arquivo = inputImagem.files[0];
+      if (!arquivo) return;
+      try {
+        const ehHorizontal = await imagemEhHorizontal(arquivo);
+        if (!ehHorizontal) {
+          mensagem.textContent = "A imagem selecionada não é horizontal. Escolha outra."; 
+          mensagem.style.color = "red";
+        } else {
+          mensagem.textContent = "";
+        }
+      } catch (err) {
+        mensagem.textContent = "Erro ao validar a imagem."; 
+        mensagem.style.color = "red";
+      }
+    });
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+
+      botaoPublicar.disabled = true;
+      mensagem.textContent = "";
+      mensagem.style.color = "#00fff2";
 
       const titulo = document.getElementById("titulo").value.trim();
       const descricao = document.getElementById("descricao").value.trim();
@@ -138,16 +198,39 @@
       if (!apelido) {
         mensagem.textContent = "Erro: usuário não identificado. Faça login novamente.";
         mensagem.style.color = "red";
+        botaoPublicar.disabled = false;
+        return;
+      }
+
+      if (!titulo || !descricao || !conteudo || !categoria) {
+        mensagem.textContent = "Preencha todos os campos obrigatórios.";
+        mensagem.style.color = "red";
+        botaoPublicar.disabled = false;
         return;
       }
 
       // Pega arquivo da imagem
-      const inputImagem = document.getElementById("imagem");
       const arquivoImagem = inputImagem.files[0];
 
       let urlImagem = null;
 
       if (arquivoImagem) {
+        // checa orientação
+        try {
+          const ehHorizontal = await imagemEhHorizontal(arquivoImagem);
+          if (!ehHorizontal) {
+            mensagem.textContent = "Erro: só são permitidas imagens na orientação horizontal."; 
+            mensagem.style.color = "red";
+            botaoPublicar.disabled = false;
+            return;
+          }
+        } catch (err) {
+          mensagem.textContent = "Erro ao validar a imagem."; 
+          mensagem.style.color = "red";
+          botaoPublicar.disabled = false;
+          return;
+        }
+
         const nomeArquivo = `${Date.now()}_${arquivoImagem.name}`;
         // Upload da imagem no bucket 'imagens-artigos'
         const { data: uploadData, error: uploadError } = await supabase.storage
@@ -157,6 +240,7 @@
         if (uploadError) {
           mensagem.textContent = "Erro ao fazer upload da imagem: " + uploadError.message;
           mensagem.style.color = "red";
+          botaoPublicar.disabled = false;
           return;
         }
 
@@ -176,6 +260,7 @@
       if (error) {
         mensagem.textContent = "Erro ao publicar o artigo: " + error.message;
         mensagem.style.color = "red";
+        botaoPublicar.disabled = false;
       } else {
         mensagem.textContent = "✅ Artigo publicado com sucesso!";
         mensagem.style.color = "#00ff88";
