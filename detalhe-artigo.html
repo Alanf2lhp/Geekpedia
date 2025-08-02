@@ -15,6 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <style>
+      /* (mantive os estilos como estavam, só reduzido aqui para brevidade) */
       #particles-js {
         position: fixed;
         width: 100%;
@@ -92,7 +93,7 @@
         color: #888;
       }
 
-      /* Estilos do popup modal */
+      /* Popup */
       #popup {
         display: none;
         position: fixed;
@@ -194,7 +195,6 @@
         font-weight: bold;
       }
 
-      /* Container vertical: imagem acima do conteúdo */
       .flex-container {
         display: flex;
         flex-direction: column;
@@ -210,7 +210,6 @@
         border-radius: 8px;
       }
 
-      /* Responsividade mantém o fluxo vertical */
       @media (max-width: 600px) {
         .article-content {
           width: 100% !important;
@@ -252,23 +251,6 @@
       </article>
     </div>
 
-    <script>
-      function exibirResolucao() {
-        const img = document.getElementById("imagem-artigo");
-        const info = document.getElementById("resolucao-imagem");
-        if (!img || !info) return;
-        const largura = img.naturalWidth;
-        const altura = img.naturalHeight;
-        info.textContent = `Resolução: ${largura} x ${altura}px`;
-      }
-      // se imagem já carregada
-      const imgEl = document.getElementById("imagem-artigo");
-      imgEl.addEventListener("load", exibirResolucao);
-      if (imgEl.complete && imgEl.naturalWidth) {
-        exibirResolucao();
-      }
-    </script>
-
     <div id="areaExcluir" style="display: none">
       <button class="btn-excluir" id="btnExcluir">🗑️ Excluir Artigo</button>
     </div>
@@ -299,8 +281,10 @@
     <div id="popup">
       <div class="popup-content">
         <p id="popupMsg">Mensagem do popup</p>
-        <button id="btnConfirmarPopup">Confirmar</button>
-        <button id="btnCancelarPopup">Cancelar</button>
+        <div id="popupButtons">
+          <button id="btnConfirmarPopup">Confirmar</button>
+          <button id="btnCancelarPopup">Cancelar</button>
+        </div>
       </div>
     </div>
 
@@ -314,6 +298,9 @@
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9keHF2a3d4aGJmZ2NtbmdkaGljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjk1MTMsImV4cCI6MjA2ODg0NTUxM30.U47P-s4GNGgk5f_3cQsBxDVLOqp3-jXsOX14Ok8fZk8";
 
       const supabase = createClient(supabaseUrl, supabaseKey);
+
+      let artigoId = null;
+      let artigoAutor = null;
 
       function getQueryParam(param) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -330,51 +317,60 @@
         return `${dia}/${mes}/${ano}`;
       }
 
-      // Popup modal
-      function abrirPopup(mensagem, aoConfirmar, soMensagem = false) {
+      // Popup reutilizável
+      function abrirPopup(mensagem, opcoes = {}) {
+        // opcoes: {confirmText, cancelText, onConfirm, onCancel, apenasMensagem:boolean}
         const popup = document.getElementById("popup");
         const msg = document.getElementById("popupMsg");
         const btnConfirmar = document.getElementById("btnConfirmarPopup");
         const btnCancelar = document.getElementById("btnCancelarPopup");
 
         msg.innerText = mensagem;
-        popup.style.display = "flex";
 
-        if (soMensagem) {
-          btnConfirmar.style.display = "none";
-          btnCancelar.innerText = "Fechar";
-        } else {
-          btnConfirmar.style.display = "inline-block";
-          btnCancelar.innerText = "Cancelar";
-        }
+        // limpar listeners antigos
+        const novoConfirmar = btnConfirmar.cloneNode(true);
+        btnConfirmar.parentNode.replaceChild(novoConfirmar, btnConfirmar);
+        const novoCancelar = btnCancelar.cloneNode(true);
+        btnCancelar.parentNode.replaceChild(novoCancelar, btnCancelar);
+
+        const mostrarConfirmar = !opcoes.apenasMensagem;
+
+        novoConfirmar.style.display = mostrarConfirmar ? "inline-block" : "none";
+        novoCancelar.innerText = opcoes.apenasMensagem ? "Fechar" : (opcoes.cancelText || "Cancelar");
+        if (opcoes.confirmText) novoConfirmar.innerText = opcoes.confirmText;
 
         function fechar() {
           popup.style.display = "none";
-          btnConfirmar.removeEventListener("click", confirmarHandler);
-          btnCancelar.removeEventListener("click", fechar);
         }
 
-        function confirmarHandler() {
+        novoCancelar.addEventListener("click", () => {
           fechar();
-          aoConfirmar();
+          if (opcoes.onCancel) opcoes.onCancel();
+        });
+
+        if (mostrarConfirmar) {
+          novoConfirmar.addEventListener("click", () => {
+            fechar();
+            if (opcoes.onConfirm) opcoes.onConfirm();
+          });
         }
 
-        btnConfirmar.addEventListener("click", confirmarHandler);
-        btnCancelar.addEventListener("click", fechar);
+        popup.style.display = "flex";
       }
 
-      async function carregarComentarios(artigoId) {
+      async function carregarComentarios(id) {
         const usuarioLogado = localStorage.getItem("apelido");
 
         const { data, error } = await supabase
           .from("comentarios")
           .select("id, apelido, texto, criado_em")
-          .eq("artigo_id", artigoId)
+          .eq("artigo_id", id)
           .order("criado_em", { ascending: false });
 
         const listaDiv = document.getElementById("listaComentarios");
         if (error) {
           listaDiv.innerHTML = "<p>Erro ao carregar comentários.</p>";
+          console.error("Erro carregar comentarios:", error);
           return;
         }
         if (!data || data.length === 0) {
@@ -418,18 +414,21 @@
             btnExcluirComentario.style.fontSize = "0.85rem";
 
             btnExcluirComentario.addEventListener("click", () => {
-              abrirPopup("Deseja excluir este comentário?", async () => {
-                const { error: erroExcluir } = await supabase
-                  .from("comentarios")
-                  .delete()
-                  .eq("id", comentario.id);
+              abrirPopup("Deseja excluir este comentário?", {
+                onConfirm: async () => {
+                  const { error: erroExcluir } = await supabase
+                    .from("comentarios")
+                    .delete()
+                    .eq("id", comentario.id);
 
-                if (erroExcluir) {
-                  abrirPopup("Erro ao excluir comentário.", () => {}, true);
-                } else {
-                  abrirPopup("Comentário excluído.", () => {}, true);
-                  carregarComentarios(artigoId);
-                }
+                  if (erroExcluir) {
+                    abrirPopup("Erro ao excluir comentário.", { apenasMensagem: true });
+                    console.error("Erro excluindo comentario:", erroExcluir);
+                  } else {
+                    abrirPopup("Comentário excluído.", { apenasMensagem: true, onConfirm: () => {} });
+                    carregarComentarios(id);
+                  }
+                },
               });
             });
 
@@ -440,10 +439,19 @@
         });
       }
 
-      async function carregarArtigoDetalhe() {
-        const id = getQueryParam("id");
+      function exibirResolucao() {
+        const img = document.getElementById("imagem-artigo");
+        const info = document.getElementById("resolucao-imagem");
+        if (!img || !info) return;
+        const largura = img.naturalWidth;
+        const altura = img.naturalHeight;
+        info.textContent = `Resolução: ${largura} x ${altura}px`;
+      }
 
-        if (!id) {
+      async function carregarArtigoDetalhe() {
+        artigoId = getQueryParam("id");
+
+        if (!artigoId) {
           document.getElementById("titulo").innerText = "Artigo não encontrado";
           document.getElementById("conteudo").innerHTML =
             "<p>Parâmetro inválido ou artigo não especificado.</p>";
@@ -453,7 +461,7 @@
         const { data, error } = await supabase
           .from("artigos")
           .select("titulo, conteudo, criado_em, apelido, url_imagem")
-          .eq("id", id)
+          .eq("id", artigoId)
           .single();
 
         if (error || !data) {
@@ -462,8 +470,12 @@
           document.getElementById(
             "conteudo"
           ).innerHTML = `<p>Não foi possível encontrar o artigo solicitado.</p>`;
+          console.error("Erro carregando artigo:", error);
           return;
         }
+
+        artigoAutor = data.apelido || null;
+
         document.getElementById("titulo").innerText = data.titulo;
         document.getElementById("conteudo").innerHTML =
           data.conteudo || "<p>Conteúdo não disponível.</p>";
@@ -482,44 +494,23 @@
         if (data.url_imagem) {
           imgEl.src = data.url_imagem;
           imgEl.style.display = "block";
-          imgEl.onload = () => {
+          imgEl.addEventListener("load", exibirResolucao);
+          if (imgEl.complete && imgEl.naturalWidth) {
             exibirResolucao();
-          };
+          }
         } else {
           imgEl.style.display = "none";
           document.getElementById("resolucao-imagem").textContent = "";
         }
 
         const usuarioLogado = localStorage.getItem("apelido");
-        if (usuarioLogado && usuarioLogado === data.apelido) {
+        if (usuarioLogado && usuarioLogado === artigoAutor) {
           document.getElementById("areaExcluir").style.display = "block";
+        } else {
+          document.getElementById("areaExcluir").style.display = "none";
         }
 
-        document
-          .getElementById("btnExcluir")
-          .addEventListener("click", async () => {
-            abrirPopup(
-              "Tem certeza que deseja excluir este artigo?",
-              async () => {
-                const { error: deleteError } = await supabase
-                  .from("artigos")
-                  .delete()
-                  .eq("id", id);
-
-                if (deleteError) {
-                  abrirPopup("Erro ao excluir artigo.", () => {}, true);
-                } else {
-                  abrirPopup("Artigo excluído com sucesso.", () => {}, true);
-                  setTimeout(() => {
-                    document.getElementById("popup").style.display = "none";
-                    window.location.href = "home.html";
-                  }, 1000);
-                }
-              }
-            );
-          });
-
-        carregarComentarios(id);
+        carregarComentarios(artigoId);
 
         const apelidoUsuarioLogado = localStorage.getItem("apelido");
         const formComentario = document.getElementById("formComentario");
@@ -537,8 +528,50 @@
         }
       }
 
+      // Inicializa
       carregarArtigoDetalhe();
 
+      // Exclusão: único listener definido aqui para evitar duplicação
+     document.getElementById("btnExcluir").addEventListener("click", async () => {
+  if (!artigoId) return;
+
+  const usuarioLogado = localStorage.getItem("apelido");
+  if (!usuarioLogado || usuarioLogado !== artigoAutor) {
+    abrirPopup("Você não tem permissão para excluir este artigo.", { apenasMensagem: true });
+    return;
+  }
+
+  abrirPopup("Tem certeza que deseja excluir este artigo?", {
+    confirmText: "Sim, excluir",
+    cancelText: "Cancelar",
+    onConfirm: async () => {
+      // Chama a RPC em vez de delete direto
+      const { error } = await supabase.rpc("delete_artigo_por_apelido", {
+        p_id: artigoId,
+        p_apelido: usuarioLogado,
+      });
+
+      if (error) {
+        console.error("Erro ao excluir via RPC:", error);
+        abrirPopup("Erro ao excluir artigo. Talvez o apelido não confira.", { apenasMensagem: true });
+        return;
+      }
+
+      abrirPopup("Artigo excluído com sucesso.", {
+        apenasMensagem: true,
+        onCancel: () => (window.location.href = "home.html"),
+        onConfirm: () => (window.location.href = "home.html"),
+      });
+
+      setTimeout(() => {
+        window.location.href = "home.html";
+      }, 1000);
+    },
+  });
+});
+
+
+      // Submit de comentário
       document
         .getElementById("formComentario")
         .addEventListener("submit", async (e) => {
@@ -546,7 +579,6 @@
 
           const apelido = localStorage.getItem("apelido");
           const texto = document.getElementById("inputTexto").value.trim();
-          const artigoId = getQueryParam("id");
 
           if (!apelido) {
             alert("Você precisa estar logado para comentar.");
@@ -564,6 +596,7 @@
           });
 
           if (error) {
+            console.error("Erro ao enviar comentário:", error);
             alert("Erro ao enviar comentário.");
             return;
           }
@@ -582,6 +615,18 @@
             window.location.href = "index.html";
           }
         });
+    </script>
+
+    <script>
+      // resolução de imagem
+      const imgEl = document.getElementById("imagem-artigo");
+      imgEl.addEventListener("load", function () {
+        const largura = imgEl.naturalWidth;
+        const altura = imgEl.naturalHeight;
+        document.getElementById(
+          "resolucao-imagem"
+        ).textContent = `Resolução: ${largura} x ${altura}px`;
+      });
     </script>
 
     <script>
